@@ -9,20 +9,24 @@
       
       
       
+        <link rel="prev" href="../../Linux/ssh/">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      
+        <link rel="next" href="../%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
     
     
       
-        <title>GXC's Docs</title>
+        <title>Sql执行计划和成本 - GXC's Docs</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.ffa9267a.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ffa9267a.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,7 +42,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +66,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -72,7 +81,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+    <a href="../../.." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -91,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Sql执行计划和成本
             
           </span>
         </div>
@@ -158,7 +167,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+    <a href="../../.." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -177,7 +186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Welcome to MkDocs
       </a>
     </li>
@@ -190,14 +199,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -206,7 +217,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Wiki
@@ -219,7 +230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         搭建自己的wiki知识管理系统
       </a>
     </li>
@@ -260,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Golang/Render/" class="md-nav__link">
+      <a href="../../Golang/Render/" class="md-nav__link">
         Render
       </a>
     </li>
@@ -274,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Golang/gin/" class="md-nav__link">
+      <a href="../../Golang/gin/" class="md-nav__link">
         Gin
       </a>
     </li>
@@ -322,7 +333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Linux/ssh/" class="md-nav__link">
+      <a href="../../Linux/ssh/" class="md-nav__link">
         ssh
       </a>
     </li>
@@ -341,14 +352,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
       
       
       
@@ -357,7 +370,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_4">
           <span class="md-nav__icon md-icon"></span>
           Mysql
@@ -368,11 +381,55 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/wiki/Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Sql执行计划和成本
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Sql执行计划和成本
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    查询表状态
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    SQL执行成本分析
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -384,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+      <a href="../%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
         查询优化器优化trace
       </a>
     </li>
@@ -432,7 +489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         基本模块
       </a>
     </li>
@@ -446,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         添加模块
       </a>
     </li>
@@ -460,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         负载均衡
       </a>
     </li>
@@ -474,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         nginx配置https及证书
       </a>
     </li>
@@ -522,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+      <a href="../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
         量化系统需求文档
       </a>
     </li>
@@ -561,6 +618,28 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    查询表状态
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    SQL执行成本分析
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -571,8 +650,93 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  <h1>Sql执行计划和成本</h1>
+
+<h5 id="_1">查询表状态</h5>
+<pre><code>mysql&gt; SHOW TABLE STATUS like 'contact_30'\G
+*************************** 1. row ***************************
+           Name: contact_30
+         Engine: InnoDB
+        Version: 10
+     Row_format: Dynamic
+           Rows: 609024
+ Avg_row_length: 99
+    Data_length: 60456960
+Max_data_length: 0
+   Index_length: 227622912
+      Data_free: 4194304
+ Auto_increment: 4530020
+    Create_time: 2021-01-14 22:33:19
+    Update_time: 2022-09-27 11:59:45
+     Check_time: NULL
+      Collation: utf8_general_ci
+       Checksum: NULL
+ Create_options: row_format=DYNAMIC
+        Comment:
+1 row in set (0.00 sec)
+</code></pre>
+<p>Row_format: 数据格式。
+Rows 表数据行数，MyISAM的这个数据行数统计是准确的，而InnoDB是估值是不准确的。这里t_user表的预估行数是9964行。
+Data_length: 该表所占用空间的字节数。 60456960 bytes = 59040kb </p>
+<h3 id="sql">SQL执行成本分析</h3>
+<p><a href="https://www.cnblogs.com/zhuwenjoyce/p/14968183.html">成本分析</a></p>
+<ol>
+<li>计算全表扫描的查询索引</li>
+</ol>
+<p>mysql每页存储16kb，innoDB需要59040kb / 16=3690页磁盘来存储</p>
+<p>磁盘io成本 = 3690*1.0(磁盘io成本) + 1.1(微调系数) = 3691.1</p>
+<p>cpu成本 = 609024(rows)*0.2 + 0.01(微调系数) = 121804.81</p>
+<p>全表扫描成本 = 3691.1 + 121805.8 = 125496.9</p>
+<ol>
+<li>计算走索引的查询成本</li>
+</ol>
+<p>mysql规定，当读取索引时，每扫描一个扫描区间或者范围区间的IO成本，和读取一个页面的IO成本是一样的，都是1.0</p>
+<ul>
+<li>查看执行计划</li>
+</ul>
+<pre><code>mysql&gt; explain select id from contact_30 where uid = 32216965 and type = 1 and risk = 0 and status = 0 and version_id &gt; 0 and version_id &lt; 1664194189167313 and tag&amp;8 order by rank desc, version_id desc limit 500;
++----+-------------+------------+------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+---------+-------------------------+-------+----------+--------------------------+
+| id | select_type | table      | partitions | type | possible_keys                                                                                                                                                                          | key                                          | key_len | ref                     | rows  | filtered | Extra                    |
++----+-------------+------------+------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+---------+-------------------------+-------+----------+--------------------------+
+|  1 | SIMPLE      | contact_30 | NULL       | ref  | owner_peer_conv_type,owner_id_version_id_del_status_key,idx_owner_conv_type_del_status_version_id,idx_uid_type_risk_status_rank_version_id_tag,idx_uid_risk_status_rank_version_id_tag | idx_uid_type_risk_status_rank_version_id_tag | 14      | const,const,const,const | 18266 |    11.11 | Using where; Using index |
++----+-------------+------------+------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+---------+-------------------------+-------+----------+--------------------------+
+1 row in set, 1 warning (0.01 sec)
+</code></pre>
+<p>io成本</p>
+<p>sql扫描了18266行，</p>
+<p>每个索引值重复行数平均值：609024(Rows) / 13370(Cardinality) = 45.55</p>
+<p>18266 / 45.55 * 1.0 = 401 + 4(扫描了4个范围区间)</p>
+<p>cpu成本</p>
+<p>18266  * 0.1111 * 0.2 + 0.01 = 405.88</p>
+<p>回表成本</p>
+<p>回表IO成本 = 18266  * 0.1111 * 1.0 + 1.0 = 2030.35 </p>
+<p>回表cpu成本 = 18266  * 0.1111 * 0.2 = 405.87</p>
+<ul>
+<li>查看索引信息</li>
+</ul>
+<pre><code>mysql&gt; show index from contact_30 where Key_name=&quot;idx_uid_type_risk_status_rank_version_id_tag&quot;;
++------------+------------+----------------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table      | Non_unique | Key_name                                     | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------+------------+----------------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            1 | uid         | A         |        7859 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            2 | type        | A         |        8818 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            3 | risk        | A         |        7092 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            4 | status      | A         |       13478 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            5 | rank        | A         |       13370 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            6 | version_id  | A         |      542032 |     NULL | NULL   |      | BTREE      |         |               |
+| contact_30 |          1 | idx_uid_type_risk_status_rank_version_id_tag |            7 | tag         | A         |      518613 |     NULL | NULL   |      | BTREE      |         |               |
++------------+------------+----------------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+7 rows in set (0.00 sec)
+</code></pre>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -604,10 +768,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
       
     
   </body>

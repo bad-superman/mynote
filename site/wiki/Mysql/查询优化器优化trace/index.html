@@ -9,20 +9,24 @@
       
       
       
+        <link rel="prev" href="../sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      
+        <link rel="next" href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
     
     
       
-        <title>GXC's Docs</title>
+        <title>查询优化器优化trace - GXC's Docs</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.ffa9267a.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ffa9267a.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,7 +42,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +66,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#trace" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -72,7 +81,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+    <a href="../../.." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -91,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              查询优化器优化trace
             
           </span>
         </div>
@@ -158,7 +167,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+    <a href="../../.." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -177,7 +186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Welcome to MkDocs
       </a>
     </li>
@@ -190,14 +199,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -206,7 +217,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Wiki
@@ -219,7 +230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         搭建自己的wiki知识管理系统
       </a>
     </li>
@@ -260,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Golang/Render/" class="md-nav__link">
+      <a href="../../Golang/Render/" class="md-nav__link">
         Render
       </a>
     </li>
@@ -274,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Golang/gin/" class="md-nav__link">
+      <a href="../../Golang/gin/" class="md-nav__link">
         Gin
       </a>
     </li>
@@ -322,7 +333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Linux/ssh/" class="md-nav__link">
+      <a href="../../Linux/ssh/" class="md-nav__link">
         ssh
       </a>
     </li>
@@ -341,14 +352,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
       
       
       
@@ -357,7 +370,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_4">
           <span class="md-nav__icon md-icon"></span>
           Mysql
@@ -370,7 +383,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+      <a href="../sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
         Sql执行计划和成本
       </a>
     </li>
@@ -382,11 +395,83 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/wiki/Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          查询优化器优化trace
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         查询优化器优化trace
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trace" class="md-nav__link">
+    查询优化器优化trace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-status" class="md-nav__link">
+    SHOW STATUS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-profilelist" class="md-nav__link">
+    SHOW PROFILELIST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-profile" class="md-nav__link">
+    SHOW PROFILE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-variables" class="md-nav__link">
+    SHOW VARIABLES
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-status_1" class="md-nav__link">
+    SHOW STATUS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -432,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         基本模块
       </a>
     </li>
@@ -446,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         添加模块
       </a>
     </li>
@@ -460,7 +545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         负载均衡
       </a>
     </li>
@@ -474,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         nginx配置https及证书
       </a>
     </li>
@@ -522,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/wiki/%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+      <a href="../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
         量化系统需求文档
       </a>
     </li>
@@ -561,6 +646,56 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trace" class="md-nav__link">
+    查询优化器优化trace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-status" class="md-nav__link">
+    SHOW STATUS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-profilelist" class="md-nav__link">
+    SHOW PROFILELIST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-profile" class="md-nav__link">
+    SHOW PROFILE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-variables" class="md-nav__link">
+    SHOW VARIABLES
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show-status_1" class="md-nav__link">
+    SHOW STATUS
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -571,8 +706,158 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  <h1>查询优化器优化trace</h1>
+
+<h2 id="trace">查询优化器优化trace</h2>
+<pre><code>mysql&gt; set session optimizer_trace=&quot;enabled=on&quot;,end_markers_in_json=on;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; SELECT id FROM `contact_26`WHERE (uid = '45549227') AND (type = '1') AND (risk = '0') AND (status = '0') AND (version_id &gt; '1645962030000070') AND (tag&amp;'2') ORDER BY rank desc,version_id desc LIMIT 9007199254740992;
++---------+
+| id      |
++---------+
+| 3615097 |
++---------+
+1 row in set (0.01 sec)
+
+mysql&gt; SELECT * FROM information_schema.OPTIMIZER_TRACE;
+mysql&gt; set session optimizer_trace=&quot;enabled=off&quot;;
+Query OK, 0 rows affected (0.00 sec)
+</code></pre>
+<h2 id="show-status">SHOW STATUS</h2>
+<p><a href="https://fromdual.com/mysql-handler-read-status-variables">相关链接</a></p>
+<p><a href="https://juejin.cn/post/6850418109329702920">相关链接</a></p>
+<p>show status查询mysql服务状态的计数，有的变量是全局的，有的变量的session级别的</p>
+<ol>
+<li>show status like 'handler_read%';</li>
+</ol>
+<pre><code>mysql&gt; SHOW SESSION STATUS LIKE 'handler_read%';
++-----------------------+-------+
+| Variable_name         | Value |
++-----------------------+-------+
+| Handler_read_first    | 0     |
+| Handler_read_key      | 3     |
+| Handler_read_last     | 0     |
+| Handler_read_next     | 0     |
+| Handler_read_prev     | 10114 |
+| Handler_read_rnd      | 0     |
+| Handler_read_rnd_next | 103   |
++-----------------------+-------+
+7 rows in set (0.00 sec)
+</code></pre>
+<ul>
+<li>Handler_read_first    读取索引第一个元素的次数，如果value比较高，说明存在很多全索引扫描</li>
+<li>Handler_read_last    读取索引最后一个元素的次数</li>
+<li>Handler_read_key    根据索引读取的操作次数</li>
+<li>Handler_read_next   按照索引向后读取行数，如果查询的索引范围过大、或者正在进行索引扫描，value会增高</li>
+<li>Handler_read_prev   按照索引向前读取行数</li>
+<li>Handler_read_rnd   </li>
+<li>Handler_read_rnd_next </li>
+</ul>
+<h2 id="show-profilelist">SHOW PROFILELIST</h2>
+<h2 id="show-profile">SHOW PROFILE</h2>
+<ol>
+<li>开启查看系统性能</li>
+</ol>
+<pre><code>## 开启
+mysql&gt; select @@profiling;
++-------------+
+| @@profiling |
++-------------+
+|           0 |
++-------------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql&gt; set profiling=ON;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql&gt; select @@profiling;
++-------------+
+| @@profiling |
++-------------+
+|           1 |
++-------------+
+1 row in set, 1 warning (0.00 sec)
+## 关闭
+mysql&gt; set profiling=OFF;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+</code></pre>
+<ol>
+<li>
+<p>执行查询语句</p>
+</li>
+<li>
+<p>查看sql执行情况</p>
+</li>
+<li>
+<p>查看执行记录</p>
+</li>
+</ol>
+<pre><code>mysql&gt; show profiles;
++----------+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                                                                                                                                                                                                                        |
++----------+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|        1 | 0.00011125 | select @@profiling
+</code></pre>
+<ul>
+<li>查看sql详情</li>
+</ul>
+<pre><code>mysql&gt; show profile for query 2;
++----------------------+----------+
+| Status               | Duration |
++----------------------+----------+
+| starting             | 0.000073 |
+| checking permissions | 0.000008 |
+| checking permissions | 0.000005 |
+| Opening tables       | 0.000052 |
+| init                 | 0.000036 |
+| System lock          | 0.000005 |
+| optimizing           | 0.000004 |
+| optimizing           | 0.000008 |
+| statistics           | 0.010685 |
+| preparing            | 0.000032 |
+| Sorting result       | 0.000008 |
+| statistics           | 0.000017 |
+| preparing            | 0.000007 |
+| executing            | 0.000006 |
+| Sending data         | 0.000019 |
+| executing            | 0.000004 |
+| Sending data         | 0.041649 |
+| end                  | 0.000021 |
+| query end            | 0.000014 |
+| closing tables       | 0.000004 |
+| removing tmp table   | 0.000008 |
+| closing tables       | 0.000009 |
+| freeing items        | 0.000027 |
+| cleaning up          | 0.000005 |
++----------------------+----------+
+24 rows in set, 1 warning (0.00 sec)
+</code></pre>
+<p>默认是执行时间，在profile可以添加指标</p>
+<ul>
+<li>cpu</li>
+<li>memory</li>
+<li>block io</li>
+</ul>
+<h2 id="show-variables">SHOW VARIABLES</h2>
+<ul>
+<li>SHOW VARIABLES LIKE '%XXX%';</li>
+<li>SHOW GLOBAL VARIABLES LIKE '%XXX%';</li>
+</ul>
+<h2 id="show-status_1">SHOW STATUS</h2>
+<ul>
+<li>SHOW GLOBAL STATUS;</li>
+<li>SHOW SESSION STATUS;</li>
+</ul>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -604,10 +889,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
       
     
   </body>
