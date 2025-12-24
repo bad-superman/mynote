@@ -1,0 +1,1840 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/">
+      
+      
+        <link rel="next" href="../../../Linux/ssh/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
+    
+    
+      
+        <title>📘 Protocol Buffers 3 语法完全指南 - GXC's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ffa9267a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#protocol-buffers-3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GXC's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📘 Protocol Buffers 3 语法完全指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    GXC's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Welcome to MkDocs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Wiki
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Wiki
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        在 Mac 上定时执行脚本的完整指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        搭建自己的wiki知识管理系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Golang
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Golang
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Render/" class="md-nav__link">
+        Render
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gin/" class="md-nav__link">
+        Gin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+          Grpc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Grpc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        📦 完整的 `.proto` 文件最佳实践模板
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          📘 Protocol Buffers 3 语法完全指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        📘 Protocol Buffers 3 语法完全指南
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    📄 1. 基础语法结构
+  </a>
+  
+    <nav class="md-nav" aria-label="📄 1. 基础语法结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    文件开头声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    注释规范
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    📦 2. 基本数据类型
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 2. 基本数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    标量类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    默认值规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    🏗️ 3. 复合数据类型
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ 3. 复合数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    消息定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    数组/列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    映射类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    枚举类型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    🔄 4. 高级特性
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 4. 高级特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oneof" class="md-nav__link">
+    Oneof 字段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    保留字段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    JSON 映射
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    🛠️ 5. 服务定义
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ 5. 服务定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    服务基础
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    📚 6. 导入和包管理
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 6. 导入和包管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    导入语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    包和命名空间
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    ⚙️ 7. 选项和注解
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ 7. 选项和注解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    字段选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    消息和枚举选项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    📋 8. 完整示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    💡 9. 重要注意事项
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 9. 重要注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    语法规则总结
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    性能最佳实践
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    工具命令示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
+        ssh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Mysql
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Mysql
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+        Sql执行计划和成本
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+        查询优化器优化trace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Nginx
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Nginx
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        基本模块
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        添加模块
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+        负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+        nginx配置https及证书
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          系统类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          系统类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        在 Mac 上定时执行脚本的完整指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          量化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          量化
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+        量化系统需求文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8_2" id="__nav_2_8_2_label" tabindex="0">
+          区块链
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          区块链
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+        BSC公链
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    📄 1. 基础语法结构
+  </a>
+  
+    <nav class="md-nav" aria-label="📄 1. 基础语法结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    文件开头声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    注释规范
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    📦 2. 基本数据类型
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 2. 基本数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    标量类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    默认值规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    🏗️ 3. 复合数据类型
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ 3. 复合数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    消息定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    数组/列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    映射类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    枚举类型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    🔄 4. 高级特性
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 4. 高级特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oneof" class="md-nav__link">
+    Oneof 字段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    保留字段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    JSON 映射
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    🛠️ 5. 服务定义
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ 5. 服务定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    服务基础
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    📚 6. 导入和包管理
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 6. 导入和包管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    导入语法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    包和命名空间
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    ⚙️ 7. 选项和注解
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ 7. 选项和注解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    字段选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    消息和枚举选项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    📋 8. 完整示例
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    💡 9. 重要注意事项
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 9. 重要注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    语法规则总结
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    性能最佳实践
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    工具命令示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="protocol-buffers-3">📘 Protocol Buffers 3 语法完全指南</h1>
+<h2 id="1">📄 <strong>1. 基础语法结构</strong></h2>
+<h3 id="_1"><strong>文件开头声明</strong></h3>
+<pre><code class="language-protobuf">// 必需：指定语法版本
+syntax = &quot;proto3&quot;;
+
+// 可选：包名（防止命名冲突）
+package mypackage.v1;
+
+// 必需（对Go）：生成的Go包路径
+option go_package = &quot;github.com/user/project/gen/go/mypackage/v1;mypackagev1&quot;;
+
+// 其他语言选项
+option java_multiple_files = true;
+option java_package = &quot;com.example.mypackage.v1&quot;;
+option csharp_namespace = &quot;Example.MyPackage.V1&quot;;
+</code></pre>
+<h3 id="_2"><strong>注释规范</strong></h3>
+<pre><code class="language-protobuf">// 单行注释
+message User {
+  // 字段注释
+  string id = 1;
+
+  /*
+   * 多行注释
+   * 用于复杂说明
+   */
+  string name = 2;
+}
+
+/// 文档注释（部分工具支持）
+/// 用户服务接口
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User);
+}
+</code></pre>
+<h2 id="2">📦 <strong>2. 基本数据类型</strong></h2>
+<h3 id="_3"><strong>标量类型</strong></h3>
+<pre><code class="language-protobuf">message ScalarTypes {
+  // 数字类型
+  double double_field = 1;   // 双精度浮点数
+  float float_field = 2;     // 单精度浮点数
+
+  // 整数类型
+  int32 int32_field = 3;     // 变长编码，负值效率低
+  int64 int64_field = 4;     // 变长编码，负值效率低
+  uint32 uint32_field = 5;   // 无符号变长编码
+  uint64 uint64_field = 6;   // 无符号变长编码
+  sint32 sint32_field = 7;   // 变长编码，负值效率高
+  sint64 sint64_field = 8;   // 变长编码，负值效率高
+  fixed32 fixed32_field = 9; // 固定4字节，大于2^28时效率高
+  fixed64 fixed64_field = 10;// 固定8字节，大于2^56时效率高
+  sfixed32 sfixed32_field = 11; // 固定4字节
+  sfixed64 sfixed64_field = 12; // 固定8字节
+
+  // 布尔类型
+  bool bool_field = 13;
+
+  // 字符串类型
+  string string_field = 14;  // UTF-8 或 7-bit ASCII
+
+  // 字节类型
+  bytes bytes_field = 15;    // 任意二进制数据
+}
+</code></pre>
+<h3 id="_4"><strong>默认值规则</strong></h3>
+<pre><code class="language-protobuf">// proto3 中所有字段都有默认值，无法区分&quot;未设置&quot;和&quot;默认值&quot;
+message DefaultValues {
+  string name = 1;           // 默认: &quot;&quot; (空字符串)
+  int32 count = 2;           // 默认: 0
+  bool active = 3;           // 默认: false
+  repeated string tags = 4;  // 默认: [] (空列表)
+  Color color = 5;           // 默认: 第一个枚举值(必须为0)
+}
+
+enum Color {
+  COLOR_UNSPECIFIED = 0;  // 必须定义0值作为默认
+  COLOR_RED = 1;
+  COLOR_GREEN = 2;
+}
+</code></pre>
+<h2 id="3">🏗️ <strong>3. 复合数据类型</strong></h2>
+<h3 id="_5"><strong>消息定义</strong></h3>
+<pre><code class="language-protobuf">// 基本消息
+message Person {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+}
+
+// 嵌套消息
+message Company {
+  string id = 1;
+  string name = 2;
+
+  // 内嵌消息定义
+  message Address {
+    string street = 1;
+    string city = 2;
+    string country = 3;
+  }
+
+  Address address = 3;
+
+  // 引用外部消息
+  repeated Person employees = 4;
+}
+
+// 使用嵌套消息
+Company.Address companyAddress = 1;
+</code></pre>
+<h3 id="_6"><strong>数组/列表</strong></h3>
+<pre><code class="language-protobuf">message ListExample {
+  // 重复字段（数组）
+  repeated string tags = 1;
+  repeated int32 scores = 2;
+  repeated Person people = 3;
+
+  // 二维数组（通过嵌套消息实现）
+  message Row {
+    repeated int32 cells = 1;
+  }
+  repeated Row matrix = 4;
+}
+</code></pre>
+<h3 id="_7"><strong>映射类型</strong></h3>
+<pre><code class="language-protobuf">message MapExample {
+  // 键类型只能是整数或字符串
+  map&lt;string, string&gt; properties = 1;
+  map&lt;int32, string&gt; id_to_name = 2;
+  map&lt;string, Person&gt; username_to_person = 3;
+
+  // map&lt;string, repeated string&gt; 不允许
+  // 替代方案：
+  message StringList {
+    repeated string values = 1;
+  }
+  map&lt;string, StringList&gt; tags_by_category = 4;
+}
+</code></pre>
+<h3 id="_8"><strong>枚举类型</strong></h3>
+<pre><code class="language-protobuf">enum UserRole {
+  // 必须从0开始
+  USER_ROLE_UNSPECIFIED = 0;  // 约定：使用UNSPECIFIED作为0值
+  USER_ROLE_GUEST = 1;
+  USER_ROLE_USER = 2;
+  USER_ROLE_ADMIN = 3;
+  USER_ROLE_SUPER_ADMIN = 4;
+
+  // 可以预留值
+  reserved 5 to 10;
+  reserved &quot;DEPRECATED_ROLE&quot;;
+}
+
+// 枚举别名（相同值的不同名称）
+enum Status {
+  STATUS_UNKNOWN = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
+  STATUS_ENABLED = 1;  // STATUS_ACTIVE的别名
+}
+</code></pre>
+<h2 id="4">🔄 <strong>4. 高级特性</strong></h2>
+<h3 id="oneof"><strong>Oneof 字段</strong></h3>
+<pre><code class="language-protobuf">message Notification {
+  string id = 1;
+  int64 timestamp = 2;
+
+  // 互斥的字段，同一时间只能设置一个
+  oneof content {
+    string text = 3;
+    Image image = 4;
+    Video video = 5;
+    Audio audio = 6;
+  }
+
+  oneof priority {
+    bool high_priority = 7;
+    bool urgent = 8;
+  }
+}
+
+// 注意：oneof 字段不能是 repeated
+</code></pre>
+<h3 id="_9"><strong>保留字段</strong></h3>
+<pre><code class="language-protobuf">message User {
+  // 保留字段编号（防止重用）
+  reserved 2, 15 to 20;  // 保留字段号
+  reserved &quot;surname&quot;, &quot;age&quot;;  // 保留字段名
+
+  string id = 1;
+  string name = 3;  // 跳过保留的2
+  // string surname = 4;  // 错误：字段名被保留
+}
+</code></pre>
+<h3 id="json"><strong>JSON 映射</strong></h3>
+<pre><code class="language-protobuf">message JsonExample {
+  // 自定义JSON字段名
+  string user_id = 1 [json_name = &quot;userId&quot;];
+  string full_name = 2 [json_name = &quot;fullName&quot;];
+
+  // 默认映射规则：
+  // message_name → messageName
+  // field_name → fieldName
+  // repeated → 数组
+  // map → 对象
+}
+</code></pre>
+<h2 id="5">🛠️ <strong>5. 服务定义</strong></h2>
+<h3 id="_10"><strong>服务基础</strong></h3>
+<pre><code class="language-protobuf">// 服务定义
+service UserService {
+  // 一元RPC（请求-响应）
+  rpc GetUser(GetUserRequest) returns (User);
+
+  // 服务端流式RPC
+  rpc ListUsers(ListUsersRequest) returns (stream User);
+
+  // 客户端流式RPC
+  rpc CreateUsers(stream CreateUserRequest) returns (CreateUsersResponse);
+
+  // 双向流式RPC
+  rpc Chat(stream ChatMessage) returns (stream ChatMessage);
+}
+
+// 请求/响应消息
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+</code></pre>
+<h2 id="6">📚 <strong>6. 导入和包管理</strong></h2>
+<h3 id="_11"><strong>导入语法</strong></h3>
+<pre><code class="language-protobuf">// 导入其他.proto文件
+import &quot;google/protobuf/timestamp.proto&quot;;
+import &quot;google/protobuf/empty.proto&quot;;
+import &quot;google/protobuf/wrappers.proto&quot;;
+
+// 公共导入
+import public &quot;common.proto&quot;;  // 可被导入此文件的其他文件使用
+
+// 使用导入的类型
+message Event {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.StringValue description = 3;
+}
+</code></pre>
+<h3 id="_12"><strong>包和命名空间</strong></h3>
+<pre><code class="language-protobuf">// 声明包
+package company.product.v1;
+
+// 使用完全限定名
+message MyMessage {
+  // 使用其他包的类型
+  company.product.v2.CommonType common = 1;
+
+  // 简写（在同一包内）
+  CommonType local_common = 2;
+}
+</code></pre>
+<h2 id="7">⚙️ <strong>7. 选项和注解</strong></h2>
+<h3 id="_13"><strong>字段选项</strong></h3>
+<pre><code class="language-protobuf">import &quot;google/protobuf/descriptor.proto&quot;;
+
+message AdvancedMessage {
+  // 弃用字段
+  string old_field = 1 [deprecated = true];
+
+  // 自定义选项（需要先定义）
+  string secret_field = 2 [
+    sensitive = true,  // 自定义选项
+    json_name = &quot;secretField&quot;
+  ];
+
+  // 验证规则（使用protoc-gen-validate）
+  string email = 3 [(validate.rules).string.email = true];
+  int32 age = 4 [(validate.rules).int32 = {gt: 0, lt: 150}];
+}
+
+// 定义自定义选项
+extend google.protobuf.FieldOptions {
+  bool sensitive = 50000;
+}
+</code></pre>
+<h3 id="_14"><strong>消息和枚举选项</strong></h3>
+<pre><code class="language-protobuf">// 消息选项
+message Config {
+  option (my_option) = &quot;value&quot;;
+
+  string name = 1;
+}
+
+// 枚举选项
+enum LogLevel {
+  option allow_alias = true;  // 允许枚举值别名
+
+  LOG_LEVEL_UNSPECIFIED = 0;
+  LOG_LEVEL_DEBUG = 1;
+  LOG_LEVEL_INFO = 2;
+  LOG_LEVEL_WARNING = 3;
+  LOG_LEVEL_ERROR = 4;
+  LOG_LEVEL_FATAL = 5;
+  LOG_LEVEL_PANIC = 5;  // FATAL的别名
+}
+</code></pre>
+<h2 id="8">📋 <strong>8. 完整示例</strong></h2>
+<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
+
+package ecommerce.v1;
+
+import &quot;google/protobuf/timestamp.proto&quot;;
+import &quot;google/protobuf/wrappers.proto&quot;;
+import &quot;validate/validate.proto&quot;;
+
+option go_package = &quot;github.com/company/ecommerce/gen/go/ecommerce/v1;ecommercev1&quot;;
+option java_multiple_files = true;
+option java_package = &quot;com.company.ecommerce.v1&quot;;
+
+// 枚举定义
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_PENDING = 1;
+  ORDER_STATUS_PROCESSING = 2;
+  ORDER_STATUS_SHIPPED = 3;
+  ORDER_STATUS_DELIVERED = 4;
+  ORDER_STATUS_CANCELLED = 5;
+  ORDER_STATUS_REFUNDED = 6;
+}
+
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  PAYMENT_METHOD_CREDIT_CARD = 1;
+  PAYMENT_METHOD_PAYPAL = 2;
+  PAYMENT_METHOD_BANK_TRANSFER = 3;
+}
+
+// 消息定义
+message Product {
+  string id = 1 [(validate.rules).string.uuid = true];
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 100}];
+  string description = 3;
+  Category category = 4;
+  Money price = 5;
+  int32 stock = 6;
+  bool active = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  map&lt;string, string&gt; attributes = 10;
+
+  message Category {
+    string id = 1;
+    string name = 2;
+    string slug = 3;
+  }
+}
+
+message Money {
+  string currency_code = 1 [(validate.rules).string.len = 3];
+  int64 units = 2;  // 整数部分
+  int32 nanos = 3;  // 小数部分（10^-9）
+}
+
+message Order {
+  string id = 1;
+  string customer_id = 2;
+  OrderStatus status = 3;
+  repeated OrderItem items = 4;
+  Money total_amount = 5;
+  Address shipping_address = 6;
+  PaymentMethod payment_method = 7;
+  google.protobuf.Timestamp order_date = 8;
+  google.protobuf.Timestamp estimated_delivery = 9;
+
+  message OrderItem {
+    string product_id = 1;
+    string product_name = 2;
+    int32 quantity = 3 [(validate.rules).int32.gt = 0];
+    Money unit_price = 4;
+    Money total_price = 5;
+  }
+}
+
+message Address {
+  string line1 = 1 [(validate.rules).string.min_len = 1];
+  google.protobuf.StringValue line2 = 2;
+  string city = 3 [(validate.rules).string.min_len = 1];
+  string state = 4;
+  string postal_code = 5;
+  string country = 6 [(validate.rules).string.len = 2];
+
+  oneof type {
+    bool is_residential = 7;
+    bool is_business = 8;
+  }
+}
+
+// 服务定义
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (Order);
+  rpc GetOrder(GetOrderRequest) returns (Order);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (Order);
+  rpc StreamOrderUpdates(StreamOrderUpdatesRequest) returns (stream OrderUpdate);
+
+  // 批量操作
+  rpc BatchCreateOrders(stream CreateOrderRequest) returns (BatchCreateOrdersResponse);
+}
+
+// 请求/响应消息
+message CreateOrderRequest {
+  string customer_id = 1 [(validate.rules).string.uuid = true];
+  repeated OrderItem items = 2 [(validate.rules).repeated.min_items = 1];
+  Address shipping_address = 3;
+  PaymentMethod payment_method = 4;
+}
+
+message ListOrdersRequest {
+  string customer_id = 1;  // 可选过滤
+  repeated OrderStatus status_filter = 2;
+  google.protobuf.Timestamp from_date = 3;
+  google.protobuf.Timestamp to_date = 4;
+  int32 page_size = 5 [(validate.rules).int32 = {gte: 1, lte: 100}];
+  string page_token = 6;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message OrderUpdate {
+  string order_id = 1;
+  OrderStatus new_status = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string message = 4;
+}
+</code></pre>
+<h2 id="9">💡 <strong>9. 重要注意事项</strong></h2>
+<h3 id="_15"><strong>语法规则总结</strong></h3>
+<ol>
+<li>
+<p><strong>字段编号</strong>：1-15 占用1字节，16-2047 占用2字节</p>
+</li>
+<li>
+<p><strong>字段规则</strong>：proto3 只有 <code>repeated</code>，没有 <code>required</code>/<code>optional</code></p>
+</li>
+<li>
+<p><strong>默认值</strong>：无法检测字段是否被设置 vs 显式设置为默认值</p>
+</li>
+<li>
+<p><strong>枚举</strong>：必须包含值为0的枚举项作为默认值</p>
+</li>
+<li>
+<p><strong>服务</strong>：必须定义请求和响应消息，不能使用标量类型</p>
+</li>
+<li>
+<p><strong>兼容性</strong>：不能修改已使用字段的编号或类型</p>
+</li>
+</ol>
+<h3 id="_16"><strong>性能最佳实践</strong></h3>
+<pre><code class="language-protobuf">// 1. 常用字段使用1-15的编号
+message OptimizedMessage {
+  string id = 1;           // 常用字段用小编号
+  string name = 2;
+  int32 priority = 3;
+  repeated string tags = 16;  // 不常用字段用大编号
+  map&lt;string, string&gt; metadata = 17;
+}
+
+// 2. 避免过度嵌套
+// 3. 合理使用 repeated 和 map
+// 4. 考虑使用 oneof 替代多个可选字段
+</code></pre>
+<h3 id="_17"><strong>工具命令示例</strong></h3>
+<pre><code class="language-bash"># 1. 生成Go代码
+protoc --go_out=. --go_opt=paths=source_relative \
+       --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+       *.proto
+
+# 2. 生成多种语言
+protoc \
+  --go_out=gen/go \
+  --java_out=gen/java \
+  --python_out=gen/python \
+  --js_out=gen/js \
+  *.proto
+
+# 3. 使用Buf工具
+buf lint      # 代码检查
+buf generate  # 生成代码
+buf breaking  # 检查破坏性变更
+</code></pre>
+<p>这个语法指南涵盖了 proto3 的所有核心特性。在实际使用中，建议结合具体的业务需求和团队规范进行调整。</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>
