@@ -775,6 +775,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    调试单个任务
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -788,14 +795,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     脚本调试技巧
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     高级技巧
   </a>
   
@@ -803,21 +810,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     网络依赖检测
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     防止脚本重复运行
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     邮件通知
   </a>
   
@@ -829,14 +836,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     常见问题解决
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     安全注意事项
   </a>
   
@@ -1035,6 +1042,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    调试单个任务
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1048,14 +1062,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     脚本调试技巧
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     高级技巧
   </a>
   
@@ -1063,21 +1077,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     网络依赖检测
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     防止脚本重复运行
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     邮件通知
   </a>
   
@@ -1089,14 +1103,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     常见问题解决
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     安全注意事项
   </a>
   
@@ -1219,6 +1233,18 @@ launchctl list | grep com.user.myscript
 │ └──────── 小时 (0 - 23)
 └────────── 分钟 (0 - 59)
 </code></pre>
+<h3 id="_3">调试单个任务</h3>
+<pre><code class="language-text"># 1. 手动模拟 cron 环境
+env -i /bin/bash -c &quot;cd / &amp;&amp; /path/to/script.sh&quot;
+
+# 2. 使用 cron 调试模式
+# 创建测试 crontab
+echo &quot;* * * * * echo '测试: \$(date)' &gt;&gt; /tmp/cron_test.log&quot; | crontab -
+
+# 3. 检查一分钟后的结果
+sleep 61
+cat /tmp/cron_test.log
+</code></pre>
 <h2 id="3-automator">3. 使用 Automator 应用程序（图形界面）</h2>
 <p>适合不需要复杂调度的简单任务：</p>
 <ol>
@@ -1250,7 +1276,7 @@ launchctl list | grep com.user.myscript
 <p>点击 "i" 图标设置执行时间</p>
 </li>
 </ol>
-<h2 id="_3">脚本调试技巧</h2>
+<h2 id="_4">脚本调试技巧</h2>
 <ol>
 <li><strong>测试脚本</strong>：</li>
 </ol>
@@ -1280,8 +1306,8 @@ source ~/.zshrc
 
 # 脚本内容...
 </code></pre>
-<h2 id="_4">高级技巧</h2>
-<h3 id="_5">网络依赖检测</h3>
+<h2 id="_5">高级技巧</h2>
+<h3 id="_6">网络依赖检测</h3>
 <pre><code class="language-bash">#!/bin/zsh
 
 # 等待网络连接
@@ -1292,7 +1318,7 @@ done
 # 执行网络相关操作
 curl -O https://example.com/file
 </code></pre>
-<h3 id="_6">防止脚本重复运行</h3>
+<h3 id="_7">防止脚本重复运行</h3>
 <pre><code class="language-bash">#!/bin/zsh
 
 LOCK_FILE=&quot;/tmp/myscript.lock&quot;
@@ -1310,7 +1336,7 @@ touch &quot;$LOCK_FILE&quot;
 # 清理锁文件
 rm -f &quot;$LOCK_FILE&quot;
 </code></pre>
-<h3 id="_7">邮件通知</h3>
+<h3 id="_8">邮件通知</h3>
 <pre><code class="language-bash">#!/bin/zsh
 
 # 执行脚本
@@ -1322,7 +1348,7 @@ if [ $? -ne 0 ]; then
     echo &quot;Script failed!&quot; | mail -s &quot;Script Error&quot; your@email.com
 fi
 </code></pre>
-<h2 id="_8">常见问题解决</h2>
+<h2 id="_9">常见问题解决</h2>
 <ol>
 <li>
 <p><strong>脚本不执行</strong>：</p>
@@ -1356,7 +1382,7 @@ launchctl list | grep cron
 # 查看系统日志
 grep cron /var/log/system.log
 </code></pre>
-<h2 id="_9">安全注意事项</h2>
+<h2 id="_10">安全注意事项</h2>
 <ol>
 <li>
 <p>避免在脚本中使用明文密码</p>
