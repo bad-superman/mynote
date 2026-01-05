@@ -1,0 +1,2141 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/">
+      
+      
+        <link rel="next" href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
+    
+    
+      
+        <title>🎭 Playwright 简洁使用教程 - GXC's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ffa9267a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#playwright" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GXC's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🎭 Playwright 简洁使用教程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    GXC's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Welcome to MkDocs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Wiki
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Wiki
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        搭建自己的wiki知识管理系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Golang
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Golang
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/Render/" class="md-nav__link">
+        Render
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/gin/" class="md-nav__link">
+        Gin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        ✈️ Go泛型主要用法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        无标题笔记
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        泛型主要用法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+          Grpc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Grpc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/Grpc/%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        📦 完整的 `.proto` 文件最佳实践模板
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        📘 Protocol Buffers 3 语法完全指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        📦 完整的 `.proto` 文件最佳实践模板
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
+        ssh
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          Mysql
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Mysql
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+        Sql执行计划和成本
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+        查询优化器优化trace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5_1" id="__nav_2_5_1_label" tabindex="0">
+          数据分析
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          数据分析
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        🐼 Python Pandas 完全教程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        🐼 Python Pandas 完全教程
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5_2" id="__nav_2_5_2_label" tabindex="0">
+          自动化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          自动化
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          🎭 Playwright 简洁使用教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        🎭 Playwright 简洁使用教程
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    📦 1. 安装与配置
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 1. 安装与配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    验证安装
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    🚀 2. 核心概念速查
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 2. 核心概念速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三种浏览器引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs-api" class="md-nav__link">
+    同步 vs 异步 API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    🎯 3. 基础操作
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 3. 基础操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    页面导航
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    元素定位与交互
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    表单操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    🔍 4. 高级元素操作
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 4. 高级元素操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    多种定位方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    元素状态检查
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    📊 5. 页面等待策略
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 5. 页面等待策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    智能等待
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    超时控制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    🌐 6. 网络与请求处理
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 6. 网络与请求处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    拦截请求
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API 测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    📁 7. 文件与下载
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 7. 文件与下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    文件下载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdf" class="md-nav__link">
+    截图与PDF
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    🧪 8. 测试框架集成
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 8. 测试框架集成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pytest" class="md-nav__link">
+    Pytest 示例
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    测试配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8_1" class="md-nav__link">
+    🛡️ 8. 最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ 8. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    代码组织
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    配置管理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    🚨 9. 常见问题解决
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 9. 常见问题解决">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    调试技巧
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    常见错误处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    📋 10. 速查表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    🎯 快速开始模板
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Nginx
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Nginx
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        基本模块
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        添加模块
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+        负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+        nginx配置https及证书
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          系统类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          系统类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        在 Mac 上定时执行脚本的完整指南
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          量化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          量化
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+        量化系统需求文档
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8_2" id="__nav_2_8_2_label" tabindex="0">
+          区块链
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          区块链
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+        BSC公链
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    📦 1. 安装与配置
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 1. 安装与配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    验证安装
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    🚀 2. 核心概念速查
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 2. 核心概念速查">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三种浏览器引擎
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs-api" class="md-nav__link">
+    同步 vs 异步 API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    🎯 3. 基础操作
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 3. 基础操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    页面导航
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    元素定位与交互
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    表单操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    🔍 4. 高级元素操作
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 4. 高级元素操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    多种定位方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    元素状态检查
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    📊 5. 页面等待策略
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 5. 页面等待策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    智能等待
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    超时控制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    🌐 6. 网络与请求处理
+  </a>
+  
+    <nav class="md-nav" aria-label="🌐 6. 网络与请求处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    拦截请求
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API 测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    📁 7. 文件与下载
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 7. 文件与下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    文件下载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdf" class="md-nav__link">
+    截图与PDF
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    🧪 8. 测试框架集成
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 8. 测试框架集成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pytest" class="md-nav__link">
+    Pytest 示例
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    测试配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8_1" class="md-nav__link">
+    🛡️ 8. 最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ 8. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    代码组织
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    配置管理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    🚨 9. 常见问题解决
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 9. 常见问题解决">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    调试技巧
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    常见错误处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    📋 10. 速查表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    🎯 快速开始模板
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="playwright">🎭 Playwright 简洁使用教程</h1>
+<h2 id="1">📦 <strong>1. 安装与配置</strong></h2>
+<h3 id="_1"><strong>安装</strong></h3>
+<pre><code class="language-bash"># 安装 Playwright
+pip install playwright
+
+# 安装浏览器（推荐）
+playwright install          # 安装所有浏览器
+playwright install chromium # 只安装 Chromium
+
+# 安装 Pytest 集成（可选）
+pip install pytest-playwright
+</code></pre>
+<h3 id="_2"><strong>验证安装</strong></h3>
+<pre><code class="language-python"># 验证脚本
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+    page.goto(&quot;https://www.google.com&quot;)
+    print(f&quot;页面标题: {page.title()}&quot;)
+    browser.close()
+</code></pre>
+<h2 id="2">🚀 <strong>2. 核心概念速查</strong></h2>
+<h3 id="_3"><strong>三种浏览器引擎</strong></h3>
+<pre><code class="language-python">from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    # Chromium (Google Chrome/Edge 基础)
+    browser = p.chromium.launch()
+
+    # Firefox
+    browser = p.firefox.launch()
+
+    # WebKit (Safari 基础)
+    browser = p.webkit.launch()
+</code></pre>
+<h3 id="vs-api"><strong>同步 vs 异步 API</strong></h3>
+<pre><code class="language-python"># 同步 API（推荐初学者）
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto(&quot;https://example.com&quot;)
+    browser.close()
+
+# 异步 API
+import asyncio
+from playwright.async_api import async_playwright
+
+async def main():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        page = await browser.new_page()
+        await page.goto(&quot;https://example.com&quot;)
+        await browser.close()
+
+asyncio.run(main())
+</code></pre>
+<h2 id="3">🎯 <strong>3. 基础操作</strong></h2>
+<h3 id="_4"><strong>页面导航</strong></h3>
+<pre><code class="language-python">from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)  # 显示浏览器
+    page = browser.new_page()
+
+    # 基本导航
+    page.goto(&quot;https://example.com&quot;)  # 跳转
+    page.reload()                     # 刷新
+    page.go_back()                    # 后退
+    page.go_forward()                 # 前进
+
+    # 等待策略
+    page.goto(&quot;https://example.com&quot;, wait_until=&quot;networkidle&quot;)  # 网络空闲
+    page.goto(&quot;https://example.com&quot;, wait_until=&quot;domcontentloaded&quot;)  # DOM加载
+    page.goto(&quot;https://example.com&quot;, wait_until=&quot;load&quot;)  # 页面完全加载
+
+    # 获取页面信息
+    title = page.title()            # 标题
+    url = page.url                  # 当前URL
+    content = page.content()        # HTML内容
+
+    browser.close()
+</code></pre>
+<h3 id="_5"><strong>元素定位与交互</strong></h3>
+<pre><code class="language-python"># 定位方法（最常用的）
+page.click(&quot;button#submit&quot;)                    # 点击
+page.fill(&quot;input[name='username']&quot;, &quot;admin&quot;)   # 填写表单
+page.type(&quot;textarea&quot;, &quot;Hello World&quot;)           # 模拟打字
+page.press(&quot;input&quot;, &quot;Enter&quot;)                   # 按键
+
+# 多种选择器
+page.click(&quot;#id&quot;)                       # ID
+page.click(&quot;.class&quot;)                    # 类名
+page.click(&quot;text=Login&quot;)                # 文本内容
+page.click(&quot;button:has-text('Submit')&quot;) # 包含文本
+page.click(&quot;input[name='email']&quot;)       # 属性
+page.click(&quot;//button[@type='submit']&quot;)  # XPath
+
+# 等待元素
+page.wait_for_selector(&quot;#loading&quot;, state=&quot;hidden&quot;)  # 等待隐藏
+page.wait_for_selector(&quot;.result&quot;, state=&quot;visible&quot;)  # 等待显示
+page.wait_for_timeout(3000)                         # 强制等待（不推荐）
+</code></pre>
+<h3 id="_6"><strong>表单操作</strong></h3>
+<pre><code class="language-python"># 表单填写
+page.fill(&quot;#username&quot;, &quot;testuser&quot;)
+page.fill(&quot;#password&quot;, &quot;password123&quot;)
+page.select_option(&quot;#country&quot;, &quot;US&quot;)            # 下拉框
+page.check(&quot;#agree-terms&quot;)                      # 勾选
+page.uncheck(&quot;#newsletter&quot;)                     # 取消勾选
+page.set_checked(&quot;#remember&quot;, True)             # 设置复选框状态
+
+# 文件上传
+page.set_input_files(&quot;input[type='file']&quot;, &quot;path/to/file.pdf&quot;)
+
+# 提交表单
+page.click(&quot;button[type='submit']&quot;)
+# 或
+page.press(&quot;#password&quot;, &quot;Enter&quot;)
+</code></pre>
+<h2 id="4">🔍 <strong>4. 高级元素操作</strong></h2>
+<h3 id="_7"><strong>多种定位方式</strong></h3>
+<pre><code class="language-python"># 单元素定位
+element = page.query_selector(&quot;.item&quot;)          # 第一个匹配元素
+element = page.locator(&quot;.item&quot;).first          # 使用locator
+
+# 多元素定位
+elements = page.query_selector_all(&quot;.item&quot;)     # 所有匹配元素
+elements = page.locator(&quot;.item&quot;).all()         # 使用locator
+
+# 精确的文本定位
+page.click(&quot;text=Submit&quot;)                      # 精确文本
+page.click(&quot;text=/submit/i&quot;)                   # 正则匹配
+page.click(&quot;text='Log in'&quot;)                    # 包含文本
+
+# 相对定位
+page.locator(&quot;form&quot;).locator(&quot;button&quot;).click()  # 在form中找button
+</code></pre>
+<h3 id="_8"><strong>元素状态检查</strong></h3>
+<pre><code class="language-python"># 检查可见性
+is_visible = page.is_visible(&quot;#element&quot;)
+is_hidden = page.is_hidden(&quot;#element&quot;)
+
+# 检查存在
+is_present = page.locator(&quot;#element&quot;).count() &gt; 0
+
+# 检查状态
+is_enabled = page.is_enabled(&quot;button&quot;)
+is_checked = page.is_checked(&quot;#checkbox&quot;)
+is_editable = page.is_editable(&quot;input&quot;)
+
+# 获取属性
+text = page.text_content(&quot;.title&quot;)              # 文本内容
+value = page.input_value(&quot;#input&quot;)              # 输入值
+attribute = page.get_attribute(&quot;img&quot;, &quot;src&quot;)    # 属性值
+</code></pre>
+<h2 id="5">📊 <strong>5. 页面等待策略</strong></h2>
+<h3 id="_9"><strong>智能等待</strong></h3>
+<pre><code class="language-python"># 等待元素出现
+page.wait_for_selector(&quot;.result&quot;)
+
+# 等待元素状态
+page.wait_for_selector(&quot;#loading&quot;, state=&quot;hidden&quot;)    # 等待消失
+page.wait_for_selector(&quot;#content&quot;, state=&quot;visible&quot;)   # 等待显示
+page.wait_for_selector(&quot;#button&quot;, state=&quot;enabled&quot;)    # 等待可用
+
+# 等待函数
+page.wait_for_function(&quot;window.dataLoaded&quot;)          # JS函数返回true
+page.wait_for_function(&quot;document.querySelectorAll('.item').length &gt; 5&quot;)
+
+# 等待事件
+page.wait_for_event(&quot;load&quot;)                          # 页面加载
+page.wait_for_event(&quot;domcontentloaded&quot;)
+
+# 组合等待
+from playwright.sync_api import expect
+expect(page.locator(&quot;.result&quot;)).to_be_visible()
+expect(page.locator(&quot;#count&quot;)).to_have_text(&quot;10&quot;)
+expect(page.locator(&quot;#status&quot;)).to_have_value(&quot;completed&quot;)
+</code></pre>
+<h3 id="_10"><strong>超时控制</strong></h3>
+<pre><code class="language-python"># 全局超时
+context.set_default_timeout(30000)  # 30秒
+
+# 单个操作超时
+page.click(&quot;button&quot;, timeout=10000)            # 10秒
+page.wait_for_selector(&quot;.item&quot;, timeout=5000)  # 5秒
+
+# 自定义重试逻辑
+import time
+for attempt in range(3):
+    try:
+        page.click(&quot;#unstable-button&quot;, timeout=2000)
+        break
+    except:
+        if attempt == 2:
+            raise
+        time.sleep(1)
+</code></pre>
+<h2 id="6">🌐 <strong>6. 网络与请求处理</strong></h2>
+<h3 id="_11"><strong>拦截请求</strong></h3>
+<pre><code class="language-python"># 请求拦截
+def handle_request(route, request):
+    if &quot;analytics&quot; in request.url:
+        route.abort()  # 阻止请求
+    else:
+        route.continue_()
+
+page.route(&quot;**/*&quot;, handle_request)
+
+# 修改响应
+def handle_response(route, request):
+    response = route.fulfill(
+        status=200,
+        content_type=&quot;text/html&quot;,
+        body=&quot;&lt;html&gt;&lt;body&gt;Custom Response&lt;/body&gt;&lt;/html&gt;&quot;
+    )
+
+page.route(&quot;**/api/data&quot;, handle_response)
+
+# 移除拦截
+page.unroute(&quot;**/*&quot;, handle_request)
+</code></pre>
+<h3 id="api"><strong>API 测试</strong></h3>
+<pre><code class="language-python"># 监听网络请求
+api_responses = []
+
+def log_response(response):
+    if &quot;/api/&quot; in response.url:
+        api_responses.append(response)
+
+page.on(&quot;response&quot;, log_response)
+
+# 获取请求数据
+request = page.wait_for_request(&quot;**/api/login&quot;)
+print(f&quot;Method: {request.method}&quot;)
+print(f&quot;Headers: {request.headers}&quot;)
+print(f&quot;Post Data: {request.post_data}&quot;)
+
+# 获取响应数据
+response = page.wait_for_response(&quot;**/api/data&quot;)
+print(f&quot;Status: {response.status}&quot;)
+print(f&quot;Body: {response.json()}&quot;)
+</code></pre>
+<h2 id="7">📁 <strong>7. 文件与下载</strong></h2>
+<h3 id="_12"><strong>文件下载</strong></h3>
+<pre><code class="language-python"># 等待下载
+with page.expect_download() as download_info:
+    page.click(&quot;a.download-link&quot;)
+
+download = download_info.value
+path = download.path()                      # 临时路径
+save_path = f&quot;downloads/{download.suggested_filename}&quot;
+download.save_as(save_path)                # 保存文件
+
+# 自动接受下载
+context = browser.new_context(
+    accept_downloads=True
+)
+</code></pre>
+<h3 id="pdf"><strong>截图与PDF</strong></h3>
+<pre><code class="language-python"># 截图
+page.screenshot(path=&quot;screenshot.png&quot;)           # 全屏
+page.screenshot(path=&quot;element.png&quot;, clip={&quot;x&quot;: 10, &quot;y&quot;: 10, &quot;width&quot;: 100, &quot;height&quot;: 100})
+element.screenshot(path=&quot;button.png&quot;)            # 元素截图
+
+# PDF导出
+page.pdf(path=&quot;page.pdf&quot;, format=&quot;A4&quot;)
+</code></pre>
+<h2 id="8">🧪 <strong>8. 测试框架集成</strong></h2>
+<h3 id="pytest"><strong>Pytest 示例</strong></h3>
+<pre><code class="language-python"># test_example.py
+import pytest
+from playwright.sync_api import Page, expect
+
+@pytest.fixture(scope=&quot;function&quot;)
+def page(context):
+    page = context.new_page()
+    yield page
+    page.close()
+
+def test_login(page: Page):
+    &quot;&quot;&quot;测试登录功能&quot;&quot;&quot;
+    page.goto(&quot;https://example.com/login&quot;)
+
+    page.fill(&quot;#username&quot;, &quot;testuser&quot;)
+    page.fill(&quot;#password&quot;, &quot;password123&quot;)
+    page.click(&quot;#login-button&quot;)
+
+    # 使用expect进行断言
+    expect(page).to_have_url(&quot;https://example.com/dashboard&quot;)
+    expect(page.locator(&quot;.welcome&quot;)).to_have_text(&quot;Welcome, testuser!&quot;)
+
+def test_search(page: Page):
+    &quot;&quot;&quot;测试搜索功能&quot;&quot;&quot;
+    page.goto(&quot;https://example.com&quot;)
+
+    page.fill(&quot;[placeholder='Search']&quot;, &quot;Playwright&quot;)
+    page.press(&quot;[placeholder='Search']&quot;, &quot;Enter&quot;)
+
+    # 等待并验证结果
+    results = page.locator(&quot;.search-result&quot;)
+    expect(results).to_have_count(10)
+</code></pre>
+<h3 id="_13"><strong>测试配置</strong></h3>
+<pre><code class="language-python"># conftest.py
+import pytest
+from playwright.sync_api import Playwright, Browser, BrowserContext
+
+@pytest.fixture(scope=&quot;session&quot;)
+def playwright():
+    with sync_playwright() as p:
+        yield p
+
+@pytest.fixture(scope=&quot;session&quot;)
+def browser(playwright: Playwright):
+    browser = playwright.chromium.launch(
+        headless=True,      # 无头模式
+        slow_mo=50,         # 慢动作（调试用）
+        devtools=True       # 打开开发者工具
+    )
+    yield browser
+    browser.close()
+
+@pytest.fixture
+def context(browser: Browser):
+    context = browser.new_context(
+        viewport={&quot;width&quot;: 1920, &quot;height&quot;: 1080},
+        locale=&quot;en-US&quot;,
+        timezone_id=&quot;America/New_York&quot;
+    )
+    yield context
+    context.close()
+</code></pre>
+<h2 id="8_1">🛡️ <strong>8. 最佳实践</strong></h2>
+<h3 id="_14"><strong>代码组织</strong></h3>
+<pre><code class="language-python"># page_objects/login_page.py
+class LoginPage:
+    def __init__(self, page):
+        self.page = page
+        self.username_input = page.locator(&quot;#username&quot;)
+        self.password_input = page.locator(&quot;#password&quot;)
+        self.login_button = page.locator(&quot;#login-button&quot;)
+        self.error_message = page.locator(&quot;.error&quot;)
+
+    def navigate(self):
+        self.page.goto(&quot;https://example.com/login&quot;)
+
+    def login(self, username, password):
+        self.username_input.fill(username)
+        self.password_input.fill(password)
+        self.login_button.click()
+
+    def get_error(self):
+        return self.error_message.text_content()
+
+# 使用示例
+def test_login():
+    page = browser.new_page()
+    login_page = LoginPage(page)
+    login_page.navigate()
+    login_page.login(&quot;user&quot;, &quot;pass&quot;)
+    assert login_page.get_error() == &quot;Invalid credentials&quot;
+</code></pre>
+<h3 id="_15"><strong>配置管理</strong></h3>
+<pre><code class="language-yaml"># playwright.config.py
+import pytest
+from playwright.sync_api import Browser, BrowserContext
+
+def pytest_configure(config):
+    config.option.headless = True
+    config.option.screenshot = &quot;only-on-failure&quot;
+    config.option.video = &quot;retain-on-failure&quot;
+
+@pytest.fixture
+def browser_context_args(browser_context_args):
+    return {
+        **browser_context_args,
+        &quot;viewport&quot;: {&quot;width&quot;: 1920, &quot;height&quot;: 1080},
+        &quot;ignore_https_errors&quot;: True,
+        &quot;record_video_dir&quot;: &quot;videos/&quot;
+    }
+</code></pre>
+<h2 id="9">🚨 <strong>9. 常见问题解决</strong></h2>
+<h3 id="_16"><strong>调试技巧</strong></h3>
+<pre><code class="language-python"># 1. 暂停调试
+page.pause()  # 打开Playwright Inspector
+
+# 2. 控制台输出
+page.on(&quot;console&quot;, lambda msg: print(f&quot;CONSOLE: {msg.text}&quot;))
+
+# 3. 详细日志
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+# 4. 慢动作模式
+browser = p.chromium.launch(headless=False, slow_mo=1000)
+
+# 5. 录制脚本
+playwright codegen https://example.com
+</code></pre>
+<h3 id="_17"><strong>常见错误处理</strong></h3>
+<pre><code class="language-python">try:
+    page.click(&quot;#unstable-element&quot;, timeout=3000)
+except TimeoutError:
+    print(&quot;元素未找到，尝试其他方式&quot;)
+    page.reload()
+    page.wait_for_selector(&quot;#unstable-element&quot;, state=&quot;visible&quot;)
+    page.click(&quot;#unstable-element&quot;)
+
+# 处理弹窗
+page.on(&quot;dialog&quot;, lambda dialog: dialog.accept())
+
+# 处理框架
+frame = page.frame(name=&quot;iframe-name&quot;)
+frame.click(&quot;button&quot;)
+</code></pre>
+<h2 id="10">📋 <strong>10. 速查表</strong></h2>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>代码示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>启动浏览器</strong></td>
+<td><code>browser = p.chromium.launch(headless=False)</code></td>
+</tr>
+<tr>
+<td><strong>新建页面</strong></td>
+<td><code>page = browser.new_page()</code></td>
+</tr>
+<tr>
+<td><strong>页面跳转</strong></td>
+<td><code>page.goto("https://example.com")</code></td>
+</tr>
+<tr>
+<td><strong>点击元素</strong></td>
+<td><code>page.click("button#submit")</code></td>
+</tr>
+<tr>
+<td><strong>填写表单</strong></td>
+<td><code>page.fill("input[name='email']", "test@example.com")</code></td>
+</tr>
+<tr>
+<td><strong>获取文本</strong></td>
+<td><code>text = page.text_content(".title")</code></td>
+</tr>
+<tr>
+<td><strong>等待元素</strong></td>
+<td><code>page.wait_for_selector(".result")</code></td>
+</tr>
+<tr>
+<td><strong>截图</strong></td>
+<td><code>page.screenshot(path="screenshot.png")</code></td>
+</tr>
+<tr>
+<td><strong>执行JS</strong></td>
+<td><code>page.evaluate("window.scrollTo(0, document.body.scrollHeight)")</code></td>
+</tr>
+<tr>
+<td><strong>获取URL</strong></td>
+<td><code>current_url = page.url</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_18">🎯 <strong>快速开始模板</strong></h2>
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+Playwright 快速开始模板
+&quot;&quot;&quot;
+
+from playwright.sync_api import sync_playwright
+
+def main():
+    with sync_playwright() as p:
+        # 1. 启动浏览器
+        browser = p.chromium.launch(
+            headless=False,      # 显示浏览器窗口
+            slow_mo=100,         # 慢动作，方便观察
+        )
+
+        # 2. 创建页面
+        page = browser.new_page()
+
+        # 3. 设置视口大小
+        page.set_viewport_size({&quot;width&quot;: 1920, &quot;height&quot;: 1080})
+
+        try:
+            # 4. 访问网站
+            page.goto(&quot;https://www.baidu.com&quot;)
+
+            # 5. 页面操作
+            page.fill(&quot;#kw&quot;, &quot;Playwright教程&quot;)
+            page.press(&quot;#kw&quot;, &quot;Enter&quot;)
+
+            # 6. 等待结果
+            page.wait_for_selector(&quot;.result&quot;)
+
+            # 7. 获取数据
+            results = page.query_selector_all(&quot;.result h3 a&quot;)
+            for result in results[:5]:
+                print(f&quot;标题: {result.text_content()}&quot;)
+                print(f&quot;链接: {result.get_attribute('href')}&quot;)
+
+            # 8. 截图
+            page.screenshot(path=&quot;search_results.png&quot;)
+
+        finally:
+            # 9. 关闭浏览器
+            browser.close()
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      
+    
+  </body>
+</html>
