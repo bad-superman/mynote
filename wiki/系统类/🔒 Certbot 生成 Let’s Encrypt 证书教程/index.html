@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+        <link rel="prev" href="../%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
       
       
-        <link rel="next" href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+        <link rel="next" href="../%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
     
     
       
-        <title>nginx配置https及证书 - GXC's Docs</title>
+        <title>🔒 Certbot 生成 Let’s Encrypt 证书教程 - GXC's Docs</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nginxhttps" class="md-skip">
+        <a href="#certbot-lets-encrypt" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              nginx配置https及证书
+              🔒 Certbot 生成 Let’s Encrypt 证书教程
             
           </span>
         </div>
@@ -676,16 +676,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
       
       
       
@@ -694,7 +692,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_6">
           <span class="md-nav__icon md-icon"></span>
           Nginx
@@ -707,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         基本模块
       </a>
     </li>
@@ -721,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         添加模块
       </a>
     </li>
@@ -735,8 +733,72 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         负载均衡
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+        nginx配置https及证书
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          系统类
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          系统类
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        在 Mac 上定时执行脚本的完整指南
       </a>
     </li>
   
@@ -759,12 +821,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          nginx配置https及证书
+          🔒 Certbot 生成 Let’s Encrypt 证书教程
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        nginx配置https及证书
+        🔒 Certbot 生成 Let’s Encrypt 证书教程
       </a>
       
         
@@ -784,14 +846,129 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    设置站点
+    📌 前置条件
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    证书配置
+  <a href="#1-certbot" class="md-nav__link">
+    1️⃣ 安装 Certbot
+  </a>
+  
+    <nav class="md-nav" aria-label="1️⃣ 安装 Certbot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu-debian" class="md-nav__link">
+    Ubuntu / Debian
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-rhel" class="md-nav__link">
+    CentOS / RHEL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2️⃣ 生成证书
+  </a>
+  
+    <nav class="md-nav" aria-label="2️⃣ 生成证书">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#awebroot-web" class="md-nav__link">
+    方式 A：Webroot 模式（适合已有 Web 服务）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bstandalone-web" class="md-nav__link">
+    方式 B：Standalone 模式（无 Web 服务或测试用）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-nginx-apache" class="md-nav__link">
+    方式 C：自动配置 Nginx / Apache（推荐生产环境）
+  </a>
+  
+    <nav class="md-nav" aria-label="方式 C：自动配置 Nginx / Apache（推荐生产环境）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apache" class="md-nav__link">
+    Apache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3️⃣ 测试证书续期
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4️⃣ 使用证书（示例）
+  </a>
+  
+    <nav class="md-nav" aria-label="4️⃣ 使用证书（示例）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teleport" class="md-nav__link">
+    Teleport 配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-https" class="md-nav__link">
+    Nginx 配置（HTTPS）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5️⃣ 常用命令总结
   </a>
   
 </li>
@@ -805,75 +982,13 @@
 
             
           
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
-          系统类
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_2_7">
-          <span class="md-nav__icon md-icon"></span>
-          系统类
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
             
               
   
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
-        在 Mac 上定时执行脚本的完整指南
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
-        🔒 Certbot 生成 Let’s Encrypt 证书教程
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         🕐在 Mac 上定时执行脚本的完整指南
       </a>
     </li>
@@ -887,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         🚀 Teleport Community Edition 安装与入门教程
       </a>
     </li>
@@ -1136,14 +1251,129 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    设置站点
+    📌 前置条件
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    证书配置
+  <a href="#1-certbot" class="md-nav__link">
+    1️⃣ 安装 Certbot
+  </a>
+  
+    <nav class="md-nav" aria-label="1️⃣ 安装 Certbot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu-debian" class="md-nav__link">
+    Ubuntu / Debian
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centos-rhel" class="md-nav__link">
+    CentOS / RHEL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2️⃣ 生成证书
+  </a>
+  
+    <nav class="md-nav" aria-label="2️⃣ 生成证书">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#awebroot-web" class="md-nav__link">
+    方式 A：Webroot 模式（适合已有 Web 服务）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bstandalone-web" class="md-nav__link">
+    方式 B：Standalone 模式（无 Web 服务或测试用）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-nginx-apache" class="md-nav__link">
+    方式 C：自动配置 Nginx / Apache（推荐生产环境）
+  </a>
+  
+    <nav class="md-nav" aria-label="方式 C：自动配置 Nginx / Apache（推荐生产环境）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    Nginx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apache" class="md-nav__link">
+    Apache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3️⃣ 测试证书续期
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4️⃣ 使用证书（示例）
+  </a>
+  
+    <nav class="md-nav" aria-label="4️⃣ 使用证书（示例）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teleport" class="md-nav__link">
+    Teleport 配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-https" class="md-nav__link">
+    Nginx 配置（HTTPS）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5️⃣ 常用命令总结
   </a>
   
 </li>
@@ -1163,52 +1393,162 @@
                   
 
 
-<h1 id="nginxhttps">nginx配置https及证书</h1>
-<h2 id="_1">设置站点</h2>
-<pre><code>    server {
-        listen       80;
-        server_name  www.xxx.com;
-        #将所有HTTP请求通过rewrite指令重定向到HTTPS。
-        rewrite ^(.*)$ https://$host$1;
-        #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
-
-        location / {
-            root /usr/share/nginx/html;
-            index  index.html index.htm;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
+<h1 id="certbot-lets-encrypt">🔒 Certbot 生成 Let’s Encrypt 证书教程</h1>
+<h2 id="_1">📌 前置条件</h2>
+<ul>
+<li>
+<p>一台 Linux 服务器（Ubuntu/Debian/CentOS/RHEL 均可）</p>
+</li>
+<li>
+<p>域名已解析到服务器公网 IP</p>
+</li>
+<li>
+<p>服务器开放 <strong>80（HTTP）端口</strong>用于域名验证</p>
+</li>
+<li>
+<p>安装对应 Web 服务器（Nginx 或 Apache）或打算用 <strong>Standalone 模式</strong></p>
+</li>
+</ul>
+<hr />
+<h2 id="1-certbot">1️⃣ 安装 Certbot</h2>
+<h3 id="ubuntu-debian">Ubuntu / Debian</h3>
+<pre><code class="language-bash">sudo apt update
+sudo apt install certbot -y
+# 安装 Nginx 插件（可选）
+sudo apt install python3-certbot-nginx -y
+# 安装 Apache 插件（可选）
+sudo apt install python3-certbot-apache -y
 </code></pre>
-<h2 id="_2">证书配置</h2>
-<pre><code>server {
-    listen 443;
-    ssl on;
-    #配置HTTPS的默认访问端口为443。
-    #如果未在此处配置HTTPS的默认访问端口，可能会造成Nginx无法启动。
-    #如果您使用Nginx 1.15.0及以上版本，请使用listen 443 ssl代替listen 443和ssl on。
-    server_name www.tradebong.com; #需要将xxxx.com替换成证书绑定的域名。
-    root html;
-    index index.html index.htm;
-    ssl_certificate /root/cert/xxx.pem;  #需要将cert-file-name.pem替换成已上传的证书文件的名称。
-    ssl_certificate_key /root/cert/xxx.key; #需要将cert-file-name.key替换成已上传的证书密钥文件的名称。
-    ssl_session_timeout 5m;
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
-    #表示使用的加密套件的类型。
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #表示使用的TLS协议的类型。
-    ssl_prefer_server_ciphers on;
+<h3 id="centos-rhel">CentOS / RHEL</h3>
+<pre><code class="language-bash">sudo yum install epel-release -y
+sudo yum install certbot python3-certbot-nginx -y
+sudo yum install python3-certbot-apache -y
+</code></pre>
+<hr />
+<h2 id="2">2️⃣ 生成证书</h2>
+<p>Certbot 支持多种验证模式：</p>
+<h3 id="awebroot-web">方式 A：Webroot 模式（适合已有 Web 服务）</h3>
+<pre><code class="language-bash">sudo certbot certonly \
+  --webroot -w /var/www/html \
+  -d example.com -d www.example.com
+</code></pre>
+<p>参数说明：</p>
+<ul>
+<li>
+<p><code>--webroot -w /var/www/html</code>：网站根目录，用于放置验证文件</p>
+</li>
+<li>
+<p><code>-d example.com -d www.example.com</code>：域名列表，可多个</p>
+</li>
+<li>
+<p>执行后会生成证书，默认路径：</p>
+<ul>
+<li>
+<p><code>/etc/letsencrypt/live/example.com/fullchain.pem</code>（完整证书）</p>
+</li>
+<li>
+<p><code>/etc/letsencrypt/live/example.com/privkey.pem</code>（私钥）</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="bstandalone-web">方式 B：Standalone 模式（无 Web 服务或测试用）</h3>
+<pre><code class="language-bash">sudo certbot certonly --standalone -d example.com -d www.example.com
+</code></pre>
+<ul>
+<li>
+<p>Certbot 会启动临时 HTTP 服务监听 80 端口完成验证</p>
+</li>
+<li>
+<p>成功后证书同样存放在 <code>/etc/letsencrypt/live/</code> 下</p>
+</li>
+</ul>
+<hr />
+<h3 id="c-nginx-apache">方式 C：自动配置 Nginx / Apache（推荐生产环境）</h3>
+<h4 id="nginx">Nginx</h4>
+<pre><code class="language-bash">sudo certbot --nginx -d example.com -d www.example.com
+</code></pre>
+<ul>
+<li>
+<p>Certbot 会自动修改 Nginx 配置，加入 HTTPS 配置</p>
+</li>
+<li>
+<p>证书自动生效，且生成自动续期任务</p>
+</li>
+</ul>
+<h4 id="apache">Apache</h4>
+<pre><code class="language-bash">sudo certbot --apache -d example.com -d www.example.com
+</code></pre>
+<ul>
+<li>功能与 Nginx 类似，会自动启用 HTTPS</li>
+</ul>
+<hr />
+<h2 id="3">3️⃣ 测试证书续期</h2>
+<p>Let’s Encrypt 证书有效期 90 天，需要自动续期。Certbot 安装后会默认创建系统定时任务（cron 或 systemd timer）</p>
+<p>手动测试续期命令：</p>
+<pre><code class="language-bash">sudo certbot renew --dry-run
+</code></pre>
+<ul>
+<li>
+<p>输出 <code>Congratulations, all renewals succeeded.</code> 表示续期功能正常</p>
+</li>
+<li>
+<p>建议每天或每周检查一次</p>
+</li>
+</ul>
+<hr />
+<h2 id="4">4️⃣ 使用证书（示例）</h2>
+<p>假设你用 Teleport / Nginx / Apache：</p>
+<h3 id="teleport">Teleport 配置</h3>
+<pre><code class="language-yaml">https_key_file: /etc/letsencrypt/live/example.com/privkey.pem
+https_cert_file: /etc/letsencrypt/live/example.com/fullchain.pem
+</code></pre>
+<h3 id="nginx-https">Nginx 配置（HTTPS）</h3>
+<pre><code class="language-nginx">server {
+    listen 443 ssl;
+    server_name example.com;
+
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
     location / {
-        #root   /;  #站点目录。
-        index index.html index.htm;
+        proxy_pass http://127.0.0.1:3080;
     }
 }
 </code></pre>
-<p><a href="https://blog.csdn.net/duyusean/article/details/79348613">资料</a></p>
+<hr />
+<h2 id="5">5️⃣ 常用命令总结</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sudo certbot certonly --standalone -d example.com</code></td>
+<td>单独生成证书</td>
+</tr>
+<tr>
+<td><code>sudo certbot --nginx -d example.com</code></td>
+<td>自动 Nginx 配置并生成证书</td>
+</tr>
+<tr>
+<td><code>sudo certbot renew --dry-run</code></td>
+<td>测试续期</td>
+</tr>
+<tr>
+<td><code>/etc/letsencrypt/live/example.com/fullchain.pem</code></td>
+<td>证书路径</td>
+</tr>
+<tr>
+<td><code>/etc/letsencrypt/live/example.com/privkey.pem</code></td>
+<td>私钥路径</td>
+</tr>
+</tbody>
+</table>
 
 
 

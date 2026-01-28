@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+        <link rel="prev" href="../%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/">
       
       
-        <link rel="next" href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+        <link rel="next" href="../%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.13">
     
     
       
-        <title>nginx配置https及证书 - GXC's Docs</title>
+        <title>并发 & 幂等设计 - GXC's Docs</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nginxhttps" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              nginx配置https及证书
+              并发 & 幂等设计
             
           </span>
         </div>
@@ -676,16 +676,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
       
       
       
@@ -694,7 +692,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_6">
           <span class="md-nav__icon md-icon"></span>
           Nginx
@@ -707,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         基本模块
       </a>
     </li>
@@ -721,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         添加模块
       </a>
     </li>
@@ -735,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         负载均衡
       </a>
     </li>
@@ -747,59 +745,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          nginx配置https及证书
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         nginx配置https及证书
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    设置站点
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    证书配置
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1002,14 +952,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" checked>
       
       
       
@@ -1018,7 +970,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_9">
           <span class="md-nav__icon md-icon"></span>
           金融
@@ -1031,7 +983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         券商风险服务 - 强平模块设计方案
       </a>
     </li>
@@ -1043,11 +995,66 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          并发 & 幂等设计
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         并发 & 幂等设计
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 账户级锁
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 幂等
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-kafka-partition" class="md-nav__link">
+    2.3 Kafka Partition
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1059,7 +1066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         无标题笔记
       </a>
     </li>
@@ -1073,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         一、核心风控计算因子（Risk Factors）
       </a>
     </li>
@@ -1087,7 +1094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         一、核心风控计算因子（Risk Factors）
       </a>
     </li>
@@ -1135,15 +1142,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    设置站点
+  <a href="#21" class="md-nav__link">
+    2.1 账户级锁
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    证书配置
+  <a href="#22" class="md-nav__link">
+    2.2 幂等
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-kafka-partition" class="md-nav__link">
+    2.3 Kafka Partition
   </a>
   
 </li>
@@ -1163,52 +1177,165 @@
                   
 
 
-<h1 id="nginxhttps">nginx配置https及证书</h1>
-<h2 id="_1">设置站点</h2>
-<pre><code>    server {
-        listen       80;
-        server_name  www.xxx.com;
-        #将所有HTTP请求通过rewrite指令重定向到HTTPS。
-        rewrite ^(.*)$ https://$host$1;
-        #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
-
-        location / {
-            root /usr/share/nginx/html;
-            index  index.html index.htm;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
+<h1 id="_1">并发 &amp; 幂等设计</h1>
+<h2 id="21">2.1 账户级锁</h2>
+<pre><code class="language-text">Redis Key: risk:sell:lock:{accountId}
+TTL: 10s
 </code></pre>
-<h2 id="_2">证书配置</h2>
-<pre><code>server {
-    listen 443;
-    ssl on;
-    #配置HTTPS的默认访问端口为443。
-    #如果未在此处配置HTTPS的默认访问端口，可能会造成Nginx无法启动。
-    #如果您使用Nginx 1.15.0及以上版本，请使用listen 443 ssl代替listen 443和ssl on。
-    server_name www.tradebong.com; #需要将xxxx.com替换成证书绑定的域名。
-    root html;
-    index index.html index.htm;
-    ssl_certificate /root/cert/xxx.pem;  #需要将cert-file-name.pem替换成已上传的证书文件的名称。
-    ssl_certificate_key /root/cert/xxx.key; #需要将cert-file-name.key替换成已上传的证书密钥文件的名称。
-    ssl_session_timeout 5m;
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
-    #表示使用的加密套件的类型。
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #表示使用的TLS协议的类型。
-    ssl_prefer_server_ciphers on;
-    location / {
-        #root   /;  #站点目录。
-        index index.html index.htm;
-    }
-}
+<hr />
+<h2 id="22">2.2 幂等</h2>
+<pre><code class="language-text">Key: liquidation:once:{accountId}:{timestamp}
 </code></pre>
-<p><a href="https://blog.csdn.net/duyusean/article/details/79348613">资料</a></p>
+<hr />
+<h2 id="23-kafka-partition">2.3 Kafka Partition</h2>
+<pre><code class="language-text">key = accountId
+保证一个用户平仓信号在一个partition
+</code></pre>
+<h1 id="_2">三、表结构</h1>
+<h3 id="31-risk_force_sell_task">3.1 强平任务表(risk_force_sell_task)</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uid</td>
+<td>bigint</td>
+<td></td>
+</tr>
+<tr>
+<td>customer_id</td>
+<td>bigint</td>
+<td></td>
+</tr>
+<tr>
+<td>task_id</td>
+<td>char(32)</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>tinyint</td>
+<td>1执行中 2 完成 3取消</td>
+</tr>
+<tr>
+<td>rr</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr>
+<td>rr_version</td>
+<td>int</td>
+<td>rr计算结果版本，幂等</td>
+</tr>
+<tr>
+<td>extra</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>datetime</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-risk_force_sell_task_detail">3.2 强平任务详情表（risk_force_sell_task_detail）</h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task_id</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>uid</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>customer_id</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>price_type</td>
+<td></td>
+<td>market市价 limit限价</td>
+</tr>
+<tr>
+<td>trade_price</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>direction</td>
+<td></td>
+<td>方向 1买入 2卖出</td>
+</tr>
+<tr>
+<td>side</td>
+<td></td>
+<td>long/short</td>
+</tr>
+<tr>
+<td>trade_num</td>
+<td></td>
+<td>平仓数量</td>
+</tr>
+<tr>
+<td>status</td>
+<td></td>
+<td>1 创建成功 2 执行成功 3 执行失败 4 取消</td>
+</tr>
+<tr>
+<td>reason</td>
+<td></td>
+<td>执行失败，取消失败原因</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td></td>
+<td>执行订单</td>
+</tr>
+<tr>
+<td>c_order_id</td>
+<td></td>
+<td>自定义id，保持幂等，防止多次下单</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
 
