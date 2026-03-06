@@ -1,0 +1,3443 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+      
+      
+        <link rel="next" href="../%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+    
+    
+      
+        <title>✅protoc gen validate 完整使用教程 - GXC's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9f615399.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#protoc-gen-validate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-header__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GXC's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ✅protoc gen validate 完整使用教程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="GXC&#39;s Docs" class="md-nav__button md-logo" aria-label="GXC's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    GXC's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Wiki
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Wiki
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    搭建自己的wiki知识管理系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Golang
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Golang
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Render/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Render
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ✈️ Go泛型主要用法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    无标题笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    泛型主要用法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" checked>
+        
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Grpc
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Grpc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    protoc-gen-validate 完整使用教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ✅protoc gen validate 完整使用教程
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    ✅protoc gen validate 完整使用教程
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一、简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二、安装
+  </a>
+  
+    <nav class="md-nav" aria-label="二、安装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 安装依赖
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validateproto" class="md-nav__link">
+    2. 导入 validate.proto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三、基本使用
+  </a>
+  
+    <nav class="md-nav" aria-label="三、基本使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-proto" class="md-nav__link">
+    1. 创建 proto 文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 生成代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    四、所有验证规则详解
+  </a>
+  
+    <nav class="md-nav" aria-label="四、所有验证规则详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1. 数值类型验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2. 字符串验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 布尔值验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 枚举验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 消息验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 数组验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-map" class="md-nav__link">
+    7. Map验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-oneof" class="md-nav__link">
+    8. OneOf验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    9. 时间戳验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-duration" class="md-nav__link">
+    10. Duration验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    五、自定义验证规则
+  </a>
+  
+    <nav class="md-nav" aria-label="五、自定义验证规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1. 自定义消息级别验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    2. 条件验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    六、Go代码中使用
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Go代码中使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    1. 基础验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grpc" class="md-nav__link">
+    2. gRPC拦截器集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3. 自定义验证扩展
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    七、高级功能
+  </a>
+  
+    <nav class="md-nav" aria-label="七、高级功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    1. 错误信息国际化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    2. 性能优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    3. 验证规则动态加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    八、测试验证规则
+  </a>
+  
+    <nav class="md-nav" aria-label="八、测试验证规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    1. 单元测试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    2. 性能测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    九、最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="九、最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_6" class="md-nav__link">
+    1. 项目结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-makefile" class="md-nav__link">
+    2. Makefile示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    十、常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="十、常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validateproto" class="md-nav__link">
+    1. 导入validate.proto失败
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_5" class="md-nav__link">
+    2. 验证规则不生效
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    3. 性能问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    十一、与其他工具集成
+  </a>
+  
+    <nav class="md-nav" aria-label="十一、与其他工具集成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-swaggeropenapi" class="md-nav__link">
+    1. 与Swagger/OpenAPI集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gorm" class="md-nav__link">
+    2. 与GORM集成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📦 完整的 .proto 文件最佳实践模板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📘 Protocol Buffers 3 语法完全指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📦 完整的 .proto 文件最佳实践模板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    LLM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            LLM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ollma
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Ollma
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📚 Windows命令完整速查表（Ollama + GPU + WSL）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📝 Ollama 本地部署与GPU加速问题排查笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ssh
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mysql
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Mysql
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sql执行计划和成本
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    查询优化器优化trace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_1" >
+        
+          <label class="md-nav__link" for="__nav_2_6_1" id="__nav_2_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    数据分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            数据分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🐼 Python Pandas 完全教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📊 Matplotlib Pyplot 完全可视化教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        
+          <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    自动化
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            自动化
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🎭 Playwright 简洁使用教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Nginx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Nginx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本模块
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    添加模块
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    负载均衡
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nginx配置https及证书
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    系统类
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            系统类
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    在 Mac 上定时执行脚本的完整指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🔒 Certbot 生成 Let’s Encrypt 证书教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🕐在 Mac 上定时执行脚本的完整指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🚀windows开机启动和定时任务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    运维
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            运维
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%BF%90%E7%BB%B4/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🚀 Teleport Community Edition 安装与入门教程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9_2" >
+        
+          <label class="md-nav__link" for="__nav_2_9_2" id="__nav_2_9_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    夜莺
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            夜莺
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    📓 夜莺日志检索功能速查笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    量化
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            量化
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    量化系统需求文档
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_2" >
+        
+          <label class="md-nav__link" for="__nav_2_10_2" id="__nav_2_10_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    区块链
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            区块链
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BSC公链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    金融
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            金融
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    券商风险服务 - 强平模块设计方案
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    并发 & 幂等设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    无标题笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    一、核心风控计算因子（Risk Factors）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    一、核心风控计算因子（Risk Factors）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一、简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二、安装
+  </a>
+  
+    <nav class="md-nav" aria-label="二、安装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 安装依赖
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validateproto" class="md-nav__link">
+    2. 导入 validate.proto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三、基本使用
+  </a>
+  
+    <nav class="md-nav" aria-label="三、基本使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-proto" class="md-nav__link">
+    1. 创建 proto 文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 生成代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    四、所有验证规则详解
+  </a>
+  
+    <nav class="md-nav" aria-label="四、所有验证规则详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1. 数值类型验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2. 字符串验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 布尔值验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 枚举验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 消息验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 数组验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-map" class="md-nav__link">
+    7. Map验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-oneof" class="md-nav__link">
+    8. OneOf验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    9. 时间戳验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-duration" class="md-nav__link">
+    10. Duration验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    五、自定义验证规则
+  </a>
+  
+    <nav class="md-nav" aria-label="五、自定义验证规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1. 自定义消息级别验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    2. 条件验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    六、Go代码中使用
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Go代码中使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    1. 基础验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grpc" class="md-nav__link">
+    2. gRPC拦截器集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3. 自定义验证扩展
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    七、高级功能
+  </a>
+  
+    <nav class="md-nav" aria-label="七、高级功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    1. 错误信息国际化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    2. 性能优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    3. 验证规则动态加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    八、测试验证规则
+  </a>
+  
+    <nav class="md-nav" aria-label="八、测试验证规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    1. 单元测试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    2. 性能测试
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    九、最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="九、最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_6" class="md-nav__link">
+    1. 项目结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-makefile" class="md-nav__link">
+    2. Makefile示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    十、常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="十、常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validateproto" class="md-nav__link">
+    1. 导入validate.proto失败
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_5" class="md-nav__link">
+    2. 验证规则不生效
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    3. 性能问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    十一、与其他工具集成
+  </a>
+  
+    <nav class="md-nav" aria-label="十一、与其他工具集成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-swaggeropenapi" class="md-nav__link">
+    1. 与Swagger/OpenAPI集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gorm" class="md-nav__link">
+    2. 与GORM集成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p>✅</p>
+<p>✅</p>
+<p>✅</p>
+<h1 id="protoc-gen-validate">✅protoc-gen-validate 完整使用教程</h1>
+<h2 id="_1"><strong>一、简介</strong></h2>
+<p>protoc-gen-validate 是谷歌官方推荐的 Protocol Buffers 验证插件，可以在 proto 文件中定义验证规则，自动生成验证代码。</p>
+<h2 id="_2"><strong>二、安装</strong></h2>
+<h3 id="1"><strong>1. 安装依赖</strong></h3>
+<pre><code class="language-bash"># 1. 安装 protoc
+# macOS
+brew install protobuf
+
+# Ubuntu/Debian
+sudo apt-get install protobuf-compiler
+
+# 2. 安装 Go 插件
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+# 3. 安装 protoc-gen-validate
+go install github.com/envoyproxy/protoc-gen-validate@latest
+
+# 验证安装
+protoc-gen-validate --version
+</code></pre>
+<h3 id="2-validateproto"><strong>2. 导入 validate.proto</strong></h3>
+<pre><code class="language-bash"># 获取 validate.proto 文件
+mkdir -p validate
+cd validate
+wget https://raw.githubusercontent.com/envoyproxy/protoc-gen-validate/main/validate/validate.proto
+
+# 查看安装位置
+go list -m -f '{{.Dir}}' github.com/envoyproxy/protoc-gen-validate
+</code></pre>
+<h2 id="_3"><strong>三、基本使用</strong></h2>
+<h3 id="1-proto"><strong>1. 创建 proto 文件</strong></h3>
+<pre><code class="language-protobuf">// user.proto
+syntax = &quot;proto3&quot;;
+
+package example;
+
+import &quot;validate/validate.proto&quot;;
+
+option go_package = &quot;github.com/yourname/project/gen/go;example&quot;;
+
+message User {
+  uint64 id = 1 [
+    (validate.rules).uint64.gt = 0  // 必须大于0
+  ];
+
+  string username = 2 [
+    (validate.rules).string = {
+      min_len: 3,
+      max_len: 20,
+      pattern: &quot;^[a-zA-Z0-9_]+$&quot;  // 只能包含字母数字下划线
+    }
+  ];
+
+  string email = 3 [
+    (validate.rules).string.email = true  // 必须为邮箱格式
+  ];
+
+  int32 age = 4 [
+    (validate.rules).int32 = {
+      gte: 18,
+      lte: 100
+    }
+  ];
+
+  repeated string tags = 5 [
+    (validate.rules).repeated = {
+      min_items: 1,
+      max_items: 10,
+      items: {
+        string: {
+          min_len: 1,
+          max_len: 20
+        }
+      }
+    }
+  ];
+
+  UserType type = 6 [
+    (validate.rules).enum = {
+      defined_only: true,
+      not_in: [0]  // 不允许 UNKNOWN 类型
+    }
+  ];
+
+  map&lt;string, string&gt; metadata = 7 [
+    (validate.rules).map = {
+      min_pairs: 0,
+      max_pairs: 10,
+      keys: {
+        string: {
+          pattern: &quot;^[a-z_]+$&quot;
+        }
+      },
+      values: {
+        string: {
+          max_len: 100
+        }
+      }
+    }
+  ];
+
+  oneof contact {
+    string phone = 8 [
+      (validate.rules).string = {
+        pattern: &quot;^1[3-9]\\d{9}$&quot;  // 中国手机号格式
+      }
+    ];
+    string wechat = 9 [
+      (validate.rules).string = {
+        min_len: 3,
+        max_len: 20
+      }
+    ];
+  }
+}
+
+enum UserType {
+  USER_TYPE_UNKNOWN = 0;
+  USER_TYPE_NORMAL = 1;
+  USER_TYPE_VIP = 2;
+  USER_TYPE_ADMIN = 3;
+}
+
+message CreateUserRequest {
+  User user = 1 [
+    (validate.rules).message.required = true
+  ];
+
+  string password = 2 [
+    (validate.rules).string = {
+      min_len: 8,
+      max_len: 32,
+      contains_any: &quot;!@#$%^&amp;*&quot;  // 必须包含特殊字符
+    }
+  ];
+}
+
+message CreateUserResponse {
+  uint64 user_id = 1;
+}
+</code></pre>
+<h3 id="2"><strong>2. 生成代码</strong></h3>
+<pre><code class="language-bash">#!/bin/bash
+# generate.sh
+
+# 设置路径
+PROTO_DIR=&quot;./proto&quot;
+GEN_DIR=&quot;./gen/go&quot;
+VALIDATE_PATH=&quot;$(go list -m -f '{{.Dir}}' github.com/envoyproxy/protoc-gen-validate)/validate&quot;
+
+# 创建目录
+mkdir -p ${GEN_DIR}
+
+# 生成代码
+protoc \
+  --proto_path=${PROTO_DIR} \
+  --proto_path=. \
+  --proto_path=${VALIDATE_PATH} \
+  --go_out=${GEN_DIR} \
+  --go-grpc_out=${GEN_DIR} \
+  --validate_out=&quot;lang=go:${GEN_DIR}&quot; \
+  ${PROTO_DIR}/*.proto
+
+echo &quot;代码生成完成！&quot;
+</code></pre>
+<h2 id="_4"><strong>四、所有验证规则详解</strong></h2>
+<h3 id="1_1"><strong>1. 数值类型验证</strong></h3>
+<pre><code class="language-protobuf">message NumberValidation {
+  // int32/int64
+  int32 int_field = 1 [
+    (validate.rules).int32 = {
+      const: 100,        // 必须等于100
+      lt: 100,           // 小于100
+      lte: 100,          // 小于等于100
+      gt: 0,             // 大于0
+      gte: 1,            // 大于等于1
+      in: [1, 2, 3],     // 必须在列表中
+      not_in: [0, 99]    // 不能在列表中
+    }
+  ];
+
+  // uint32/uint64
+  uint64 uint_field = 2 [
+    (validate.rules).uint64 = {
+      gt: 0,
+      lt: 1000
+    }
+  ];
+
+  // sint32/sint64（有符号整数）
+  sint32 sint_field = 3 [
+    (validate.rules).sint32 = {
+      gte: -100,
+      lte: 100
+    }
+  ];
+
+  // fixed32/fixed64（固定长度）
+  fixed32 fixed_field = 4 [
+    (validate.rules).fixed32 = {
+      gt: 0
+    }
+  ];
+
+  // float/double
+  double double_field = 5 [
+    (validate.rules).double = {
+      gt: 0.0,
+      lt: 100.0,
+      epsilon: 0.0001  // 浮点数精度
+    }
+  ];
+}
+</code></pre>
+<h3 id="2_1"><strong>2. 字符串验证</strong></h3>
+<pre><code class="language-protobuf">message StringValidation {
+  string field = 1 [
+    (validate.rules).string = {
+      // 长度约束
+      min_len: 3,
+      max_len: 100,
+      len: 10,           // 必须正好10个字符
+
+      // 格式约束
+      email: true,       // 邮箱格式
+      hostname: true,    // 主机名格式
+      ip: true,          // IP地址（v4或v6）
+      ipv4: true,        // IPv4地址
+      ipv6: true,        // IPv6地址
+      uri: true,         // URI格式
+      uri_ref: true,     // URI引用格式
+      address: true,     // 地址格式（hostname:port）
+      uuid: true,        // UUID格式
+
+      // 内容约束
+      pattern: &quot;^[a-zA-Z0-9_]+$&quot;,  // 正则表达式
+      contains: &quot;abc&quot;,   // 必须包含子串
+      not_contains: &quot;123&quot;,  // 不能包含子串
+      prefix: &quot;user_&quot;,   // 必须以指定前缀开头
+      suffix: &quot;_id&quot;,     // 必须以指定后缀结尾
+
+      // 字符集约束
+      contains_any: &quot;!@#$%&quot;,  // 必须包含任意指定字符
+      not_contains_any: &quot; \t\n&quot;,  // 不能包含任意指定字符
+
+      // 其他
+      ignore_empty: true,  // 空字符串时跳过验证
+    }
+  ];
+}
+</code></pre>
+<h3 id="3"><strong>3. 布尔值验证</strong></h3>
+<pre><code class="language-protobuf">message BoolValidation {
+  bool field = 1 [
+    (validate.rules).bool.const = true  // 必须为true
+  ];
+}
+</code></pre>
+<h3 id="4"><strong>4. 枚举验证</strong></h3>
+<pre><code class="language-protobuf">enum Status {
+  STATUS_UNKNOWN = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
+  STATUS_DELETED = 3;
+}
+
+message EnumValidation {
+  Status status = 1 [
+    (validate.rules).enum = {
+      defined_only: true,   // 必须是已定义的值
+      in: [1, 2],           // 必须在列表中
+      not_in: [0, 3]        // 不能在列表中
+    }
+  ];
+}
+</code></pre>
+<h3 id="5"><strong>5. 消息验证</strong></h3>
+<pre><code class="language-protobuf">message MessageValidation {
+  // 必须存在
+  User user = 1 [
+    (validate.rules).message.required = true
+  ];
+
+  // 可选但存在时必须验证
+  Profile profile = 2 [
+    (validate.rules).message.required = false  // 默认就是false
+  ];
+
+  // 跳过验证
+  Config config = 3 [
+    (validate.rules).message.skip = true
+  ];
+}
+</code></pre>
+<h3 id="6"><strong>6. 数组验证</strong></h3>
+<pre><code class="language-protobuf">message RepeatedValidation {
+  repeated string items = 1 [
+    (validate.rules).repeated = {
+      min_items: 1,
+      max_items: 10,
+      unique: true,  // 元素必须唯一
+      items: {
+        string: {
+          min_len: 1,
+          max_len: 50
+        }
+      }
+    }
+  ];
+
+  // 嵌套数组
+  repeated repeated int32 matrix = 2 [
+    (validate.rules).repeated = {
+      min_items: 1,
+      items: {
+        repeated: {
+          min_items: 3,
+          max_items: 3,
+          items: {
+            int32: {
+              gte: 0
+            }
+          }
+        }
+      }
+    }
+  ];
+}
+</code></pre>
+<h3 id="7-map"><strong>7. Map验证</strong></h3>
+<pre><code class="language-protobuf">message MapValidation {
+  map&lt;string, string&gt; config = 1 [
+    (validate.rules).map = {
+      min_pairs: 1,
+      max_pairs: 10,
+      no_sparse: true,  // 不允许有空值
+      keys: {
+        string: {
+          pattern: &quot;^[a-z_]+$&quot;
+        }
+      },
+      values: {
+        string: {
+          max_len: 100
+        }
+      }
+    }
+  ];
+
+  map&lt;int32, User&gt; users = 2 [
+    (validate.rules).map = {
+      min_pairs: 0,
+      values: {
+        message: {
+          required: true,
+          skip: false
+        }
+      }
+    }
+  ];
+}
+</code></pre>
+<h3 id="8-oneof"><strong>8. OneOf验证</strong></h3>
+<pre><code class="language-protobuf">message OneOfValidation {
+  oneof contact_method {
+    option (validate.required) = true;  // 必须选择其中一个
+
+    string email = 1 [
+      (validate.rules).string.email = true
+    ];
+
+    string phone = 2 [
+      (validate.rules).string = {
+        pattern: &quot;^1[3-9]\\d{9}$&quot;
+      }
+    ];
+
+    Address address = 3 [
+      (validate.rules).message.required = true
+    ];
+  }
+}
+</code></pre>
+<h3 id="9"><strong>9. 时间戳验证</strong></h3>
+<pre><code class="language-protobuf">import &quot;google/protobuf/timestamp.proto&quot;;
+
+message TimestampValidation {
+  google.protobuf.Timestamp created_at = 1 [
+    (validate.rules).timestamp = {
+      required: true,
+      gt: {seconds: 1609459200},  // 大于2021-01-01
+      within: {seconds: 31536000} // 在一年内（从当前时间）
+    }
+  ];
+
+  google.protobuf.Timestamp expires_at = 2 [
+    (validate.rules).timestamp = {
+      gt_now: true,      // 必须大于当前时间
+      within: {seconds: 2592000}  // 30天内
+    }
+  ];
+}
+</code></pre>
+<h3 id="10-duration"><strong>10. Duration验证</strong></h3>
+<pre><code class="language-protobuf">import &quot;google/protobuf/duration.proto&quot;;
+
+message DurationValidation {
+  google.protobuf.Duration timeout = 1 [
+    (validate.rules).duration = {
+      required: true,
+      gt: {seconds: 1},      // 大于1秒
+      lt: {seconds: 300},    // 小于5分钟
+      within: {seconds: 60}  // 在60秒范围内
+    }
+  ];
+}
+</code></pre>
+<h2 id="_5"><strong>五、自定义验证规则</strong></h2>
+<h3 id="1_2"><strong>1. 自定义消息级别验证</strong></h3>
+<pre><code class="language-protobuf">message Transaction {
+  double amount = 1;
+  string currency = 2;
+
+  // 自定义验证（需要在生成代码后实现）
+  option (validate.disabled) = false;
+}
+
+// 然后在Go代码中实现自定义验证
+</code></pre>
+<h3 id="2_2"><strong>2. 条件验证</strong></h3>
+<pre><code class="language-protobuf">message ConditionalValidation {
+  string type = 1;
+  string value = 2 [
+    (validate.rules).string = {
+      min_len: 1,
+      max_len: 100
+    }
+  ];
+
+  // 自定义规则：如果type为&quot;email&quot;，则value必须是邮箱
+  // 这需要在业务代码中实现
+}
+</code></pre>
+<h2 id="go"><strong>六、Go代码中使用</strong></h2>
+<h3 id="1_3"><strong>1. 基础验证</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+
+    &quot;github.com/envoyproxy/protoc-gen-validate/validate&quot;
+)
+
+func main() {
+    // 创建用户
+    user := &amp;example.User{
+        Id:       1001,
+        Username: &quot;john_doe&quot;,
+        Email:    &quot;john@example.com&quot;,
+        Age:      25,
+        Tags:     []string{&quot;golang&quot;, &quot;backend&quot;},
+        Type:     example.UserType_USER_TYPE_NORMAL,
+    }
+
+    // 验证
+    if err := user.Validate(); err != nil {
+        if verr, ok := err.(validate.Error); ok {
+            fmt.Printf(&quot;验证失败: 字段=%s, 原因=%v\n&quot;, verr.Field, verr.Reason)
+        } else {
+            log.Fatalf(&quot;验证失败: %v&quot;, err)
+        }
+        return
+    }
+
+    fmt.Println(&quot;验证通过!&quot;)
+}
+</code></pre>
+<h3 id="2-grpc"><strong>2. gRPC拦截器集成</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+
+    &quot;github.com/envoyproxy/protoc-gen-validate/validate&quot;
+    &quot;google.golang.org/grpc&quot;
+    &quot;google.golang.org/grpc/codes&quot;
+    &quot;google.golang.org/grpc/status&quot;
+)
+
+// ValidationInterceptor 验证拦截器
+func ValidationInterceptor() grpc.UnaryServerInterceptor {
+    return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+        // 检查是否实现了Validate方法
+        if v, ok := req.(interface{ Validate() error }); ok {
+            if err := v.Validate(); err != nil {
+                // 转换为友好的错误信息
+                errMsg := formatValidationError(err)
+                return nil, status.Errorf(codes.InvalidArgument, &quot;参数验证失败: %s&quot;, errMsg)
+            }
+        }
+
+        return handler(ctx, req)
+    }
+}
+
+// 格式化验证错误
+func formatValidationError(err error) string {
+    if verr, ok := err.(validate.Error); ok {
+        // 根据错误类型返回友好信息
+        switch verr.Reason {
+        case validate.Error_REQUIRED:
+            return fmt.Sprintf(&quot;字段 %s 不能为空&quot;, verr.Field)
+        case validate.Error_TOO_SHORT:
+            return fmt.Sprintf(&quot;字段 %s 长度太短&quot;, verr.Field)
+        case validate.Error_TOO_LONG:
+            return fmt.Sprintf(&quot;字段 %s 长度太长&quot;, verr.Field)
+        case validate.Error_PATTERN_MISMATCH:
+            return fmt.Sprintf(&quot;字段 %s 格式不正确&quot;, verr.Field)
+        default:
+            return verr.Error()
+        }
+    }
+
+    // 处理多个错误
+    if multiErr, ok := err.(validate.Errors); ok {
+        var msgs []string
+        for _, e := range multiErr {
+            msgs = append(msgs, formatValidationError(e))
+        }
+        return fmt.Sprintf(&quot;多个验证错误: %v&quot;, msgs)
+    }
+
+    return err.Error()
+}
+
+// 使用拦截器
+func main() {
+    server := grpc.NewServer(
+        grpc.UnaryInterceptor(ValidationInterceptor()),
+    )
+
+    // 注册服务...
+}
+</code></pre>
+<h3 id="3_1"><strong>3. 自定义验证扩展</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;context&quot;
+    &quot;regexp&quot;
+
+    &quot;github.com/go-playground/validator/v10&quot;
+    &quot;google.golang.org/grpc&quot;
+)
+
+// 扩展验证器
+type CustomValidator struct {
+    validator *validator.Validate
+}
+
+func NewCustomValidator() *CustomValidator {
+    v := validator.New()
+
+    // 注册自定义验证规则
+    v.RegisterValidation(&quot;chinese_mobile&quot;, func(fl validator.FieldLevel) bool {
+        mobile := fl.Field().String()
+        re := regexp.MustCompile(`^1[3-9]\d{9}$`)
+        return re.MatchString(mobile)
+    })
+
+    v.RegisterValidation(&quot;strong_password&quot;, func(fl validator.FieldLevel) bool {
+        password := fl.Field().String()
+        if len(password) &lt; 8 {
+            return false
+        }
+
+        hasUpper := regexp.MustCompile(`[A-Z]`).MatchString(password)
+        hasLower := regexp.MustCompile(`[a-z]`).MatchString(password)
+        hasNumber := regexp.MustCompile(`[0-9]`).MatchString(password)
+        hasSpecial := regexp.MustCompile(`[!@#$%^&amp;*]`).MatchString(password)
+
+        return hasUpper &amp;&amp; hasLower &amp;&amp; hasNumber &amp;&amp; hasSpecial
+    })
+
+    return &amp;CustomValidator{validator: v}
+}
+
+// 集成到gRPC拦截器
+func (cv *CustomValidator) Interceptor() grpc.UnaryServerInterceptor {
+    return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+        // 先使用protoc-gen-validate验证
+        if v, ok := req.(interface{ Validate() error }); ok {
+            if err := v.Validate(); err != nil {
+                return nil, status.Errorf(codes.InvalidArgument, &quot;基础验证失败: %v&quot;, err)
+            }
+        }
+
+        // 再使用自定义验证器
+        if err := cv.validator.Struct(req); err != nil {
+            return nil, status.Errorf(codes.InvalidArgument, &quot;自定义验证失败: %v&quot;, err)
+        }
+
+        return handler(ctx, req)
+    }
+}
+</code></pre>
+<h2 id="_6"><strong>七、高级功能</strong></h2>
+<h3 id="1_4"><strong>1. 错误信息国际化</strong></h3>
+<pre><code class="language-go">package i18n
+
+import (
+    &quot;github.com/envoyproxy/protoc-gen-validate/validate&quot;
+)
+
+// 国际化错误信息
+var errorMessages = map[validate.Error_Reason]map[string]string{
+    validate.Error_REQUIRED: {
+        &quot;en&quot;: &quot;field is required&quot;,
+        &quot;zh&quot;: &quot;字段不能为空&quot;,
+        &quot;ja&quot;: &quot;フィールドは必須です&quot;,
+    },
+    validate.Error_TOO_SHORT: {
+        &quot;en&quot;: &quot;field is too short&quot;,
+        &quot;zh&quot;: &quot;字段长度太短&quot;,
+        &quot;ja&quot;: &quot;フィールドが短すぎます&quot;,
+    },
+    // ... 其他错误类型
+}
+
+func TranslateError(err error, lang string) string {
+    if verr, ok := err.(validate.Error); ok {
+        if msgs, ok := errorMessages[verr.Reason]; ok {
+            if msg, ok := msgs[lang]; ok {
+                return msg
+            }
+        }
+    }
+    return err.Error()
+}
+</code></pre>
+<h3 id="2_3"><strong>2. 性能优化</strong></h3>
+<pre><code class="language-go">package validation
+
+import (
+    &quot;sync&quot;
+
+    &quot;github.com/envoyproxy/protoc-gen-validate/validate&quot;
+)
+
+// 验证器缓存
+var validatorPool = sync.Pool{
+    New: func() interface{} {
+        return &amp;validate.Validator{}
+    },
+}
+
+func GetValidator() *validate.Validator {
+    return validatorPool.Get().(*validate.Validator)
+}
+
+func PutValidator(v *validate.Validator) {
+    validatorPool.Put(v)
+}
+
+// 带缓存的验证
+func ValidateWithCache(msg interface{ Validate() error }) error {
+    // 直接使用Validate方法（内部有缓存机制）
+    return msg.Validate()
+}
+</code></pre>
+<h3 id="3_2"><strong>3. 验证规则动态加载</strong></h3>
+<pre><code class="language-go">package config
+
+import (
+    &quot;encoding/json&quot;
+    &quot;os&quot;
+)
+
+// 从配置文件加载验证规则
+type ValidationRules struct {
+    MinUsernameLength int    `json:&quot;min_username_length&quot;`
+    MaxUsernameLength int    `json:&quot;max_username_length&quot;`
+    MinPasswordLength int    `json:&quot;min_password_length&quot;`
+    AllowedCountries  []string `json:&quot;allowed_countries&quot;`
+}
+
+func LoadValidationRules(filePath string) (*ValidationRules, error) {
+    data, err := os.ReadFile(filePath)
+    if err != nil {
+        return nil, err
+    }
+
+    var rules ValidationRules
+    if err := json.Unmarshal(data, &amp;rules); err != nil {
+        return nil, err
+    }
+
+    return &amp;rules, nil
+}
+</code></pre>
+<h2 id="_7"><strong>八、测试验证规则</strong></h2>
+<h3 id="1_5"><strong>1. 单元测试</strong></h3>
+<pre><code class="language-go">package test
+
+import (
+    &quot;testing&quot;
+
+    &quot;github.com/stretchr/testify/assert&quot;
+    &quot;google.golang.org/grpc/codes&quot;
+    &quot;google.golang.org/grpc/status&quot;
+
+    pb &quot;github.com/yourname/project/gen/go&quot;
+)
+
+func TestUserValidation(t *testing.T) {
+    tests := []struct {
+        name    string
+        user    *pb.User
+        wantErr bool
+    }{
+        {
+            name: &quot;有效用户&quot;,
+            user: &amp;pb.User{
+                Id:       1001,
+                Username: &quot;john_doe&quot;,
+                Email:    &quot;john@example.com&quot;,
+                Age:      25,
+                Type:     pb.UserType_USER_TYPE_NORMAL,
+            },
+            wantErr: false,
+        },
+        {
+            name: &quot;用户名太短&quot;,
+            user: &amp;pb.User{
+                Id:       1002,
+                Username: &quot;jo&quot;,  // 少于3个字符
+                Email:    &quot;john@example.com&quot;,
+                Age:      25,
+            },
+            wantErr: true,
+        },
+        {
+            name: &quot;邮箱格式错误&quot;,
+            user: &amp;pb.User{
+                Id:       1003,
+                Username: &quot;jane_doe&quot;,
+                Email:    &quot;invalid-email&quot;,  // 无效邮箱
+                Age:      30,
+            },
+            wantErr: true,
+        },
+        {
+            name: &quot;年龄太小&quot;,
+            user: &amp;pb.User{
+                Id:       1004,
+                Username: &quot;teen_user&quot;,
+                Email:    &quot;teen@example.com&quot;,
+                Age:      16,  // 小于18
+            },
+            wantErr: true,
+        },
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            err := tt.user.Validate()
+
+            if tt.wantErr {
+                assert.Error(t, err)
+                // 验证错误类型
+                if s, ok := status.FromError(err); ok {
+                    assert.Equal(t, codes.InvalidArgument, s.Code())
+                }
+            } else {
+                assert.NoError(t, err)
+            }
+        })
+    }
+}
+
+// 测试gRPC拦截器
+func TestValidationInterceptor(t *testing.T) {
+    interceptor := ValidationInterceptor()
+
+    handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+        return &quot;success&quot;, nil
+    }
+
+    // 测试有效请求
+    validUser := &amp;pb.CreateUserRequest{
+        User: &amp;pb.User{
+            Id:       1001,
+            Username: &quot;test_user&quot;,
+            Email:    &quot;test@example.com&quot;,
+            Age:      25,
+        },
+        Password: &quot;Password123!&quot;,
+    }
+
+    resp, err := interceptor(
+        context.Background(),
+        validUser,
+        &amp;grpc.UnaryServerInfo{
+            FullMethod: &quot;/example.UserService/CreateUser&quot;,
+        },
+        handler,
+    )
+
+    assert.NoError(t, err)
+    assert.Equal(t, &quot;success&quot;, resp)
+}
+</code></pre>
+<h3 id="2_4"><strong>2. 性能测试</strong></h3>
+<pre><code class="language-go">package benchmark
+
+import (
+    &quot;testing&quot;
+
+    pb &quot;github.com/yourname/project/gen/go&quot;
+)
+
+func BenchmarkUserValidation(b *testing.B) {
+    user := &amp;pb.User{
+        Id:       1001,
+        Username: &quot;benchmark_user&quot;,
+        Email:    &quot;benchmark@example.com&quot;,
+        Age:      30,
+        Tags:     []string{&quot;test&quot;, &quot;benchmark&quot;},
+        Type:     pb.UserType_USER_TYPE_VIP,
+    }
+
+    b.ResetTimer()
+    for i := 0; i &lt; b.N; i++ {
+        _ = user.Validate()
+    }
+}
+</code></pre>
+<h2 id="_8"><strong>九、最佳实践</strong></h2>
+<h3 id="1_6"><strong>1. 项目结构</strong></h3>
+<pre><code class="language-text">project/
+├── proto/                  # Proto文件
+│   ├── user.proto
+│   ├── product.proto
+│   └── validate/          # validate.proto
+├── gen/
+│   └── go/               # 生成的代码
+├── internal/
+│   ├── validator/        # 验证逻辑
+│   │   ├── interceptor.go
+│   │   ├── custom.go
+│   │   └── i18n.go
+│   └── server/
+├── api/                  # API定义
+├── config/              # 配置文件
+├── go.mod
+└── Makefile
+</code></pre>
+<h3 id="2-makefile"><strong>2. Makefile示例</strong></h3>
+<pre><code class="language-makefile">.PHONY: proto generate build test
+
+PROTO_DIR=proto
+GEN_DIR=gen/go
+VALIDATE_PATH=$(shell go list -m -f '{{.Dir}}' github.com/envoyproxy/protoc-gen-validate)/validate
+
+proto:
+    @echo &quot;生成代码...&quot;
+    protoc \
+        --proto_path=$(PROTO_DIR) \
+        --proto_path=. \
+        --proto_path=$(VALIDATE_PATH) \
+        --go_out=$(GEN_DIR) \
+        --go-grpc_out=$(GEN_DIR) \
+        --validate_out=&quot;lang=go:$(GEN_DIR)&quot; \
+        $(PROTO_DIR)/*.proto
+
+generate: proto
+    @echo &quot;代码生成完成&quot;
+
+test:
+    go test ./... -v
+
+bench:
+    go test ./... -bench=. -benchmem
+</code></pre>
+<h2 id="_9"><strong>十、常见问题</strong></h2>
+<h3 id="1-validateproto"><strong>1. 导入validate.proto失败</strong></h3>
+<pre><code class="language-bash"># 解决方案：确保validate.proto在正确路径
+# 1. 下载validate.proto
+wget -P proto/validate https://raw.githubusercontent.com/envoyproxy/protoc-gen-validate/main/validate/validate.proto
+
+# 2. 更新protoc命令
+protoc --proto_path=proto --proto_path=. --proto_path=$(go env GOPATH)/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v0.10.1
+</code></pre>
+<h3 id="2_5"><strong>2. 验证规则不生效</strong></h3>
+<pre><code class="language-protobuf">// 检查是否正确导入
+import &quot;validate/validate.proto&quot;;
+
+// 检查语法
+string field = 1 [
+  (validate.rules).string = {
+    min_len: 3  // 注意：不是 minLen
+  }
+];
+</code></pre>
+<h3 id="3_3"><strong>3. 性能问题</strong></h3>
+<pre><code class="language-go">// 1. 使用缓存
+var validateCache sync.Pool
+
+// 2. 避免重复验证
+type validatedRequest struct {
+    once sync.Once
+    err  error
+    req  interface{ Validate() error }
+}
+
+func (v *validatedRequest) Validate() error {
+    v.once.Do(func() {
+        v.err = v.req.Validate()
+    })
+    return v.err
+}
+</code></pre>
+<h2 id="_10"><strong>十一、与其他工具集成</strong></h2>
+<h3 id="1-swaggeropenapi"><strong>1. 与Swagger/OpenAPI集成</strong></h3>
+<pre><code class="language-protobuf">// 添加Swagger注解
+message User {
+  uint64 id = 1 [
+    (validate.rules).uint64.gt = 0,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: &quot;用户ID&quot;
+    }
+  ];
+}
+</code></pre>
+<h3 id="2-gorm"><strong>2. 与GORM集成</strong></h3>
+<pre><code class="language-go">// 在GORM模型中使用
+type UserModel struct {
+    ID       uint64 `gorm:&quot;primaryKey&quot; validate:&quot;gt=0&quot;`
+    Username string `gorm:&quot;size:20&quot; validate:&quot;min=3,max=20&quot;`
+    Email    string `gorm:&quot;uniqueIndex&quot; validate:&quot;email&quot;`
+}
+
+// 保存前验证
+func (u *UserModel) BeforeSave(tx *gorm.DB) error {
+    // 转换为protobuf消息验证
+    pbUser := &amp;pb.User{
+        Id:       u.ID,
+        Username: u.Username,
+        Email:    u.Email,
+    }
+
+    if err := pbUser.Validate(); err != nil {
+        return err
+    }
+
+    return nil
+}
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      
+    
+  </body>
+</html>
