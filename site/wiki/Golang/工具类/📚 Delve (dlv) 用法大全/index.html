@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../../%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/">
+        <link rel="prev" href="../../Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/">
       
       
-        <link rel="next" href="../%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/">
+        <link rel="next" href="../../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>量化系统需求文档 - Roy's Docs</title>
+        <title>📚 Delve (dlv) 用法大全 - Roy's Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9f615399.min.css">
       
       
 
@@ -43,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#delve-dlv" class="md-skip">
           Skip to content
         </a>
       
@@ -81,7 +81,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              量化系统需求文档
+              📚 Delve (dlv) 用法大全
             
           </span>
         </div>
@@ -173,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -190,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -245,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -263,17 +263,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
@@ -286,7 +288,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Golang
@@ -299,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Render/" class="md-nav__link">
+      <a href="../../Render/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -319,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/gin/" class="md-nav__link">
+      <a href="../../gin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -339,7 +341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -359,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,7 +381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -399,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -453,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../Grpc/protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -473,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -493,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../../Grpc/%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -513,7 +515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,7 +535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../../Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -559,17 +561,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_8" checked>
         
           <label class="md-nav__link" for="__nav_2_2_8" id="__nav_2_2_8_label" tabindex="0">
             
@@ -582,7 +586,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2_8">
             <span class="md-nav__icon md-icon"></span>
             工具类
@@ -593,9 +597,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    📚 Delve (dlv) 用法大全
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -604,6 +626,255 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#delve-dlv" class="md-nav__link">
+    📚 Delve (dlv) 用法大全
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Delve (dlv) 用法大全">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一、基础调试命令
+  </a>
+  
+    <nav class="md-nav" aria-label="一、基础调试命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 直接调试模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-headless" class="md-nav__link">
+    1.2 Headless 模式（成功工作的方式）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-exec" class="md-nav__link">
+    1.3 Exec 模式（调试已编译程序）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-attach" class="md-nav__link">
+    1.4 Attach 模式（附加到运行中的进程）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delve-dap" class="md-nav__link">
+    二、Delve DAP 模式（最新协议）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    三、调试器后端选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    四、日志和调试信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    五、交互式调试中的断点命令
+  </a>
+  
+    <nav class="md-nav" aria-label="五、交互式调试中的断点命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-dlv" class="md-nav__link">
+    5.1 在 dlv 控制台中设置断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 查看和管理断点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headless" class="md-nav__link">
+    六、headless 模式下的断点设置
+  </a>
+  
+    <nav class="md-nav" aria-label="六、headless 模式下的断点设置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 通过命令行客户端
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-rest-api" class="md-nav__link">
+    6.2 通过 REST API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    七、高级断点类型
+  </a>
+  
+    <nav class="md-nav" aria-label="七、高级断点类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1 条件断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    7.2 函数断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-tracepoint" class="md-nav__link">
+    7.3 跟踪点（Tracepoint）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-watchpoint" class="md-nav__link">
+    7.4 数据断点（Watchpoint）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    八、断点调试实战
+  </a>
+  
+    <nav class="md-nav" aria-label="八、断点调试实战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    8.1 示例程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    8.2 调试会话示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    九、断点调试最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="九、断点调试最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    9.1 临时断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    9.2 断点日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    9.3 断点统计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -699,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -719,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -815,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../LLM/openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -835,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../LLM/openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -913,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Linux/ssh/" class="md-nav__link">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -975,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -995,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1091,7 +1362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1111,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1173,7 +1444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1243,7 +1514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1263,7 +1534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1283,7 +1554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1303,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1365,7 +1636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1385,7 +1656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1405,7 +1676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1425,7 +1696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1487,7 +1758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../%E8%BF%90%E7%BB%B4/%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1507,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E8%BF%90%E7%BB%B4/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1561,7 +1832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1595,19 +1866,17 @@
                 
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
         
           <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
             
@@ -1620,7 +1889,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_10">
             <span class="md-nav__icon md-icon"></span>
             量化
@@ -1631,18 +1900,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1651,7 +1911,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1697,7 +1956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1767,7 +2026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1787,7 +2046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1807,7 +2066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1827,7 +2086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1847,7 +2106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1893,8 +2152,245 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#delve-dlv" class="md-nav__link">
+    📚 Delve (dlv) 用法大全
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Delve (dlv) 用法大全">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一、基础调试命令
+  </a>
+  
+    <nav class="md-nav" aria-label="一、基础调试命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 直接调试模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-headless" class="md-nav__link">
+    1.2 Headless 模式（成功工作的方式）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-exec" class="md-nav__link">
+    1.3 Exec 模式（调试已编译程序）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-attach" class="md-nav__link">
+    1.4 Attach 模式（附加到运行中的进程）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delve-dap" class="md-nav__link">
+    二、Delve DAP 模式（最新协议）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    三、调试器后端选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    四、日志和调试信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    五、交互式调试中的断点命令
+  </a>
+  
+    <nav class="md-nav" aria-label="五、交互式调试中的断点命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-dlv" class="md-nav__link">
+    5.1 在 dlv 控制台中设置断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    5.2 查看和管理断点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headless" class="md-nav__link">
+    六、headless 模式下的断点设置
+  </a>
+  
+    <nav class="md-nav" aria-label="六、headless 模式下的断点设置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 通过命令行客户端
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-rest-api" class="md-nav__link">
+    6.2 通过 REST API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    七、高级断点类型
+  </a>
+  
+    <nav class="md-nav" aria-label="七、高级断点类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1 条件断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    7.2 函数断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-tracepoint" class="md-nav__link">
+    7.3 跟踪点（Tracepoint）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-watchpoint" class="md-nav__link">
+    7.4 数据断点（Watchpoint）
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    八、断点调试实战
+  </a>
+  
+    <nav class="md-nav" aria-label="八、断点调试实战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    8.1 示例程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    8.2 调试会话示例
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    九、断点调试最佳实践
+  </a>
+  
+    <nav class="md-nav" aria-label="九、断点调试最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    9.1 临时断点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    9.2 断点日志
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    9.3 断点统计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1909,8 +2405,266 @@
                   
 
 
-<h1 id="_1">量化系统需求文档</h1>
-<p><img alt="test" src="../../../images/roy.png" /></p>
+  <h1>📚 Delve (dlv) 用法大全</h1>
+
+<h2 id="delve-dlv">📚 Delve (dlv) 用法大全</h2>
+<h3 id="_1">一、基础调试命令</h3>
+<h4 id="11">1.1 直接调试模式</h4>
+<pre><code class="language-bash"># 最基本的调试方式（在我们的环境中失败）
+dlv debug main.go
+
+# 调试当前包
+dlv debug .
+
+# 指定文件调试
+dlv debug main.go -- -arg1 value
+</code></pre>
+<h4 id="12-headless">1.2 Headless 模式（成功工作的方式）</h4>
+<pre><code class="language-bash"># 基础 headless 模式
+dlv debug --headless --listen=:2345 --api-version=2 main.go
+
+# 带日志的 headless 模式
+dlv debug --headless --listen=:2345 --api-version=2 --accept-multiclient --log --log-output=dap main.go
+
+# 启动后继续执行
+dlv debug --headless --listen=:2345 --api-version=2 --accept-multiclient --continue main.go
+</code></pre>
+<h4 id="13-exec">1.3 Exec 模式（调试已编译程序）</h4>
+<pre><code class="language-bash"># 先编译
+go build -gcflags=&quot;all=-N -l&quot; -o /tmp/debug_bin .
+
+# 调试二进制文件
+dlv exec /tmp/debug_bin
+dlv exec --headless --listen=:2345 /tmp/debug_bin
+</code></pre>
+<h4 id="14-attach">1.4 Attach 模式（附加到运行中的进程）</h4>
+<pre><code class="language-bash"># 查找进程 PID
+pgrep your-program
+
+# 附加到进程
+dlv attach &lt;PID&gt;
+dlv attach --headless --listen=:2345 &lt;PID&gt;
+</code></pre>
+<h3 id="delve-dap">二、Delve DAP 模式（最新协议）</h3>
+<pre><code class="language-bash"># 启动 DAP 服务器
+dlv dap --listen=:23456
+
+# 带日志的 DAP 模式
+dlv dap --listen=:23456 --log --log-output=dap
+
+# 通过命令行加载程序
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{
+  &quot;name&quot;: &quot;attach&quot;,
+  &quot;mode&quot;: &quot;debug&quot;,
+  &quot;program&quot;: &quot;/path/to/your/project&quot;
+}' http://localhost:23456/launch
+</code></pre>
+<h3 id="_2">三、调试器后端选择</h3>
+<pre><code class="language-bash"># 列出可用后端
+dlv debug --help | grep -A5 backend
+
+# 使用不同后端
+dlv debug --backend=native main.go      # 原生后端
+dlv debug --backend=default main.go      # 默认后端
+dlv debug --backend=llvm main.go         # LLVM 后端
+dlv debug --backend=lldb main.go         # LLDB 后端（macOS）
+</code></pre>
+<h3 id="_3">四、日志和调试信息</h3>
+<pre><code class="language-bash"># 启用各种日志输出
+dlv debug --log --log-output=debugger main.go
+dlv debug --log --log-output=rpc main.go
+dlv debug --log --log-output=dap main.go
+dlv debug --log --log-output=debugger,rpc,dap,terminal main.go
+
+# 将日志输出到文件
+dlv debug --log --log-output=debugger --log-dest=/tmp/dlv.log main.go
+</code></pre>
+<h3 id="_4">五、交互式调试中的断点命令</h3>
+<h4 id="51-dlv">5.1 在 dlv 控制台中设置断点</h4>
+<pre><code class="language-bash"># 进入 dlv 交互式控制台
+dlv debug main.go
+
+# 然后在 (dlv) 提示符下：
+</code></pre>
+<p><strong>基本断点命令：</strong></p>
+<pre><code class="language-bash"># 在指定行号打断点
+(dlv) break main.go:10
+(dlv) b main.go:10          # b 是 break 的简写
+
+# 在函数名打断点
+(dlv) break main.main
+(dlv) break main.init
+(dlv) break fmt.Println
+
+# 在方法上打断点
+(dlv) break (*MyStruct).String
+
+# 在当前文件当前行+5行打断点
+(dlv) break +5
+(dlv) break -3
+
+# 根据条件打断点
+(dlv) break main.go:10 if i == 5
+(dlv) break main.main if x &gt; 100 &amp;&amp; y &lt; 50
+</code></pre>
+<h4 id="52">5.2 查看和管理断点</h4>
+<pre><code class="language-bash"># 列出所有断点
+(dlv) breakpoints
+(dlv) bp                    # bp 是简写
+
+# 输出示例：
+Breakpoint 1 at 0x123456 for main.main() main.go:5 (0 hits)
+Breakpoint 2 at 0x123789 for main.main() main.go:10 (2 hits)
+
+# 删除断点
+(dlv) clear 1               # 删除断点1
+(dlv) clear main.go:10      # 删除指定位置的断点
+(dlv) clearall              # 删除所有断点
+(dlv) clearall main.go      # 删除文件中的所有断点
+
+# 禁用/启用断点
+(dlv) toggle 1              # 切换断点1的状态
+(dlv) enable 1              # 启用断点1
+(dlv) disable 2             # 禁用断点2
+</code></pre>
+<h3 id="headless">六、headless 模式下的断点设置</h3>
+<h4 id="61">6.1 通过命令行客户端</h4>
+<pre><code class="language-bash"># 终端1：启动 headless 服务
+dlv debug --headless --listen=:2345 --api-version=2 --accept-multiclient main.go
+
+# 终端2：连接客户端
+dlv connect localhost:2345
+
+# 然后在客户端中设置断点
+(dlv) break main.go:15
+(dlv) continue
+</code></pre>
+<h4 id="62-rest-api">6.2 通过 REST API</h4>
+<pre><code class="language-bash"># 启动 headless 服务
+dlv debug --headless --listen=:2345 --api-version=2 --accept-multiclient main.go
+
+# 通过 API 设置断点
+curl -X POST http://localhost:2345/breakpoint \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;breakpoint&quot;: {
+      &quot;file&quot;: &quot;main.go&quot;,
+      &quot;line&quot;: 15
+    }
+  }'
+</code></pre>
+<h3 id="_5">七、高级断点类型</h3>
+<h4 id="71">7.1 条件断点</h4>
+<pre><code class="language-bash"># 只有满足条件时才暂停
+(dlv) condition 1 i == 10
+(dlv) cond 2 err != nil    # cond 是 condition 的简写
+
+# 查看断点条件
+(dlv) condition 1
+</code></pre>
+<h4 id="72">7.2 函数断点</h4>
+<pre><code class="language-bash"># 在正则表达式匹配的所有函数上打断点
+(dlv) break main.*Handler
+
+# 在递归函数上打断点（只在第一次进入时暂停）
+(dlv) break -r main.recursive 1
+</code></pre>
+<h4 id="73-tracepoint">7.3 跟踪点（Tracepoint）</h4>
+<pre><code class="language-bash"># 不暂停，只打印信息
+(dlv) trace main.go:15
+(dlv) trace fmt.Println
+
+# 自定义跟踪输出
+(dlv) trace main.go:15 &quot;i = {{.i}}&quot;
+</code></pre>
+<h4 id="74-watchpoint">7.4 数据断点（Watchpoint）</h4>
+<pre><code class="language-bash"># 监视变量何时被修改
+(dlv) watch -w globalVar   # 写入时暂停
+(dlv) watch -r globalVar   # 读取时暂停
+(dlv) watch -rw globalVar  # 读写都暂停
+</code></pre>
+<h3 id="_6">八、断点调试实战</h3>
+<h4 id="81">8.1 示例程序</h4>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;Starting...&quot;)
+
+    for i := 0; i &lt; 10; i++ {
+        process(i)
+    }
+
+    fmt.Println(&quot;Done!&quot;)
+}
+
+func process(n int) {
+    result := n * n
+    fmt.Printf(&quot;Processing %d: %d\n&quot;, n, result)
+}
+</code></pre>
+<h4 id="82">8.2 调试会话示例</h4>
+<pre><code class="language-bash">$ dlv debug main.go
+(dlv) break main.go:7                # 在 for 循环行打断点
+(dlv) break main.go:12               # 在 process 函数内打断点
+(dlv) break process if n == 5        # 条件断点，只在 n=5 时暂停
+(dlv) breakpoints                     # 查看所有断点
+
+Breakpoint 1 at 0x123456 for main.main() main.go:7 (0 hits)
+Breakpoint 2 at 0x123789 for main.process() main.go:12 (0 hits)
+Breakpoint 3 at 0x123abc for main.process() main.go:12 (0 hits) (condition n == 5)
+
+(dlv) continue                         # 运行到第一个断点
+&gt; main.main() main.go:7 (hits goroutine(1):1 total:1)
+     6: func main() {
+     7:     for i := 0; i &lt; 10; i++ {
+     8:         process(i)
+     9:     }
+
+(dlv) print i                          # 查看变量
+0
+
+(dlv) continue                         # 继续运行
+&gt; main.process() main.go:12 (hits goroutine(1):1 total:1)
+    11: func process(n int) {
+    12:     result := n * n
+    13:     fmt.Printf(&quot;Processing %d: %d\n&quot;, n, result)
+    14: }
+
+(dlv) next                             # 单步执行
+&gt; main.process() main.go:13 (hits goroutine(1):1 total:1)
+    12:     result := n * n
+    13:     fmt.Printf(&quot;Processing %d: %d\n&quot;, n, result)
+    14: }
+
+(dlv) print n                           # 查看参数
+0
+(dlv) print result                       # 查看计算结果
+0
+</code></pre>
+<h3 id="_7">九、断点调试最佳实践</h3>
+<h4 id="91">9.1 临时断点</h4>
+<pre><code class="language-bash"># 运行到光标位置（一次性断点）
+(dlv) until main.go:20
+</code></pre>
+<h4 id="92">9.2 断点日志</h4>
+<pre><code class="language-bash"># 添加断点时直接设置条件
+(dlv) break main.go:15 if i%2==0
+
+# 设置断点命中时的操作
+(dlv) on 1 print i
+(dlv) on 1 list
+(dlv) on 1 stack
+</code></pre>
+<h4 id="93">9.3 断点统计</h4>
+<pre><code class="language-bash"># 查看断点命中次数
+(dlv) break -c 5 main.go:15  # 在第5次命中时才暂停
+
+# 重置断点命中计数
+(dlv) clear 1
+(dlv) break main.go:15       # 重新设置
+</code></pre>
 
 
 
@@ -1948,10 +2702,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>
