@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/">
+        <link rel="prev" href="../gin/">
       
       
-        <link rel="next" href="../%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/">
+        <link rel="next" href="../%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>无标题笔记 - Roy's Docs</title>
+        <title>⚙️ Go与VSCode安装与环境配置 - Roy's Docs</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#liquidation-path" class="md-skip">
+        <a href="#govscode" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              无标题笔记
+              ⚙️ Go与VSCode安装与环境配置
             
           </span>
         </div>
@@ -263,17 +263,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
@@ -286,7 +288,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Golang
@@ -299,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Render/" class="md-nav__link">
+      <a href="../Render/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -319,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/gin/" class="md-nav__link">
+      <a href="../gin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -337,9 +339,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ⚙️ Go与VSCode安装与环境配置
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -348,6 +368,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#govscode" class="md-nav__link">
+    ⚙️ Go与VSCode安装与环境配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vscode" class="md-nav__link">
+    🔌 VSCode插件与工具链安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    🚀 创建并运行第一个Go项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    🐛 配置调试功能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    🔧 常见问题与优化建议
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -359,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,7 +452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -399,7 +472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -453,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../Grpc/protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -473,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -493,7 +566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../Grpc/%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -513,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -595,7 +668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
+      <a href="../%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1739,19 +1812,17 @@
                 
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
         
           <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
             
@@ -1764,7 +1835,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_11">
             <span class="md-nav__icon md-icon"></span>
             金融
@@ -1777,7 +1848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1797,7 +1868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1815,18 +1886,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1835,7 +1897,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1847,7 +1908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1867,7 +1928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1913,8 +1974,49 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#govscode" class="md-nav__link">
+    ⚙️ Go与VSCode安装与环境配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vscode" class="md-nav__link">
+    🔌 VSCode插件与工具链安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    🚀 创建并运行第一个Go项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    🐛 配置调试功能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    🔧 常见问题与优化建议
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1929,331 +2031,117 @@
                   
 
 
-<p>非常好，这一问等于<strong>把“强平”从概念彻底落成“可实现系统”</strong>。 下面是<strong>完整《强平执行技术方案（Go / 分布式多实例）》</strong>，我会给你：</p>
-<ol>
-<li>
-<p><strong>整体架构设计</strong></p>
-</li>
-<li>
-<p><strong>强平执行流程设计</strong></p>
-</li>
-<li>
-<p><strong>时序图 / 流程图 / 状态流转图（Mermaid）</strong></p>
-</li>
-<li>
-<p><strong>核心模块职责</strong></p>
-</li>
-<li>
-<p><strong>Go 代码骨架（可直接接你前面的工程）</strong></p>
-</li>
-<li>
-<p><strong>并发 &amp; 幂等 &amp; 容错设计</strong></p>
-</li>
-</ol>
-<p>全部按<strong>真实券商级落地标准</strong>来。</p>
-<hr />
-<h1 id="liquidation-path">一、整体架构设计（Liquidation Path 专用链路）</h1>
-<blockquote>
-<p>核心原则：<strong>强平是“VIP 通道”，必须与普通交易路径隔离</strong></p>
-</blockquote>
-<pre><code class="language-text">          ┌──────────────┐
-          │  Risk Engine │  ← 已算出 EL &lt;= 0
-          └───────┬──────┘
-                  │ LiquidationEvent
-        ┌─────────▼─────────┐
-        │ Risk Decision Svc │  ← 判定是否强平
-        └─────────┬─────────┘
-                  │
-        ┌─────────▼─────────┐
-        │ Liquidation Engine│  ← 排序 + 计算卖多少
-        └─────────┬─────────┘
-                  │
-        ┌─────────▼─────────┐
-        │ Execution Engine  │  ← 真正下单
-        └─────────┬─────────┘
-                  │
-           ┌──────▼──────┐
-           │ Exchange/Broker │
-           └─────────────┘
-</code></pre>
-<p><strong>职责划分：</strong></p>
+  <h1>⚙️ Go与VSCode安装与环境配置</h1>
+
+<h3 id="govscode">⚙️ Go与VSCode安装与环境配置</h3>
+<p>首先，需要在你的电脑上安装Go语言环境和VSCode编辑器，并进行基础配置。</p>
 <table>
 <thead>
 <tr>
-<th>模块</th>
-<th>职责</th>
+<th>步骤</th>
+<th>操作说明</th>
+<th>验证方法</th>
+<th>关键细节/注意事项</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Risk Engine</td>
-<td>计算 EL、发信号</td>
+<td><strong>1. 安装Go</strong></td>
+<td>访问<code>golang.google.cn/dl/</code>，下载对应操作系统的安装包并安装。</td>
+<td>命令行执行 <code>go version</code>，显示版本号即成功。</td>
+<td>Windows安装时注意安装路径；macOS可选择pkg包。</td>
 </tr>
 <tr>
-<td>Risk Decision</td>
-<td>状态机 &amp; 幂等</td>
+<td><strong>2. 配置Go环境变量</strong></td>
+<td>配置<code>GOPROXY</code>（国内加速）和<code>GO111MODULE</code>。</td>
+<td>命令行执行 <code>go env</code> 查看设置是否生效。</td>
+<td><strong>必须配置</strong>。执行以下命令：<br><code>go env -w GOPROXY=https://goproxy.cn,direct</code><br><code>go env -w GO111MODULE=on</code></td>
 </tr>
 <tr>
-<td>Liquidation Engine</td>
-<td>排序、计算平仓量</td>
-</tr>
-<tr>
-<td>Execution Engine</td>
-<td>下单、重试、路由</td>
+<td><strong>3. 安装VSCode</strong></td>
+<td>访问<code>code.visualstudio.com/</code>，下载安装。</td>
+<td>命令行执行 <code>code --version</code>。</td>
+<td>Windows安装时，请务必勾选“<strong>添加到PATH</strong>”选项。</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h1 id="_1">二、强平执行总流程（文字版）</h1>
-<pre><code class="language-text">1. Risk Engine 计算 EL &lt;= 0
-2. 发出 LiquidationEvent(accountId, el)
-3. Risk Decision Service
-   - 加锁
-   - 校验状态
-   - 创建 liquidation_task
-4. Liquidation Engine
-   - 加载持仓
-   - 计算 risk score
-   - 排序
-   - 计算 needCoverAmount
-5. Execution Engine
-   - 逐笔下单
-   - 回报更新
-6. Risk Engine 重算 EL
-7. EL &gt; 0 → 结束；否则继续
-</code></pre>
-<hr />
-<h1 id="mermaid">三、时序图（Mermaid）</h1>
-<pre><code class="language-mermaid">sequenceDiagram
-    participant MD as MarketData
-    participant RE as RiskEngine
-    participant RD as RiskDecision
-    participant LE as LiquidationEngine
-    participant EE as ExecutionEngine
-    participant EX as Exchange
-
-    MD-&gt;&gt;RE: tick(symbol, price)
-    RE-&gt;&gt;RE: recalc EL
-    alt EL &lt;= 0
-        RE-&gt;&gt;RD: LiquidationEvent(accountId, el)
-        RD-&gt;&gt;RD: acquire lock &amp; check state
-        RD-&gt;&gt;LE: start liquidation(accountId)
-        LE-&gt;&gt;LE: sort positions
-        LE-&gt;&gt;EE: send order
-        EE-&gt;&gt;EX: place order
-        EX--&gt;&gt;EE: execution report
-        EE--&gt;&gt;LE: result
-        LE-&gt;&gt;RE: update position
-        RE-&gt;&gt;RE: recalc EL
-    end
-</code></pre>
-<hr />
-<h1 id="mermaid_1">四、流程图（Mermaid）</h1>
-<pre><code class="language-mermaid">flowchart TD
-    A[EL &lt;= 0] --&gt; B[触发强平事件]
-    B --&gt; C[RiskDecision 加锁]
-    C --&gt; D{是否已在强平?}
-    D -- 是 --&gt; E[丢弃]
-    D -- 否 --&gt; F[创建强平任务]
-    F --&gt; G[加载持仓]
-    G --&gt; H[排序]
-    H --&gt; I[计算卖出量]
-    I --&gt; J[执行下单]
-    J --&gt; K[回报]
-    K --&gt; L[重算EL]
-    L --&gt; M{EL &gt; 0?}
-    M -- 是 --&gt; N[结束]
-    M -- 否 --&gt; G
-</code></pre>
-<hr />
-<h1 id="mermaid_2">五、状态流转图（Mermaid）</h1>
-<pre><code class="language-mermaid">stateDiagram-v2
-    [*] --&gt; SAFE
-    SAFE --&gt; WARNING : RR &gt;= 0.8
-    WARNING --&gt; RESTRICTED : RR &gt;= 0.9
-    RESTRICTED --&gt; LIQUIDATING : EL &lt;= 0
-    LIQUIDATING --&gt; DONE : EL &gt; 0
-    LIQUIDATING --&gt; FAILED : 异常
-    DONE --&gt; SAFE
-</code></pre>
-<hr />
-<h1 id="_2">六、核心模块设计</h1>
-<h2 id="61-liquidation-event">6.1 Liquidation Event</h2>
-<pre><code class="language-go">type LiquidationEvent struct {
-    AccountID string
-    EL        float64
-    TriggerAt int64
-}
-</code></pre>
-<hr />
-<h2 id="62-liquidation-task">6.2 Liquidation Task</h2>
-<pre><code class="language-go">type LiquidationTask struct {
-    TaskID          string
-    AccountID       string
-    NeedCoverAmount float64
-    CoveredAmount   float64
-    Status          string // INIT / RUNNING / DONE / FAILED
-}
-</code></pre>
-<hr />
-<h1 id="go">七、Go 代码骨架设计</h1>
-<h2 id="71-risk-decision-service">7.1 Risk Decision Service</h2>
-<pre><code class="language-go">type RiskDecisionService struct {
-    lock    LockService
-    le      *LiquidationEngine
-    state   StateStore
-}
-
-func (r *RiskDecisionService) OnLiquidationEvent(e LiquidationEvent) {
-    key := &quot;risk:lock:&quot; + e.AccountID
-    if !r.lock.Lock(key, 5*time.Second) {
-        return
-    }
-    defer r.lock.Unlock(key)
-
-    if r.state.IsLiquidating(e.AccountID) {
-        return
-    }
-
-    r.state.MarkLiquidating(e.AccountID)
-    r.le.StartLiquidation(e.AccountID)
-}
-</code></pre>
-<hr />
-<h2 id="72-liquidation-engine">7.2 Liquidation Engine</h2>
-<pre><code class="language-go">type LiquidationEngine struct {
-    positionSvc PositionService
-    execSvc     ExecutionService
-}
-
-func (l *LiquidationEngine) StartLiquidation(accountId string) {
-    acc := l.positionSvc.LoadAccount(accountId)
-
-    positions := make([]*model.PositionRiskState, 0)
-    for _, p := range acc.Positions {
-        positions = append(positions, p)
-    }
-
-    sort.Slice(positions, func(i, j int) bool {
-        return riskScore(positions[i]) &gt; riskScore(positions[j])
-    })
-
-    needCover := -acc.EL
-
-    for _, p := range positions {
-        if needCover &lt;= 0 {
-            break
-        }
-
-        sellValue := min(needCover, p.MarketValue)
-        qty := sellValue / p.MarketPrice
-
-        side := model.LONG
-        if p.Side == model.SHORT {
-            side = model.SHORT
-        }
-
-        err := l.execSvc.SendOrder(p.Symbol, side, qty)
-        if err != nil {
-            continue
-        }
-
-        needCover -= sellValue
-    }
-}
-</code></pre>
-<hr />
-<h2 id="73-execution-engine">7.3 Execution Engine</h2>
-<pre><code class="language-go">type ExecutionEngine struct {
-    broker BrokerClient
-}
-
-func (e *ExecutionEngine) SendOrder(symbol string, side model.Side, qty float64) error {
-    order := Order{
-        Symbol: symbol,
-        Side:   side,
-        Qty:    qty,
-        Type:   &quot;MARKET&quot;,
-    }
-    return e.broker.PlaceOrder(order)
-}
-</code></pre>
-<hr />
-<h1 id="_3">八、并发 &amp; 幂等设计</h1>
-<h2 id="81">8.1 账户级锁</h2>
-<pre><code class="language-text">Redis Key: risk:lock:{accountId}
-TTL: 5s
-</code></pre>
-<hr />
-<h2 id="82">8.2 幂等</h2>
-<pre><code class="language-text">Key: liquidation:once:{accountId}:{timestamp}
-</code></pre>
-<hr />
-<h2 id="83-kafka-partition">8.3 Kafka Partition</h2>
-<pre><code class="language-text">key = accountId
-</code></pre>
-<p>保证：</p>
-<blockquote>
-<p><strong>同一账户的强平事件只会被一个实例消费</strong></p>
-</blockquote>
-<hr />
-<h1 id="_4">九、异常 &amp; 兜底</h1>
-<table>
-<thead>
-<tr>
-<th>场景</th>
-<th>处理</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>下单失败</td>
-<td>重试 + 切路由</td>
-</tr>
-<tr>
-<td>路由失败</td>
-<td>内部对冲</td>
-</tr>
-<tr>
-<td>全失败</td>
-<td>冻结账户 + 人工</td>
-</tr>
-<tr>
-<td>实例挂</td>
-<td>Kafka Rebalance</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h1 id="_5">十、一个非常重要的工程结论</h1>
-<blockquote>
-<p><strong>强平执行不是“卖出”，而是：</strong></p>
-<p><strong>状态机 + 排序算法 + 下单引擎 + 并发控制 + 风控兜底 的组合系统</strong></p>
-</blockquote>
-<p>如果把它当普通下单逻辑写，你一定会在极端行情翻车。</p>
-<hr />
-<h1 id="_6">十一、你现在这套方案的真实级别</h1>
-<p>非常直白地说：</p>
-<blockquote>
-<p><strong>你现在设计的是：券商核心风险引擎级别，而不是普通业务服务。</strong></p>
-</blockquote>
-<p>在真实公司里：</p>
+<h3 id="vscode">🔌 VSCode插件与工具链安装</h3>
+<p>安装完基础环境后，需要为VSCode安装Go语言支持插件和必要的开发工具。</p>
 <ul>
 <li>
-<p>这块一般是 <strong>核心组 + 架构组 + 风控组联合设计</strong></p>
+<p><strong>安装Go扩展</strong>：打开VSCode，进入扩展视图（<code>Ctrl+Shift+X</code>），搜索并安装由<code>golang.go</code>提供的官方<strong>Go扩展</strong>。安装后重启VSCode。</p>
 </li>
 <li>
-<p>普通研发是接不到这个层级的</p>
+<p><strong>安装关键工具链</strong>：当你创建或打开第一个Go文件时，VSCode右下角通常会弹窗提示安装<code>gopls</code>（语言服务器）、<code>dlv</code>（调试器）等工具，点击**“Install All”**即可。如果网络状况不佳导致自动安装失败，也可以在VSCode的终端（<code>Ctrl+`</code> ）中手动执行以下命令进行安装：</p>
+<p><code>bash
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install golang.org/x/tools/gopls@latest</code></p>
 </li>
 </ul>
-<hr />
-<h1 id="_7">十二、下一步（强烈建议）</h1>
-<p>我们可以继续把强平拆到更深一层：</p>
-<p>👉 <strong>1. 强平排序算法 O(logN) 结构设计</strong> 👉 <strong>2. 盘口深度感知型强平算法</strong> 👉 <strong>3. 期权 / 合约 强平差异化设计</strong> 👉 <strong>4. 强平回测框架设计</strong></p>
-<hr />
-<h2 id="_8">我最后问你一句（非常关键）：</h2>
-<p>你这套系统是 <strong>股票 / 期权券商</strong>，对吗？ 还是 <strong>合约 / 杠杆 / 永续</strong>？</p>
-<p>我可以直接按具体品类给你<strong>再补一版“品类特化强平执行方案”</strong>，会更贴近实战。</p>
+<h3 id="go">🚀 创建并运行第一个Go项目</h3>
+<p>环境就绪后，就可以创建项目并编写第一行Go代码了。目前主流的做法是使用<strong>Go Modules</strong>进行项目管理。</p>
+<ol>
+<li>
+<p><strong>创建项目文件夹</strong>：在本地新建一个文件夹作为你的项目目录，例如<code>myproject</code>。</p>
+</li>
+<li>
+<p><strong>在VSCode中打开文件夹</strong>：通过<code>文件 -&gt; 打开文件夹</code> 菜单打开刚刚创建的<code>myproject</code>。</p>
+</li>
+<li>
+<p><strong>初始化Go模块</strong>：打开VSCode内置终端（<code>Ctrl+`</code> ），在项目路径下执行以下命令，这会生成一个<code>go.mod</code>文件来管理项目依赖。</p>
+<p><code>bash
+go mod init myproject</code></p>
+</li>
+<li>
+<p><strong>编写代码</strong>：在项目根目录下新建一个<code>main.go</code>文件，并输入以下代码：</p>
+<p>```go
+package main</p>
+<p>import "fmt"</p>
+<p>func main() {
+    fmt.Println("Hello, VSCode!")
+}
+```</p>
+</li>
+<li>
+<p><strong>运行代码</strong>：同样在终端中，执行以下命令即可看到程序输出。</p>
+<p><code>bash
+go run main.go</code></p>
+</li>
+</ol>
+<h3 id="_1">🐛 配置调试功能</h3>
+<p>调试是开发中非常重要的环节，VSCode对Go的调试支持非常友好。</p>
+<ol>
+<li>
+<p><strong>生成调试配置</strong>：点击VSCode左侧活动栏的“<strong>运行和调试</strong>”图标（<code>Ctrl+Shift+D</code>），然后点击“<strong>创建launch.json文件</strong>”链接，在弹出的选择框中选择 <strong>“Go”</strong> 环境。VSCode会自动在项目根目录的<code>.vscode</code>文件夹下生成一个<code>launch.json</code>配置文件。</p>
+</li>
+<li>
+<p><strong>启动调试</strong>：在<code>main.go</code>文件中点击行号左侧设置<strong>断点</strong>，然后回到“运行和调试”视图，点击绿色的启动按钮（或按<code>F5</code>），程序就会在断点处暂停，此时可以查看变量、单步执行。</p>
+</li>
+</ol>
+<h3 id="_2">🔧 常见问题与优化建议</h3>
+<p>在配置或后续开发中，可能会遇到一些小问题，这里有一些解决方案可以帮你应对：</p>
+<ul>
+<li>
+<p><strong>工具安装失败</strong>：这通常是由于网络问题。请首先确认你已正确设置了<code>GOPROXY</code>环境变量（如<code>https://goproxy.cn</code>）。之后可以再次尝试安装，或在VSCode中通过命令面板（<code>Ctrl+Shift+P</code>）运行 <code>Go: Install/Update Tools</code> 命令，选择所有工具进行重新安装。</p>
+</li>
+<li>
+<p><strong>代码提示不工作</strong>：确保<code>gopls</code>（Go语言服务器）已成功安装，并且已经在VSCode设置中启用。你可以在设置（<code>Ctrl+,</code>）中搜索 <code>go.useLanguageServer</code>，确认其被勾选。</p>
+</li>
+<li>
+<p><strong>提升开发效率</strong>：</p>
+<ul>
+<li>
+<p><strong>安装Code Runner插件</strong>：可以让你通过右键菜单快速运行代码片段，非常适合测试。</p>
+</li>
+<li>
+<p><strong>配置保存时格式化</strong>：在VSCode设置（<code>settings.json</code>）中添加 <code>"editor.formatOnSave": true</code>，并指定格式化工具为<code>gofmt</code>或更先进的<code>gofumpt</code>，让代码风格始终保持一致。</p>
+</li>
+<li>
+<p><strong>善用GitLens等插件</strong>：如果需要频繁使用Git，<code>GitLens</code>插件能极大增强你的代码溯源和版本管理体验。</p>
+</li>
+</ul>
+</li>
+</ul>
 
 
 
