@@ -1701,36 +1701,9 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#forcesingleclient" class="md-nav__link">
-    ForceSingleClient 对集群连接的影响
-  </a>
-  
-    <nav class="md-nav" aria-label="ForceSingleClient 对集群连接的影响">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#forcesingleclient-false" class="md-nav__link">
-    ForceSingleClient = false (默认)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#forcesingleclient-true" class="md-nav__link">
-    ForceSingleClient = true
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#centrifugo" class="md-nav__link">
-    对 Centrifugo 的影响
+  <a href="#_3" class="md-nav__link">
+    结论
   </a>
   
 </li>
@@ -1790,21 +1763,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     什么是客户端缓存
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     工作原理
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     启用条件
   </a>
   
@@ -1818,14 +1791,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     性能影响
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     检查清单
   </a>
   
@@ -1837,7 +1810,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     参考链接
   </a>
   
@@ -2258,36 +2231,9 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#forcesingleclient" class="md-nav__link">
-    ForceSingleClient 对集群连接的影响
-  </a>
-  
-    <nav class="md-nav" aria-label="ForceSingleClient 对集群连接的影响">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#forcesingleclient-false" class="md-nav__link">
-    ForceSingleClient = false (默认)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#forcesingleclient-true" class="md-nav__link">
-    ForceSingleClient = true
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#centrifugo" class="md-nav__link">
-    对 Centrifugo 的影响
+  <a href="#_3" class="md-nav__link">
+    结论
   </a>
   
 </li>
@@ -2347,21 +2293,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     什么是客户端缓存
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     工作原理
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     启用条件
   </a>
   
@@ -2375,14 +2321,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     性能影响
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     检查清单
   </a>
   
@@ -2394,7 +2340,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     参考链接
   </a>
   
@@ -2446,96 +2392,8 @@
 <p>如果 Redis 不支持这些特性，必须设置 <code>DisableCache: true</code></p>
 </li>
 </ul>
-<hr />
-<h2 id="forcesingleclient">ForceSingleClient 对集群连接的影响</h2>
-<h3 id="forcesingleclient-false">ForceSingleClient = false (默认)</h3>
-<p>rueidis 会自动检测 Redis 是单机还是集群模式：</p>
-<ol>
-<li>
-<p>连接 InitAddress 中的节点</p>
-</li>
-<li>
-<p>执行 <code>CLUSTER SLOTS</code> 命令获取集群拓扑</p>
-</li>
-<li>
-<p>如果返回集群信息，则使用集群客户端模式</p>
-</li>
-<li>
-<p>如果不是集群，则降级为单机模式</p>
-</li>
-</ol>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>
-<p>自动适应集群拓扑变化</p>
-</li>
-<li>
-<p>支持多节点分布式读写</p>
-</li>
-<li>
-<p>性能更好（请求可以分发到多个节点）</p>
-</li>
-</ul>
-<p><strong>缺点</strong>：</p>
-<ul>
-<li>
-<p>需要 Redis 支持 CLUSTER 命令</p>
-</li>
-<li>
-<p>认证信息需要在集群拓扑扫描时正确传递</p>
-</li>
-<li>
-<p>某些网络环境下可能无法正确获取拓扑</p>
-</li>
-</ul>
-<h3 id="forcesingleclient-true">ForceSingleClient = true</h3>
-<p>强制使用单机客户端模式，即使连接的是 Redis Cluster：</p>
-<ol>
-<li>
-<p>只连接到 InitAddress 指定的节点</p>
-</li>
-<li>
-<p>不执行 CLUSTER SLOTS 命令</p>
-</li>
-<li>
-<p>所有请求都通过这一个节点转发</p>
-</li>
-</ol>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>
-<p>简单可靠，避免集群拓扑检测问题</p>
-</li>
-<li>
-<p>适用于某些特殊的集群配置（如通过代理访问）</p>
-</li>
-<li>
-<p>认证逻辑更简单</p>
-</li>
-</ul>
-<p><strong>缺点</strong>：</p>
-<ul>
-<li>
-<p><strong>失去集群的分布式优势</strong>：所有请求都通过单个节点</p>
-</li>
-<li>
-<p><strong>性能瓶颈</strong>：该节点成为流量入口，可能成为瓶颈</p>
-</li>
-<li>
-<p><strong>拓扑感知缺失</strong>：无法感知集群拓扑变化，如果该节点宕机需要手动切换</p>
-</li>
-</ul>
-<h3 id="centrifugo">对 Centrifugo 的影响</h3>
-<p>对于 Centrifugo 的 presence_manager 使用场景：</p>
-<ul>
-<li>
-<p><strong>读写模式</strong>：主要是 presence 信息的读写，数据量不大</p>
-</li>
-<li>
-<p><strong>访问模式</strong>：按 channel 哈希到特定 slot，即使单机客户端也会路由到正确节点</p>
-</li>
-</ul>
-<p>因此使用 <code>ForceSingleClient: true</code> 对性能影响有限，是可以接受的方案。</p>
+<h3 id="_3">结论</h3>
+<p>上面是ai分析的结构，真正的问题是Rueidis v1.0.54 有bug, 在发送HELLO命令之前没有AUTH，更新Rueidis版本就可以了笑脸😁</p>
 <hr />
 <h2 id="resp3">RESP3 协议</h2>
 <h3 id="resp3_1">什么是 RESP3</h3>
@@ -2629,9 +2487,9 @@
 <p>可以通过 <code>AlwaysRESP2: true</code> 强制使用 RESP2。</p>
 <hr />
 <h2 id="client-side-caching">Client-Side Caching (客户端缓存)</h2>
-<h3 id="_3">什么是客户端缓存</h3>
+<h3 id="_4">什么是客户端缓存</h3>
 <p>Redis 客户端缓存是一种优化机制，允许客户端在本地缓存从服务器读取的数据，同时服务器会跟踪客户端的缓存并在数据变更时通知客户端失效。</p>
-<h3 id="_4">工作原理</h3>
+<h3 id="_5">工作原理</h3>
 <pre><code class="language-text">┌─────────────┐                    ┌─────────────┐
 │   Client    │                    │   Server    │
 │  (rueidis)  │                    │   (Redis)   │
@@ -2651,7 +2509,7 @@
        │&lt;─────────────────────────────────│
        │ 删除缓存                         │
 </code></pre>
-<h3 id="_5">启用条件</h3>
+<h3 id="_6">启用条件</h3>
 <p>客户端缓存需要：</p>
 <ol>
 <li>
@@ -2678,7 +2536,7 @@
 </li>
 </ul>
 <p><strong>解决方案</strong>：设置 <code>DisableCache: true</code> 禁用客户端缓存功能。</p>
-<h3 id="_6">性能影响</h3>
+<h3 id="_7">性能影响</h3>
 <p>禁用客户端缓存的影响：</p>
 <ul>
 <li>
@@ -2689,7 +2547,7 @@
 </li>
 </ul>
 <hr />
-<h3 id="_7">检查清单</h3>
+<h3 id="_8">检查清单</h3>
 <ul>
 <li>
 <p>[ ] Redis 版本是否 &gt;= 6.0 (支持 CLIENT TRACKING) <!-- div-format --></p>
@@ -2705,7 +2563,7 @@
 </li>
 </ul>
 <hr />
-<h2 id="_8">参考链接</h2>
+<h2 id="_9">参考链接</h2>
 <ul>
 <li>
 <p><a href="https://github.com/redis/rueidis">rueidis GitHub</a></p>
