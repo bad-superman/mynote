@@ -2352,7 +2352,14 @@ cluade -w 
 </code></pre>
 <p>cluade默认使用git远程的HEAD作为`基准分支`</p>
 <p>使用worktree最好配置git worktree使用</p>
-<p>先使用git </p>
+<ol>
+<li>
+<p>使用git worktree指定基准分支创建工作分支</p>
+</li>
+<li>
+<p>切换到分支目录</p>
+</li>
+</ol>
 <pre><code class="language-text">git fetch origin
 
 git worktree add -b feature-login ../feature-login origin/develop
