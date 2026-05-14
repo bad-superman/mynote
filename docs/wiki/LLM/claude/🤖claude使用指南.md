@@ -62,7 +62,10 @@ cluade默认使用git远程的HEAD作为\`基准分支\`
 
 使用worktree最好配置git worktree使用
 
-先使用git 
+1.  使用git worktree指定基准分支创建工作分支
+    
+2.  切换到分支目录
+    
 
 ```text
 git fetch origin
