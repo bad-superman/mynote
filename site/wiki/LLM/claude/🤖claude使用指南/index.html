@@ -798,6 +798,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tmux" class="md-nav__link">
+    Tmux配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worktree" class="md-nav__link">
+    Worktree使用
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2264,6 +2278,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tmux" class="md-nav__link">
+    Tmux配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worktree" class="md-nav__link">
+    Worktree使用
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2308,6 +2336,31 @@
 </li>
 </ol>
 <h3 id="esc">停止（Esc）</h3>
+<h2 id="tmux">Tmux配置</h2>
+<pre><code class="language-text"># 支持 Claude Code 的通知、进度条、Shift+Enter
+#set -g allow-passthrough on
+set -s extended-keys on
+set -as terminal-features 'xterm*:extkeys'
+
+# 鼠标支持
+set -g mouse on
+</code></pre>
+<h2 id="worktree">Worktree使用</h2>
+<p>命令</p>
+<pre><code class="language-text">cluade —worktree
+cluade -w 
+</code></pre>
+<p>cluade默认使用git远程的HEAD作为`基准分支`</p>
+<p>使用worktree最好配置git worktree使用</p>
+<p>先使用git </p>
+<pre><code class="language-text">git fetch origin
+
+git worktree add -b feature-login ../feature-login origin/develop
+
+cd ../feature-login
+
+claude
+</code></pre>
 
 
 

@@ -36,3 +36,40 @@
     
 
 ### 停止（Esc）
+
+## Tmux配置
+
+```text
+# 支持 Claude Code 的通知、进度条、Shift+Enter
+#set -g allow-passthrough on
+set -s extended-keys on
+set -as terminal-features 'xterm*:extkeys'
+
+# 鼠标支持
+set -g mouse on
+```
+
+## Worktree使用
+
+命令
+
+```text
+cluade —worktree
+cluade -w 
+```
+
+cluade默认使用git远程的HEAD作为\`基准分支\`
+
+使用worktree最好配置git worktree使用
+
+先使用git 
+
+```text
+git fetch origin
+
+git worktree add -b feature-login ../feature-login origin/develop
+
+cd ../feature-login
+
+claude
+```
