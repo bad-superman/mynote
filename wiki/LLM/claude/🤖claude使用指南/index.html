@@ -1835,7 +1835,7 @@
             
   
   <span class="md-ellipsis">
-    Redis
+    Linux
   </span>
   
 
@@ -1844,6 +1844,68 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%BF%90%E7%BB%B4/Linux/tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" >
+        
+          <label class="md-nav__link" for="__nav_2_10_5" id="__nav_2_10_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Redis
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_5">
             <span class="md-nav__icon md-icon"></span>
             Redis
           </label>
@@ -1891,9 +1953,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_6" >
         
-          <label class="md-nav__link" for="__nav_2_10_5" id="__nav_2_10_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_10_6" id="__nav_2_10_6_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1904,8 +1966,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_6">
             <span class="md-nav__icon md-icon"></span>
             夜莺
           </label>
@@ -2366,6 +2428,35 @@ git worktree add -b feature-login ../feature-login origin/develop
 
 cd ../feature-login
 
+claude
+</code></pre>
+<p>脚本</p>
+<pre><code class="language-text">#!/bin/bash
+# start_claude_worktree.sh
+# 用法: ./start_claude_worktree.sh &lt;新分支名&gt; [基准分支]
+# 示例: ./start_claude_worktree.sh feature-login develop
+
+# 检查参数
+if [ -z &quot;$1&quot; ]; then
+            echo &quot;请提供新分支名&quot;
+                echo &quot;用法: $0 &lt;新分支名&gt; [基准分支]&quot;
+                    exit 1
+fi
+
+NEW_BRANCH=&quot;$1&quot;
+BASE_BRANCH=&quot;${2:-develop}&quot;  # 默认基准分支 develop
+WORKTREE_DIR=&quot;../$NEW_BRANCH&quot;
+
+echo &quot;Fetching latest changes from origin...&quot;
+git fetch origin
+
+echo &quot;Creating worktree: $WORKTREE_DIR from $BASE_BRANCH...&quot;
+git worktree add -b &quot;$NEW_BRANCH&quot; &quot;$WORKTREE_DIR&quot; &quot;origin/$BASE_BRANCH&quot;
+
+echo &quot;Entering worktree...&quot;
+cd &quot;$WORKTREE_DIR&quot; || exit 1
+
+echo &quot;Starting Claude...&quot;
 claude
 </code></pre>
 
