@@ -76,3 +76,35 @@ cd ../feature-login
 
 claude
 ```
+
+脚本
+
+```text
+#!/bin/bash
+# start_claude_worktree.sh
+# 用法: ./start_claude_worktree.sh <新分支名> [基准分支]
+# 示例: ./start_claude_worktree.sh feature-login develop
+
+# 检查参数
+if [ -z "$1" ]; then
+            echo "请提供新分支名"
+                echo "用法: $0 <新分支名> [基准分支]"
+                    exit 1
+fi
+
+NEW_BRANCH="$1"
+BASE_BRANCH="${2:-develop}"  # 默认基准分支 develop
+WORKTREE_DIR="../$NEW_BRANCH"
+
+echo "Fetching latest changes from origin..."
+git fetch origin
+
+echo "Creating worktree: $WORKTREE_DIR from $BASE_BRANCH..."
+git worktree add -b "$NEW_BRANCH" "$WORKTREE_DIR" "origin/$BASE_BRANCH"
+
+echo "Entering worktree..."
+cd "$WORKTREE_DIR" || exit 1
+
+echo "Starting Claude..."
+claude
+```
