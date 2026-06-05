@@ -1773,7 +1773,7 @@
             
   
   <span class="md-ellipsis">
-    Docker
+    Cloudflare
   </span>
   
 
@@ -1782,6 +1782,68 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_10_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cloudflare
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%BF%90%E7%BB%B4/Cloudflare/%F0%9F%A4%96%E4%BD%BF%E7%94%A8Cloudflare%20Pages%20%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🤖使用Cloudflare Pages 部署静态网站
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_4" >
+        
+          <label class="md-nav__link" for="__nav_2_10_4" id="__nav_2_10_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_4">
             <span class="md-nav__icon md-icon"></span>
             Docker
           </label>
@@ -1829,9 +1891,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" >
         
-          <label class="md-nav__link" for="__nav_2_10_4" id="__nav_2_10_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_10_5" id="__nav_2_10_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1842,8 +1904,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10_4">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_5">
             <span class="md-nav__icon md-icon"></span>
             Linux
           </label>
@@ -1891,9 +1953,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_6" >
         
-          <label class="md-nav__link" for="__nav_2_10_5" id="__nav_2_10_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_10_6" id="__nav_2_10_6_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1904,8 +1966,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_6">
             <span class="md-nav__icon md-icon"></span>
             Redis
           </label>
@@ -1953,9 +2015,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_7" >
         
-          <label class="md-nav__link" for="__nav_2_10_6" id="__nav_2_10_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_10_7" id="__nav_2_10_7_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1966,8 +2028,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10_6">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10_7">
             <span class="md-nav__icon md-icon"></span>
             夜莺
           </label>
@@ -2431,30 +2493,90 @@ cd ../feature-login
 claude
 </code></pre>
 <p>脚本</p>
-<pre><code class="language-text">#!/bin/bash
+<pre><code class="language-text">#!/usr/bin/env bash
 # start_claude_worktree.sh
-# 用法: ./start_claude_worktree.sh &lt;新分支名&gt; [基准分支]
-# 示例: ./start_claude_worktree.sh feature-login develop
+#
+# 用法:
+#   ./start_claude_worktree.sh &lt;新分支名&gt; [基准分支]
+#
+# 示例:
+#   ./start_claude_worktree.sh feature-login
+#   ./start_claude_worktree.sh feature-login develop
 
-# 检查参数
-if [ -z &quot;$1&quot; ]; then
+#set -euo pipefail
+
+if [ -z &quot;${1:-}&quot; ]; then
             echo &quot;请提供新分支名&quot;
                 echo &quot;用法: $0 &lt;新分支名&gt; [基准分支]&quot;
                     exit 1
 fi
 
 NEW_BRANCH=&quot;$1&quot;
-BASE_BRANCH=&quot;${2:-develop}&quot;  # 默认基准分支 develop
-WORKTREE_DIR=&quot;../$NEW_BRANCH&quot;
+BASE_BRANCH=&quot;${2:-}&quot;
+
+# 检查是否在 git 仓库中
+if ! git rev-parse --is-inside-work-tree &gt;/dev/null 2&gt;&amp;1; then
+            echo &quot;错误：当前目录不在 git 仓库中&quot;
+                exit 1
+fi
+
+# 获取 git 项目根目录和项目名
+REPO_ROOT=&quot;$(git rev-parse --show-toplevel)&quot;
+PROJECT_NAME=&quot;$(basename &quot;$REPO_ROOT&quot;)&quot;
+
+# 如果新分支名包含 /，用于目录名时替换成 -
+SAFE_NEW_BRANCH=&quot;$(echo &quot;$NEW_BRANCH&quot; | sed 's#[/\\ ]#-#g')&quot;
+
+# worktree 目录：../项目名_新分支名
+WORKTREE_DIR=&quot;$(dirname &quot;$REPO_ROOT&quot;)/${PROJECT_NAME}_${SAFE_NEW_BRANCH}&quot;
+
+# 如果没有传基准分支，则使用当前分支
+if [ -z &quot;$BASE_BRANCH&quot; ]; then
+  BASE_BRANCH=&quot;$(git branch --show-current)&quot;
+  if [ -z &quot;$BASE_BRANCH&quot; ]; then
+    echo &quot;错误：当前处于 detached HEAD 状态，请显式指定基准分支&quot;
+    echo &quot;用法: $0 &lt;新分支名&gt; [基准分支]&quot;
+    exit 1
+  fi
+
+  BASE_REF=&quot;origin/$BASE_BRANCH&quot;
+else
+  # 如果指定了基准分支，优先使用 origin/基准分支
+  BASE_REF=&quot;origin/$BASE_BRANCH&quot;
+fi
+
+# 检查新分支是否已存在
+if git show-ref --verify --quiet &quot;refs/heads/$NEW_BRANCH&quot;; then
+            echo &quot;错误：分支已存在：$NEW_BRANCH&quot;
+                exit 1
+fi
+
+# 检查 worktree 目录是否已存在
+if [ -e &quot;$WORKTREE_DIR&quot; ]; then
+            echo &quot;错误：worktree 目录已存在：$WORKTREE_DIR&quot;
+                exit 1
+fi
 
 echo &quot;Fetching latest changes from origin...&quot;
 git fetch origin
 
-echo &quot;Creating worktree: $WORKTREE_DIR from $BASE_BRANCH...&quot;
-git worktree add -b &quot;$NEW_BRANCH&quot; &quot;$WORKTREE_DIR&quot; &quot;origin/$BASE_BRANCH&quot;
+# 如果指定的 origin/基准分支不存在，则回退到本地基准分支
+if ! git rev-parse --verify &quot;$BASE_REF&quot; &gt;/dev/null 2&gt;&amp;1; then
+            BASE_REF=&quot;$BASE_BRANCH&quot;
+fi
+
+echo &quot;Creating worktree...&quot;
+echo &quot;  project:  $PROJECT_NAME&quot;
+echo &quot;  branch:   $NEW_BRANCH&quot;
+echo &quot;  base:     $BASE_REF&quot;
+echo &quot;  dir:      $WORKTREE_DIR&quot;
+
+git worktree add -b &quot;$NEW_BRANCH&quot; &quot;$WORKTREE_DIR&quot; &quot;$BASE_REF&quot;
+# 设置 upstream 为远程同名分支（如果还不存在，第一次推送会创建）
+git push -u origin &quot;$NEW_BRANCH&quot;
 
 echo &quot;Entering worktree...&quot;
-cd &quot;$WORKTREE_DIR&quot; || exit 1
+cd &quot;$WORKTREE_DIR&quot;
 
 echo &quot;Starting Claude...&quot;
 claude
