@@ -80,30 +80,90 @@ claude
 脚本
 
 ```text
-#!/bin/bash
+#!/usr/bin/env bash
 # start_claude_worktree.sh
-# 用法: ./start_claude_worktree.sh <新分支名> [基准分支]
-# 示例: ./start_claude_worktree.sh feature-login develop
+#
+# 用法:
+#   ./start_claude_worktree.sh <新分支名> [基准分支]
+#
+# 示例:
+#   ./start_claude_worktree.sh feature-login
+#   ./start_claude_worktree.sh feature-login develop
 
-# 检查参数
-if [ -z "$1" ]; then
+#set -euo pipefail
+
+if [ -z "${1:-}" ]; then
             echo "请提供新分支名"
                 echo "用法: $0 <新分支名> [基准分支]"
                     exit 1
 fi
 
 NEW_BRANCH="$1"
-BASE_BRANCH="${2:-develop}"  # 默认基准分支 develop
-WORKTREE_DIR="../$NEW_BRANCH"
+BASE_BRANCH="${2:-}"
+
+# 检查是否在 git 仓库中
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            echo "错误：当前目录不在 git 仓库中"
+                exit 1
+fi
+
+# 获取 git 项目根目录和项目名
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+PROJECT_NAME="$(basename "$REPO_ROOT")"
+
+# 如果新分支名包含 /，用于目录名时替换成 -
+SAFE_NEW_BRANCH="$(echo "$NEW_BRANCH" | sed 's#[/\\ ]#-#g')"
+
+# worktree 目录：../项目名_新分支名
+WORKTREE_DIR="$(dirname "$REPO_ROOT")/${PROJECT_NAME}_${SAFE_NEW_BRANCH}"
+
+# 如果没有传基准分支，则使用当前分支
+if [ -z "$BASE_BRANCH" ]; then
+  BASE_BRANCH="$(git branch --show-current)"
+  if [ -z "$BASE_BRANCH" ]; then
+    echo "错误：当前处于 detached HEAD 状态，请显式指定基准分支"
+    echo "用法: $0 <新分支名> [基准分支]"
+    exit 1
+  fi
+
+  BASE_REF="origin/$BASE_BRANCH"
+else
+  # 如果指定了基准分支，优先使用 origin/基准分支
+  BASE_REF="origin/$BASE_BRANCH"
+fi
+
+# 检查新分支是否已存在
+if git show-ref --verify --quiet "refs/heads/$NEW_BRANCH"; then
+            echo "错误：分支已存在：$NEW_BRANCH"
+                exit 1
+fi
+
+# 检查 worktree 目录是否已存在
+if [ -e "$WORKTREE_DIR" ]; then
+            echo "错误：worktree 目录已存在：$WORKTREE_DIR"
+                exit 1
+fi
 
 echo "Fetching latest changes from origin..."
 git fetch origin
 
-echo "Creating worktree: $WORKTREE_DIR from $BASE_BRANCH..."
-git worktree add -b "$NEW_BRANCH" "$WORKTREE_DIR" "origin/$BASE_BRANCH"
+# 如果指定的 origin/基准分支不存在，则回退到本地基准分支
+if ! git rev-parse --verify "$BASE_REF" >/dev/null 2>&1; then
+            BASE_REF="$BASE_BRANCH"
+fi
+
+echo "Creating worktree..."
+echo "  project:  $PROJECT_NAME"
+echo "  branch:   $NEW_BRANCH"
+echo "  base:     $BASE_REF"
+echo "  dir:      $WORKTREE_DIR"
+
+git worktree add -b "$NEW_BRANCH" "$WORKTREE_DIR" "$BASE_REF"
+# 设置 upstream 为远程同名分支（如果还不存在，第一次推送会创建）
+git push -u origin "$NEW_BRANCH"
 
 echo "Entering worktree..."
-cd "$WORKTREE_DIR" || exit 1
+cd "$WORKTREE_DIR"
 
 echo "Starting Claude..."
 claude
