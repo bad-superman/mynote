@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/">
+        <link rel="prev" href="../../Docker/Docker%20%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/">
       
       
-        <link rel="next" href="../claude/%F0%9F%98%83Hapi-%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E4%BD%A0%E7%9A%84Claude%20Code/">
+        <link rel="next" href="../%F0%9F%A7%A0%20SSH%20%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5%E8%A1%A8/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>😃Hapi 使用手机远程你的Claude Code - Roy's Docs</title>
+        <title>tmux 是一个多终端管理工具 - Roy's Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9f615399.min.css">
       
       
 
@@ -43,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,6 +64,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#tmux" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -76,7 +81,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -96,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              😃Hapi 使用手机远程你的Claude Code
+              tmux 是一个多终端管理工具
             
           </span>
         </div>
@@ -168,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -185,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -240,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -294,7 +299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Go%20Modules%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E6%A6%82%E8%A7%88/" class="md-nav__link">
+      <a href="../../../Golang/Go%20Modules%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E6%A6%82%E8%A7%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -314,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Render/" class="md-nav__link">
+      <a href="../../../Golang/Render/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -334,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/gin/" class="md-nav__link">
+      <a href="../../../Golang/gin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -354,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -374,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -394,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -414,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%F0%9F%93%98%20Go%20Module%20%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%20%26%20%E5%A4%9A%E7%BA%A7%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../../Golang/%F0%9F%93%98%20Go%20Module%20%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%20%26%20%E5%A4%9A%E7%BA%A7%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -468,7 +473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/gRPC%20Server%20Reflection%20%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/gRPC%20Server%20Reflection%20%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -508,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -528,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -590,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
+      <a href="../../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,19 +629,17 @@
                 
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
             
@@ -649,7 +652,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             LLM
@@ -660,24 +663,78 @@
                 
   
   
+  
     
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Claude
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Claude
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+  
+    <li class="md-nav__item">
+      <a href="../../../LLM/claude/%F0%9F%98%83Hapi-%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E4%BD%A0%E7%9A%84Claude%20Code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    😃Hapi 使用手机远程你的Claude Code
+    hapi 升级问题排查总结（npm / nvm / prefix）
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../LLM/claude/%F0%9F%A4%96claude%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🤖claude使用指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -704,7 +761,7 @@
             
   
   <span class="md-ellipsis">
-    Claude
+    Ollma
   </span>
   
 
@@ -714,7 +771,7 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_2">
             <span class="md-nav__icon md-icon"></span>
-            Claude
+            Ollma
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -724,11 +781,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../claude/%F0%9F%98%83Hapi-%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E4%BD%A0%E7%9A%84Claude%20Code/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    hapi 升级问题排查总结（npm / nvm / prefix）
+    📚 Windows命令完整速查表（Ollama + GPU + WSL）
   </span>
   
 
@@ -744,11 +801,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../claude/%F0%9F%A4%96claude%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    🤖claude使用指南
+    📝 Ollama 本地部署与GPU加速问题排查笔记
   </span>
   
 
@@ -786,7 +843,7 @@
             
   
   <span class="md-ellipsis">
-    Ollma
+    Openclaw
   </span>
   
 
@@ -796,7 +853,41 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_3">
             <span class="md-nav__icon md-icon"></span>
-            Ollma
+            Openclaw
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_1" >
+        
+          <label class="md-nav__link" for="__nav_2_3_3_1" id="__nav_2_3_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Agents
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agents
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -806,11 +897,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    📚 Windows命令完整速查表（Ollama + GPU + WSL）
+    🗺️ 多Bot Agent沟通模式配置
   </span>
   
 
@@ -826,15 +917,23 @@
   
   
     <li class="md-nav__item">
-      <a href="../ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    📝 Ollama 本地部署与GPU加速问题排查笔记
+    🧠多Agent协作机制
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -868,7 +967,7 @@
             
   
   <span class="md-ellipsis">
-    Openclaw
+    Opencli
   </span>
   
 
@@ -878,41 +977,7 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_4">
             <span class="md-nav__icon md-icon"></span>
-            Openclaw
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_4_1" >
-        
-          <label class="md-nav__link" for="__nav_2_3_4_1" id="__nav_2_3_4_1_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Agents
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_4_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_4_1">
-            <span class="md-nav__icon md-icon"></span>
-            Agents
+            Opencli
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -922,43 +987,15 @@
   
   
     <li class="md-nav__item">
-      <a href="../openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../LLM/opencli/%F0%9F%92%BBOpenCLI%20%E5%AE%9E%E6%88%98%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    🗺️ 多Bot Agent沟通模式配置
+    一、OpenCLI 是什么
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    🧠多Agent协作机制
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1020,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Linux/ssh/" class="md-nav__link">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1082,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1102,7 +1139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1198,7 +1235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1218,7 +1255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1280,7 +1317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1350,7 +1387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1370,7 +1407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1390,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1410,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1472,7 +1509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E2%8F%B0%20windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E2%8F%B0%20windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1492,7 +1529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%8F%B7systemd%EF%BC%88systemctl%EF%BC%89%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%20%2B%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%8F%B7systemd%EF%BC%88systemctl%EF%BC%89%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%20%2B%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1512,7 +1549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1532,7 +1569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1552,7 +1589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEZsh/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEZsh/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1614,7 +1651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/%F0%9F%98%9Cvibe%20codong%E5%8D%8F%E4%BD%9C%E6%80%9D%E8%80%83/" class="md-nav__link">
+      <a href="../../../%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/%F0%9F%98%9Cvibe%20codong%E5%8D%8F%E4%BD%9C%E6%80%9D%E8%80%83/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1640,17 +1677,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" checked>
         
           <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
             
@@ -1663,7 +1702,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_10">
             <span class="md-nav__icon md-icon"></span>
             运维
@@ -1676,7 +1715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1696,7 +1735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1750,7 +1789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/Cloudflare/%F0%9F%A4%96%E4%BD%BF%E7%94%A8Cloudflare%20Pages%20%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="md-nav__link">
+      <a href="../../Cloudflare/%F0%9F%A4%96%E4%BD%BF%E7%94%A8Cloudflare%20Pages%20%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1812,7 +1851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/Docker/Docker%20%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../Docker/Docker%20%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1838,17 +1877,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_5" checked>
         
           <label class="md-nav__link" for="__nav_2_10_5" id="__nav_2_10_5_label" tabindex="0">
             
@@ -1861,7 +1902,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_10_5">
             <span class="md-nav__icon md-icon"></span>
             Linux
@@ -1872,13 +1913,238 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/Linux/tmux/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    tmux 是一个多终端管理工具
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Tmux
+    tmux 是一个多终端管理工具
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    相关概念
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    会话管理（Session）
+  </a>
+  
+    <nav class="md-nav" aria-label="会话管理（Session）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#session_1" class="md-nav__link">
+    创建 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_2" class="md-nav__link">
+    创建指定名称 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_3" class="md-nav__link">
+    查看 session 列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_4" class="md-nav__link">
+    进入已有 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessiondetach" class="md-nav__link">
+    退出 session（detach）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_5" class="md-nav__link">
+    删除 session
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    窗口管理（Window）
+  </a>
+  
+    <nav class="md-nav" aria-label="窗口管理（Window）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window_1" class="md-nav__link">
+    创建 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_2" class="md-nav__link">
+    切换 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_3" class="md-nav__link">
+    重命名 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_4" class="md-nav__link">
+    关闭 window
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pane" class="md-nav__link">
+    面板管理（Pane）
+  </a>
+  
+    <nav class="md-nav" aria-label="面板管理（Pane）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pane_1" class="md-nav__link">
+    创建 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_2" class="md-nav__link">
+    切换 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_3" class="md-nav__link">
+    退出 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_4" class="md-nav__link">
+    放大/恢复 pane
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tmuxconf" class="md-nav__link">
+    .tmux.conf 配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    重新加载配置
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%F0%9F%A7%A0%20SSH%20%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🧠 SSH 常用参数速查表
   </span>
   
 
@@ -1936,7 +2202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/Redis/%E2%9D%97Rueidis%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%20Redis%20Cluster%20%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../Redis/%E2%9D%97Rueidis%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%20Redis%20Cluster%20%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1998,7 +2264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2068,7 +2334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2122,7 +2388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2192,7 +2458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2212,7 +2478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2232,7 +2498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2252,7 +2518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2272,7 +2538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2318,6 +2584,181 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    相关概念
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    会话管理（Session）
+  </a>
+  
+    <nav class="md-nav" aria-label="会话管理（Session）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#session_1" class="md-nav__link">
+    创建 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_2" class="md-nav__link">
+    创建指定名称 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_3" class="md-nav__link">
+    查看 session 列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_4" class="md-nav__link">
+    进入已有 session
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessiondetach" class="md-nav__link">
+    退出 session（detach）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session_5" class="md-nav__link">
+    删除 session
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    窗口管理（Window）
+  </a>
+  
+    <nav class="md-nav" aria-label="窗口管理（Window）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window_1" class="md-nav__link">
+    创建 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_2" class="md-nav__link">
+    切换 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_3" class="md-nav__link">
+    重命名 window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window_4" class="md-nav__link">
+    关闭 window
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pane" class="md-nav__link">
+    面板管理（Pane）
+  </a>
+  
+    <nav class="md-nav" aria-label="面板管理（Pane）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pane_1" class="md-nav__link">
+    创建 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_2" class="md-nav__link">
+    切换 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_3" class="md-nav__link">
+    退出 pane
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pane_4" class="md-nav__link">
+    放大/恢复 pane
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tmuxconf" class="md-nav__link">
+    .tmux.conf 配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    重新加载配置
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2332,9 +2773,110 @@
                   
 
 
-  <h1>😃Hapi 使用手机远程你的Claude Code</h1>
+<h1 id="tmux">tmux 是一个多终端管理工具</h1>
+<h2 id="_1">安装</h2>
+<pre><code class="language-markdown"># mac
+brew install tmux
+</code></pre>
+<h2 id="_2">相关概念</h2>
+<ul>
+<li>
+<p><strong>session</strong> tmux 创建一个终端管理器，每创建一个 session 就是一个会话。会话会保持运行，可以随时断开再恢复。</p>
+</li>
+<li>
+<p><strong>window</strong> 一个 session 里面可以创建多个 window。</p>
+</li>
+<li>
+<p><strong>pane</strong> 一个 window 可以分割成多个 pane。</p>
+</li>
+<li>
+<p><strong>prefix</strong> 默认快捷键是 <code>Ctrl + b</code>，用于进入 tmux 命令模式，方便进行 session/window/pane 操作。</p>
+</li>
+</ul>
+<hr />
+<h2 id="session">会话管理（Session）</h2>
+<h3 id="session_1">创建 session</h3>
+<pre><code class="language-bash">tmux
+</code></pre>
+<h3 id="session_2">创建指定名称 session</h3>
+<pre><code class="language-bash">tmux new -s name
+</code></pre>
+<h3 id="session_3">查看 session 列表</h3>
+<pre><code class="language-bash">tmux ls
+</code></pre>
+<h3 id="session_4">进入已有 session</h3>
+<pre><code class="language-bash">tmux a -t name
+# 或
+tmux a
+</code></pre>
+<h3 id="sessiondetach">退出 session（detach）</h3>
+<pre><code class="language-bash">tmux detach
+</code></pre>
+<p>或：</p>
+<pre><code class="language-text">prefix + d
+</code></pre>
+<h3 id="session_5">删除 session</h3>
+<pre><code class="language-bash">tmux kill-session -t name
+</code></pre>
+<p>（当只有一个 window 时也可以直接 <code>exit</code> 退出）</p>
+<hr />
+<h2 id="window">窗口管理（Window）</h2>
+<h3 id="window_1">创建 window</h3>
+<pre><code class="language-text">prefix + c
+</code></pre>
+<h3 id="window_2">切换 window</h3>
+<pre><code class="language-text">prefix + 1 / 2 / 3   （按编号切换）
+prefix + p           （上一个 window）
+prefix + n           （下一个 window）
+prefix + w           （列出所有 window 进行选择）
+</code></pre>
+<h3 id="window_3">重命名 window</h3>
+<pre><code class="language-text">prefix + ,
+</code></pre>
+<h3 id="window_4">关闭 window</h3>
+<pre><code class="language-text">prefix + &amp;
+</code></pre>
+<hr />
+<h2 id="pane">面板管理（Pane）</h2>
+<h3 id="pane_1">创建 pane</h3>
+<pre><code class="language-text">水平分割：prefix + %
+垂直分割：prefix + &quot;
+</code></pre>
+<h3 id="pane_2">切换 pane</h3>
+<pre><code class="language-text">prefix + 方向键
+prefix + o   （循环切换）
+</code></pre>
+<h3 id="pane_3">退出 pane</h3>
+<pre><code class="language-bash">exit
+</code></pre>
+<h3 id="pane_4">放大/恢复 pane</h3>
+<pre><code class="language-text">prefix + z
+</code></pre>
+<hr />
+<h2 id="tmuxconf">.tmux.conf 配置</h2>
+<pre><code class="language-bash"># 重新设置 prefix
+set-option -g prefix C-a
+unbind C-b
+bind-key C-a send-prefix
 
-<p>[[🤖claude使用指南]]</p>
+# 使用 Ctrl + 方向键切换 pane
+bind -n C-Left  select-pane -L
+bind -n C-Right select-pane -R
+bind -n C-Up    select-pane -U
+bind -n C-Down  select-pane -D
+
+# 使用 Shift + 方向键切换 window
+bind -n S-Left  previous-window
+bind -n S-Right next-window
+
+# split window
+bind-key h split-window -h
+bind-key v split-window -v
+</code></pre>
+<hr />
+<h2 id="_3">重新加载配置</h2>
+<pre><code class="language-bash">tmux source ~/.tmux.conf
+</code></pre>
 
 
 
@@ -2372,10 +2914,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>
