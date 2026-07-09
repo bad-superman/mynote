@@ -294,3 +294,10 @@ opencli plugin create my-tool
 ```yaml
 ~/.opencli/external-clis.yaml
 ```
+
+# 远程控制
+
+```text
+# ssh 
+ssh -N -R 19825:127.0.0.1:19825 remote
+```
