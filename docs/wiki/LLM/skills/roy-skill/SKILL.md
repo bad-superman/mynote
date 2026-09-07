@@ -10,7 +10,7 @@ Use this as the entry point for Roy's skill library.
 
 ## Workflow
 
-1. Open the skill index at `docs/wiki/LLM/skills/index.md`.
+1. Open this skill's `reference.md`.
 2. Pick the most specific matching skill.
 3. Read that skill's `SKILL.md` first.
 4. Read its `reference.md` or scripts only if needed.
@@ -27,4 +27,4 @@ Use this as the entry point for Roy's skill library.
 ## Notes
 
 - This skill is a router, not a separate workflow.
-- Keep the index current whenever a new skill is added.
+- Keep the index current whenever a new skill is added at `$ROY_NOTE_PWD/docs/wiki/LLM/skills/index.md`.
