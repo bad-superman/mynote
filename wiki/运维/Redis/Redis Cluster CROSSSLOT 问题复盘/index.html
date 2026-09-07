@@ -9,20 +9,22 @@
       
       
       
+        <link rel="prev" href="../../Linux/%F0%9F%A7%A0%20SSH%20%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5%E8%A1%A8/">
       
-        <link rel="next" href="wiki/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+      
+        <link rel="next" href="../%E2%9D%97Rueidis%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%20Redis%20Cluster%20%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
     
     
       
-        <title>Roy's Docs</title>
+        <title>Redis Cluster CROSSSLOT 问题复盘 - Roy's Docs</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.9f615399.min.css">
       
       
 
@@ -41,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -63,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#redis-cluster-crossslot" class="md-skip">
           Skip to content
         </a>
       
@@ -79,7 +81,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-header__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -99,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome to MkDocs
+              Redis Cluster CROSSSLOT 问题复盘
             
           </span>
         </div>
@@ -171,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
+    <a href="../../../.." title="Roy&#39;s Docs" class="md-nav__button md-logo" aria-label="Roy's Docs" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -186,29 +188,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Welcome to MkDocs
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -217,40 +199,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -259,17 +207,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
@@ -282,7 +232,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Wiki
@@ -295,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+      <a href="../../../%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84wiki%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -349,7 +299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Go%20Modules%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E6%A6%82%E8%A7%88/" class="md-nav__link">
+      <a href="../../../Golang/Go%20Modules%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B%E6%A6%82%E8%A7%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -369,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Render/" class="md-nav__link">
+      <a href="../../../Golang/Render/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -389,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/gin/" class="md-nav__link">
+      <a href="../../../Golang/gin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -409,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../Golang/%E2%9A%99%EF%B8%8F%20Go%E4%B8%8EVSCode%E5%AE%89%E8%A3%85%E4%B8%8E%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -429,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../../Golang/%E2%9C%88%EF%B8%8F%20Go%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -449,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
+      <a href="../../../Golang/%E6%B3%9B%E5%9E%8B%E4%B8%BB%E8%A6%81%E7%94%A8%E6%B3%95/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -469,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/%F0%9F%93%98%20Go%20Module%20%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%20%26%20%E5%A4%9A%E7%BA%A7%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="md-nav__link">
+      <a href="../../../Golang/%F0%9F%93%98%20Go%20Module%20%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%20%26%20%E5%A4%9A%E7%BA%A7%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -523,7 +473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Grpc/gRPC%20Server%20Reflection%20%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/gRPC%20Server%20Reflection%20%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -543,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%E2%9C%85protoc-gen-validate%20%E5%AE%8C%E6%95%B4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -563,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%F0%9F%93%98%20Protocol%20Buffers%203%20%E8%AF%AD%E6%B3%95%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -583,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
+      <a href="../../../Golang/Grpc/%F0%9F%93%A6%20%E5%AE%8C%E6%95%B4%E7%9A%84%20.proto%20%E6%96%87%E4%BB%B6%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%A8%A1%E6%9D%BF/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -645,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
+      <a href="../../../Golang/%E5%B7%A5%E5%85%B7%E7%B1%BB/%F0%9F%93%9A%20Delve%20%28dlv%29%20%E7%94%A8%E6%B3%95%E5%A4%A7%E5%85%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -749,7 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/claude/%F0%9F%98%83Hapi-%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E4%BD%A0%E7%9A%84Claude%20Code/" class="md-nav__link">
+      <a href="../../../LLM/claude/%F0%9F%98%83Hapi-%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E4%BD%A0%E7%9A%84Claude%20Code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -769,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/claude/%F0%9F%A4%96claude%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../LLM/claude/%F0%9F%A4%96claude%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -831,7 +781,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9A%20Windows%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%95%B4%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -851,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../LLM/ollma/%F0%9F%93%9DOllama%20%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E4%B8%8EGPU%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -947,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%97%BA%EF%B8%8F%20%E5%A4%9ABot%20Agent%E6%B2%9F%E9%80%9A%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -967,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+      <a href="../../../LLM/openclaw/agents/%F0%9F%A7%A0%E5%A4%9AAgent%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1037,7 +987,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/opencli/%F0%9F%92%BBOpenCLI%20%E5%AE%9E%E6%88%98%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../LLM/opencli/%F0%9F%92%BBOpenCLI%20%E5%AE%9E%E6%88%98%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1099,7 +1049,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/" class="md-nav__link">
+      <a href="../../../LLM/skills/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1153,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/mynote-wiki-maintenance/SKILL/" class="md-nav__link">
+      <a href="../../../LLM/skills/mynote-wiki-maintenance/SKILL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1173,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/mynote-wiki-maintenance/reference/" class="md-nav__link">
+      <a href="../../../LLM/skills/mynote-wiki-maintenance/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1235,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/one-key-hidpi/SKILL/" class="md-nav__link">
+      <a href="../../../LLM/skills/one-key-hidpi/SKILL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1255,7 +1205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/one-key-hidpi/reference/" class="md-nav__link">
+      <a href="../../../LLM/skills/one-key-hidpi/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1317,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/roy-skill/SKILL/" class="md-nav__link">
+      <a href="../../../LLM/skills/roy-skill/SKILL/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1337,7 +1287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/LLM/skills/roy-skill/reference/" class="md-nav__link">
+      <a href="../../../LLM/skills/roy-skill/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1415,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Linux/ssh/" class="md-nav__link">
+      <a href="../../../Linux/ssh/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1477,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
+      <a href="../../../Mysql/sql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E5%92%8C%E6%88%90%E6%9C%AC/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1497,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
+      <a href="../../../Mysql/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E4%BC%98%E5%8C%96trace/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1593,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%90%BC%20Python%20Pandas%20%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1613,7 +1563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/%F0%9F%93%8A%20Matplotlib%20Pyplot%20%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1675,7 +1625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../Python/%E8%87%AA%E5%8A%A8%E5%8C%96/%F0%9F%8E%AD%20Playwright%20%E7%AE%80%E6%B4%81%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1745,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/HttpAuthBasic%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1765,7 +1715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+      <a href="../../../nginx/%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1785,7 +1735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
+      <a href="../../../nginx/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1805,7 +1755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
+      <a href="../../../nginx/%E9%85%8D%E7%BD%AEhttps/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1867,7 +1817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E2%8F%B0%20windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%E2%8F%B0%20windows%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1887,7 +1837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%8F%B7systemd%EF%BC%88systemctl%EF%BC%89%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%20%2B%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%8F%B7systemd%EF%BC%88systemctl%EF%BC%89%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%20%2B%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1907,7 +1857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%94%92%20Certbot%20%E7%94%9F%E6%88%90%20Let%E2%80%99s%20Encrypt%20%E8%AF%81%E4%B9%A6%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1927,7 +1877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%95%90%E5%9C%A8%20Mac%20%E4%B8%8A%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1947,7 +1897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEZsh/" class="md-nav__link">
+      <a href="../../../%E7%B3%BB%E7%BB%9F%E7%B1%BB/%F0%9F%9A%80Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEZsh/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2009,7 +1959,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/%F0%9F%98%9Cvibe%20codong%E5%8D%8F%E4%BD%9C%E6%80%9D%E8%80%83/" class="md-nav__link">
+      <a href="../../../%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/%F0%9F%98%9Cvibe%20codong%E5%8D%8F%E4%BD%9C%E6%80%9D%E8%80%83/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2035,17 +1985,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" checked>
         
           <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
             
@@ -2058,7 +2010,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_10">
             <span class="md-nav__icon md-icon"></span>
             运维
@@ -2071,7 +2023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../%E2%9A%99%EF%B8%8F%20SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2091,7 +2043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../%F0%9F%9A%80%20Teleport%20Community%20Edition%20%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2145,7 +2097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Cloudflare/%F0%9F%A4%96%E4%BD%BF%E7%94%A8Cloudflare%20Pages%20%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="md-nav__link">
+      <a href="../../Cloudflare/%F0%9F%A4%96%E4%BD%BF%E7%94%A8Cloudflare%20Pages%20%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2207,7 +2159,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Docker/Docker%20%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../Docker/Docker%20%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2269,7 +2221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Linux/%F0%9F%92%BBtmux%20%E5%A4%9A%E7%BB%88%E7%AB%AF%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" class="md-nav__link">
+      <a href="../../Linux/%F0%9F%92%BBtmux%20%E5%A4%9A%E7%BB%88%E7%AB%AF%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2289,7 +2241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Linux/%F0%9F%A7%A0%20SSH%20%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
+      <a href="../../Linux/%F0%9F%A7%A0%20SSH%20%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E9%80%9F%E6%9F%A5%E8%A1%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2315,17 +2267,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10_6" checked>
         
           <label class="md-nav__link" for="__nav_2_10_6" id="__nav_2_10_6_label" tabindex="0">
             
@@ -2338,7 +2292,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_10_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_10_6">
             <span class="md-nav__icon md-icon"></span>
             Redis
@@ -2349,9 +2303,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Redis/Redis%20Cluster%20CROSSSLOT%20%E9%97%AE%E9%A2%98%E5%A4%8D%E7%9B%98/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Redis Cluster CROSSSLOT 问题复盘
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -2360,6 +2334,129 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    背景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    现象
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    根因
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    修复思路
+  </a>
+  
+    <nav class="md-nav" aria-label="修复思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hash" class="md-nav__link">
+    1. 同一对象的多个属性改成 Hash
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pipeline" class="md-nav__link">
+    2. 多个对象批量读取改 Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-key-hash-tag" class="md-nav__link">
+    3. 必须多 key 原子操作时使用 Hash Tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    容易踩坑
+  </a>
+  
+    <nav class="md-nav" aria-label="容易踩坑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    旧 key 类型冲突
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lua-cluster" class="md-nav__link">
+    Lua 脚本不是绕过 Cluster 限制的办法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster" class="md-nav__link">
+    Cluster 客户端支持不等于业务命令安全
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    验证清单
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    回退
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2371,7 +2468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/Redis/%E2%9D%97Rueidis%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%20Redis%20Cluster%20%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../%E2%9D%97Rueidis%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%20Redis%20Cluster%20%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2433,7 +2530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E8%BF%90%E7%BB%B4/%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../%E5%A4%9C%E8%8E%BA/%F0%9F%93%93%20%E5%A4%9C%E8%8E%BA%E6%97%A5%E5%BF%97%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2503,7 +2600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E9%87%8F%E5%8C%96%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2557,7 +2654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
+      <a href="../../../%E9%87%8F%E5%8C%96/%E5%8C%BA%E5%9D%97%E9%93%BE/BSC%E5%85%AC%E9%93%BE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2627,7 +2724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2647,7 +2744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E5%BC%BA%E5%B9%B3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2667,7 +2764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E6%97%A0%E6%A0%87%E9%A2%98%E7%AC%94%E8%AE%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2687,7 +2784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2707,7 +2804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="wiki/%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
+      <a href="../../../%E9%87%91%E8%9E%8D/%F0%9F%94%A5%20%E9%A3%8E%E6%8E%A7%E8%AE%A1%E7%AE%97%E5%9B%A0%E5%AD%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2763,15 +2860,104 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#_1" class="md-nav__link">
+    背景
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+  <a href="#_2" class="md-nav__link">
+    现象
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    根因
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    修复思路
+  </a>
+  
+    <nav class="md-nav" aria-label="修复思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hash" class="md-nav__link">
+    1. 同一对象的多个属性改成 Hash
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pipeline" class="md-nav__link">
+    2. 多个对象批量读取改 Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-key-hash-tag" class="md-nav__link">
+    3. 必须多 key 原子操作时使用 Hash Tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    容易踩坑
+  </a>
+  
+    <nav class="md-nav" aria-label="容易踩坑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    旧 key 类型冲突
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lua-cluster" class="md-nav__link">
+    Lua 脚本不是绕过 Cluster 限制的办法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster" class="md-nav__link">
+    Cluster 客户端支持不等于业务命令安全
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    验证清单
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    回退
   </a>
   
 </li>
@@ -2791,21 +2977,140 @@
                   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="redis-cluster-crossslot">Redis Cluster CROSSSLOT 问题复盘</h1>
+<h2 id="_1">背景</h2>
+<p>某次生产配置从 Redis 单机形态调整为 Redis Cluster + TLS 后，连接层问题解决以后，运行期又暴露了 <code>CROSSSLOT</code>。</p>
+<p>这个问题和具体业务无关，本质是原代码里存在单机 Redis 假设：</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
+<li>用一条 Lua 脚本同时读写多个独立 key。</li>
+<li>用 <code>MGET</code> 一次读取多个独立 key。</li>
+<li>这些 key 在 Redis Cluster 下不保证落到同一个 slot。</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h2 id="_2">现象</h2>
+<p>Redis Cluster 返回类似错误：</p>
+<pre><code class="language-text">CROSSSLOT Keys in request don't hash to the same slot
 </code></pre>
+<p>常见触发命令：</p>
+<pre><code class="language-redis">MGET obj:a:1 obj:b:1 obj:c:1
+EVAL &quot;&lt;lua&gt;&quot; 3 obj:a:1 obj:b:1 obj:c:1 ...
+</code></pre>
+<p>在单机 Redis 中，这类命令通常可以工作；切到 Redis Cluster 后，只要多个 key 分布在不同 slot，命令就会失败。</p>
+<h2 id="_3">根因</h2>
+<p>Redis Cluster 按 key 计算 slot。单条多 key 命令只有在所有 key 属于同一个 slot 时才允许执行。</p>
+<p>Lua 脚本也遵守这个限制：<code>EVAL</code> 传入的 <code>KEYS</code> 如果跨 slot，就会报 <code>CROSSSLOT</code>。</p>
+<p>可以用下面的命令检查 key slot：</p>
+<pre><code class="language-bash">redis-cli -c CLUSTER KEYSLOT 'obj:a:1'
+redis-cli -c CLUSTER KEYSLOT 'obj:b:1'
+</code></pre>
+<p>如果输出不同，说明这些 key 不能放进同一条多 key 命令。</p>
+<h2 id="_4">修复思路</h2>
+<h3 id="1-hash">1. 同一对象的多个属性改成 Hash</h3>
+<p>如果多个 key 本来描述的是同一个对象的不同字段，优先合并成一个 hash key。</p>
+<p>修改前：</p>
+<pre><code class="language-text">obj:field_a:{id}
+obj:field_b:{id}
+obj:field_c:{id}
+</code></pre>
+<p>修改后：</p>
+<pre><code class="language-text">obj:{id}
+  field_a
+  field_b
+  field_c
+</code></pre>
+<p>写入时只操作一个 key：</p>
+<pre><code class="language-redis">HSET obj:{id} field_a value_a field_b value_b field_c value_c
+EXPIRE obj:{id} 300
+</code></pre>
+<p>读取时：</p>
+<pre><code class="language-redis">HMGET obj:{id} field_a field_b field_c
+</code></pre>
+<p>如果需要原子校验和写入，可以继续用 Lua，但 <code>KEYS</code> 只传一个 hash key。</p>
+<h3 id="2-pipeline">2. 多个对象批量读取改 Pipeline</h3>
+<p>如果要读取多个对象，每个对象一个 hash key，不要用一条跨 key 的 <code>MGET</code>。</p>
+<p>可以改为 pipeline 多条单 key 命令：</p>
+<pre><code class="language-text">Pipeline:
+  HMGET obj:{id1} field_a field_b
+  HMGET obj:{id2} field_a field_b
+  HMGET obj:{id3} field_a field_b
+</code></pre>
+<p>Pipeline 只是减少网络往返，不要求所有 key 同 slot。</p>
+<h3 id="3-key-hash-tag">3. 必须多 key 原子操作时使用 Hash Tag</h3>
+<p>如果确实需要一条命令原子操作多个 key，可以使用 Redis Cluster hash tag，让多个 key 按 <code>{...}</code> 中的内容计算 slot。</p>
+<pre><code class="language-text">obj:{account_1}:a
+obj:{account_1}:b
+obj:{account_1}:c
+</code></pre>
+<p>上面三个 key 会落到同一个 slot。</p>
+<p>注意：hash tag 会影响 slot 分布，不能为了省事把大量热点 key 都塞进同一个 tag。</p>
+<h2 id="_5">容易踩坑</h2>
+<h3 id="key">旧 key 类型冲突</h3>
+<p>如果旧版本中某个 key 是 string，新版本想复用同名 key 改成 hash，旧 key 未过期前会触发类型错误：</p>
+<pre><code class="language-text">WRONGTYPE Operation against a key holding the wrong kind of value
+</code></pre>
+<p>稳妥做法：</p>
+<ul>
+<li>新 hash 使用新 key 名。</li>
+<li>或先做迁移脚本。</li>
+<li>或确认旧 key TTL 足够短，并安排兼容窗口。</li>
+</ul>
+<h3 id="lua-cluster">Lua 脚本不是绕过 Cluster 限制的办法</h3>
+<p>Lua 能保证脚本内逻辑原子，但不能让跨 slot key 合法。</p>
+<p>错误示例：</p>
+<pre><code class="language-redis">EVAL &quot;&lt;lua&gt;&quot; 2 obj:a:1 obj:b:1
+</code></pre>
+<p>正确方向：</p>
+<ul>
+<li>调整成单 key hash。</li>
+<li>或给相关 key 使用同一个 hash tag。</li>
+<li>或拆成多条命令并接受非全局原子。</li>
+</ul>
+<h3 id="cluster">Cluster 客户端支持不等于业务命令安全</h3>
+<p>客户端能连接 Redis Cluster，只代表拓扑、重定向、TLS、认证等连接层打通了。</p>
+<p>业务命令仍然需要逐个检查：</p>
+<ul>
+<li><code>MGET</code> / <code>MSET</code></li>
+<li><code>DEL key1 key2 ...</code></li>
+<li><code>EXISTS key1 key2 ...</code></li>
+<li><code>EVAL</code> / <code>EVALSHA</code></li>
+<li>其他多 key 命令</li>
+</ul>
+<h2 id="_6">验证清单</h2>
+<ol>
+<li>检查所有多 key 命令是否跨 slot。</li>
+</ol>
+<pre><code class="language-bash">rg -n &quot;MGet|MSet|Del\\(|Exists\\(|Eval|EvalSha|Pipeline|Pipelined&quot; .
+</code></pre>
+<ol>
+<li>对关键 key 做 slot 验证。</li>
+</ol>
+<pre><code class="language-bash">redis-cli -c CLUSTER KEYSLOT 'obj:{id1}'
+redis-cli -c CLUSTER KEYSLOT 'obj:{id2}'
+</code></pre>
+<ol>
+<li>本地或测试环境使用 Redis Cluster 跑最小回归。</li>
+</ol>
+<pre><code class="language-bash">go test ./...
+</code></pre>
+<ol>
+<li>
+<p>线上灰度时关注：</p>
+</li>
+<li>
+<p><code>CROSSSLOT</code></p>
+</li>
+<li><code>MOVED</code> / <code>ASK</code></li>
+<li><code>WRONGTYPE</code></li>
+<li>Redis 命令耗时</li>
+<li>pipeline 批量大小和超时</li>
+</ol>
+<h2 id="_7">回退</h2>
+<p>优先保留旧读取路径的短期兼容能力：</p>
+<ul>
+<li>新写入走新 key。</li>
+<li>读取先读新 key，缺失时可短期回退旧 key。</li>
+<li>旧 key 自然过期或迁移完成后，再删除兼容逻辑。</li>
+</ul>
+<p>如果 Cluster 改造只完成了连接层，业务命令还没完成排查，不要直接把生产流量全部切到 Cluster。</p>
 
 
 
@@ -2843,10 +3148,10 @@ docs/
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.4e0fa4ba.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.4e0fa4ba.min.js"></script>
       
     
   </body>
