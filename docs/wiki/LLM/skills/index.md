@@ -4,6 +4,7 @@
 
 ## 目录
 
+- [roy-skill：技能路由入口](roy-skill/SKILL.md)
 - [one-key-hidpi：Mac 外接显示器开启 HiDPI](one-key-hidpi/SKILL.md)
 - [mynote-wiki-maintenance：Wiki 仓库维护](mynote-wiki-maintenance/SKILL.md)
 
