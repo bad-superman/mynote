@@ -4,6 +4,7 @@
 
 - `mynote-wiki-maintenance`: repo setup, note creation, MkDocs install, publish
 - `one-key-hidpi`: Mac external display HiDPI setup
+- `issue-analysis`: Hermes Kanban issue investigation with CodeGraph and Nex
 - `roy-skill`: router entry point for the skill library
 
 ## Future extension
