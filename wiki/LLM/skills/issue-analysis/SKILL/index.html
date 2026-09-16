@@ -1233,6 +1233,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#feishu-handoff-contract" class="md-nav__link">
+    Feishu handoff contract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preflight" class="md-nav__link">
+    Preflight
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operate-the-board" class="md-nav__link">
     Operate the board
   </a>
@@ -2941,6 +2955,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#feishu-handoff-contract" class="md-nav__link">
+    Feishu handoff contract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preflight" class="md-nav__link">
+    Preflight
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operate-the-board" class="md-nav__link">
     Operate the board
   </a>
@@ -3004,6 +3032,10 @@ standalone log explanation that does not need repository and runtime evidence.</
 <p>Create the root task on the <code>issue-analysis</code> board and route it to
 <code>issue-coordinator</code>. Use <code>triage</code> so the configured decomposer can normalize
 the input and create the staged graph.</p>
+<p><code>triage</code> is a temporary orchestration state. After creating a triage task, the
+main worker should let the Gateway dispatcher run <code>auto_decompose</code>; it should
+not immediately <code>promote</code>, manually <code>decompose</code>, or start specialist work unless
+the user explicitly asks for operational recovery.</p>
 <p>Required task fields:</p>
 <ul>
 <li>title: <code>[&lt;environment&gt;][&lt;service&gt;] &lt;short symptom&gt;</code>;</li>
@@ -3034,12 +3066,39 @@ for the missing input, or leave the task blocked with a typed reason.</p>
 </code></pre>
 <p>Code and runtime branches should run in parallel. Downstream stages start only
 after their real parent tasks complete.</p>
+<h2 id="feishu-handoff-contract">Feishu handoff contract</h2>
+<p>When the task is created from Feishu and the user expects an automatic report
+back to Feishu, the creation path must leave a notification subscription:</p>
+<ul>
+<li>prefer a creation path that returns or records a subscription;</li>
+<li>if the create result says <code>subscribed=false</code>, or the task has no subscription
+  row, subscribe the originating Feishu chat with <code>notify-subscribe</code>;</li>
+<li>use <code>notify+wake</code> when the final report should be read by the gateway agent
+  and answered in the chat, not just posted as a passive Kanban event.</li>
+</ul>
+<p>If no subscription can be created, tell the user the task id and that they must
+check the board manually. Do not imply that a report will be pushed back.</p>
+<h2 id="preflight">Preflight</h2>
+<p>Before relying on an unattended run, confirm the infrastructure is ready:</p>
+<ul>
+<li>Gateway is running and <code>kanban.dispatch_in_gateway=true</code>;</li>
+<li><code>kanban.auto_decompose=true</code>;</li>
+<li><code>auxiliary.kanban_decomposer</code> can call the intended endpoint;</li>
+<li>staged profiles exist and have useful descriptions;</li>
+<li>the worker environment can run CodeGraph and Nex;</li>
+<li>Feishu notification subscription exists for the root task.</li>
+</ul>
+<p>If a preflight check fails, create a visible <code>capability</code> or <code>needs_input</code>
+blocker, or return a short setup error instead of silently leaving a task in
+<code>triage</code>.</p>
 <h2 id="operate-the-board">Operate the board</h2>
 <p>Use the commands in <a href="../reference/">reference.md</a>. The minimum lifecycle is:</p>
 <ol>
 <li>Submit the root task with <code>create --triage</code>.</li>
-<li>Confirm dispatch with <code>list</code>, <code>show</code>, or <code>stats</code>.</li>
-<li>Follow progress with <code>tail</code>; inspect <code>runs</code> and <code>diagnostics</code> when needed.</li>
+<li>Confirm the task id and notification subscription.</li>
+<li>Let Gateway auto-decompose the <code>triage</code> task.</li>
+<li>Follow progress with <code>show</code>, <code>tail</code>, or <code>runs</code> only when the user asks for
+   status or recovery.</li>
 <li>Read the root handoff and <code>analysis.md</code> after the synthesizer completes.</li>
 <li>Recover only the affected task, then re-check downstream dependencies.</li>
 </ol>

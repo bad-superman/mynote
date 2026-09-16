@@ -1293,6 +1293,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#capability-preflight" class="md-nav__link">
+    Capability preflight
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3015,6 +3022,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#capability-preflight" class="md-nav__link">
+    Capability preflight
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3105,6 +3119,20 @@ EOF
 </code></pre>
 <p>When the source has no stable key, omit <code>--idempotency-key</code> instead of using
 a changing timestamp. The returned <code>t_&lt;...&gt;</code> id is the root task id.</p>
+<p>If the task was created from a Feishu conversation and the final report should
+return there automatically, confirm a subscription exists:</p>
+<pre><code class="language-bash">hermes kanban --board issue-analysis notify-list &lt;task-id&gt;
+</code></pre>
+<p>If missing, subscribe the original Feishu chat:</p>
+<pre><code class="language-bash">hermes kanban --board issue-analysis notify-subscribe &lt;task-id&gt; \
+  --platform feishu \
+  --chat-id &lt;oc_xxx&gt; \
+  --chat-type dm \
+  --delivery-mode notify+wake
+</code></pre>
+<p>The <code>notify+wake</code> mode posts the terminal event and wakes the gateway agent so
+it can read the report and answer in the Feishu chat. Use <code>notify</code> only for a
+passive Kanban event message.</p>
 <h3 id="inspect-progress-and-results">Inspect progress and results</h3>
 <pre><code class="language-bash">hermes kanban --board issue-analysis list --sort updated --json
 hermes kanban --board issue-analysis list --status running --json
@@ -3128,6 +3156,17 @@ hermes kanban --board issue-analysis diagnostics --severity error --json
 </code></pre>
 <p>Do not start the deprecated standalone Kanban daemon while the gateway is
 running.</p>
+<p>Expected unattended flow:</p>
+<pre><code class="language-text">triage -&gt; auto-decompose -&gt; todo -&gt; ready -&gt; running -&gt; done
+</code></pre>
+<p><code>promote</code> is not the normal action for <code>triage</code>; use it only for <code>todo</code> or
+<code>blocked</code> recovery after dependencies are satisfied. If a task remains in
+<code>triage</code>, inspect the auxiliary decomposer first:</p>
+<pre><code class="language-bash">hermes kanban --board issue-analysis diagnostics --json
+hermes kanban --board issue-analysis log &lt;task-id&gt; --tail 12000
+rg -n &quot;kanban_decomposer|decompose: API call failed|AuthenticationError&quot; \
+  /home/roy/.hermes/logs/agent.log /home/roy/.hermes/logs/errors.log
+</code></pre>
 <h3 id="recover-a-task">Recover a task</h3>
 <pre><code class="language-bash"># Add a durable operator note.
 hermes kanban --board issue-analysis comment &lt;task-id&gt; &quot;已确认时间窗口，继续查询&quot;
@@ -3166,6 +3205,18 @@ hermes kanban --board issue-analysis attach &lt;task-id&gt; /path/to/report.md
 </code></pre>
 <p>Do not manually complete a specialist task unless its handoff and artifacts
 have been verified.</p>
+<h3 id="capability-preflight">Capability preflight</h3>
+<p>Run these checks before treating the workflow as fully unattended:</p>
+<pre><code class="language-bash">hermes gateway status
+hermes profile list
+hermes kanban --board issue-analysis diagnostics --json
+command -v codegraph
+command -v nex
+nex --help
+</code></pre>
+<p>For systemd-managed Gateway, verify the service <code>PATH</code> includes tool install
+locations such as <code>/home/roy/.nex/bin</code>; an interactive shell finding <code>nex</code> does
+not guarantee Kanban workers can find it.</p>
 <h2 id="evidence-directory">Evidence directory</h2>
 <p>Keep stage reports under:</p>
 <pre><code class="language-text">/home/roy/dev/.hermes-issue-analysis/&lt;task-id&gt;/
