@@ -76,6 +76,27 @@ EOF
 When the source has no stable key, omit `--idempotency-key` instead of using
 a changing timestamp. The returned `t_<...>` id is the root task id.
 
+If the task was created from a Feishu conversation and the final report should
+return there automatically, confirm a subscription exists:
+
+```bash
+hermes kanban --board issue-analysis notify-list <task-id>
+```
+
+If missing, subscribe the original Feishu chat:
+
+```bash
+hermes kanban --board issue-analysis notify-subscribe <task-id> \
+  --platform feishu \
+  --chat-id <oc_xxx> \
+  --chat-type dm \
+  --delivery-mode notify+wake
+```
+
+The `notify+wake` mode posts the terminal event and wakes the gateway agent so
+it can read the report and answer in the Feishu chat. Use `notify` only for a
+passive Kanban event message.
+
 ### Inspect progress and results
 
 ```bash
@@ -107,6 +128,23 @@ hermes kanban --board issue-analysis diagnostics --severity error --json
 
 Do not start the deprecated standalone Kanban daemon while the gateway is
 running.
+
+Expected unattended flow:
+
+```text
+triage -> auto-decompose -> todo -> ready -> running -> done
+```
+
+`promote` is not the normal action for `triage`; use it only for `todo` or
+`blocked` recovery after dependencies are satisfied. If a task remains in
+`triage`, inspect the auxiliary decomposer first:
+
+```bash
+hermes kanban --board issue-analysis diagnostics --json
+hermes kanban --board issue-analysis log <task-id> --tail 12000
+rg -n "kanban_decomposer|decompose: API call failed|AuthenticationError" \
+  /home/roy/.hermes/logs/agent.log /home/roy/.hermes/logs/errors.log
+```
 
 ### Recover a task
 
@@ -157,6 +195,23 @@ hermes kanban --board issue-analysis attach <task-id> /path/to/report.md
 
 Do not manually complete a specialist task unless its handoff and artifacts
 have been verified.
+
+### Capability preflight
+
+Run these checks before treating the workflow as fully unattended:
+
+```bash
+hermes gateway status
+hermes profile list
+hermes kanban --board issue-analysis diagnostics --json
+command -v codegraph
+command -v nex
+nex --help
+```
+
+For systemd-managed Gateway, verify the service `PATH` includes tool install
+locations such as `/home/roy/.nex/bin`; an interactive shell finding `nex` does
+not guarantee Kanban workers can find it.
 
 ## Evidence directory
 

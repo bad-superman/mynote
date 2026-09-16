@@ -31,6 +31,11 @@ Create the root task on the `issue-analysis` board and route it to
 `issue-coordinator`. Use `triage` so the configured decomposer can normalize
 the input and create the staged graph.
 
+`triage` is a temporary orchestration state. After creating a triage task, the
+main worker should let the Gateway dispatcher run `auto_decompose`; it should
+not immediately `promote`, manually `decompose`, or start specialist work unless
+the user explicitly asks for operational recovery.
+
 Required task fields:
 
 - title: `[<environment>][<service>] <short symptom>`;
@@ -69,15 +74,46 @@ root -> intake -> (code + runtime) -> verifier -> synthesizer
 Code and runtime branches should run in parallel. Downstream stages start only
 after their real parent tasks complete.
 
+## Feishu handoff contract
+
+When the task is created from Feishu and the user expects an automatic report
+back to Feishu, the creation path must leave a notification subscription:
+
+- prefer a creation path that returns or records a subscription;
+- if the create result says `subscribed=false`, or the task has no subscription
+  row, subscribe the originating Feishu chat with `notify-subscribe`;
+- use `notify+wake` when the final report should be read by the gateway agent
+  and answered in the chat, not just posted as a passive Kanban event.
+
+If no subscription can be created, tell the user the task id and that they must
+check the board manually. Do not imply that a report will be pushed back.
+
+## Preflight
+
+Before relying on an unattended run, confirm the infrastructure is ready:
+
+- Gateway is running and `kanban.dispatch_in_gateway=true`;
+- `kanban.auto_decompose=true`;
+- `auxiliary.kanban_decomposer` can call the intended endpoint;
+- staged profiles exist and have useful descriptions;
+- the worker environment can run CodeGraph and Nex;
+- Feishu notification subscription exists for the root task.
+
+If a preflight check fails, create a visible `capability` or `needs_input`
+blocker, or return a short setup error instead of silently leaving a task in
+`triage`.
+
 ## Operate the board
 
 Use the commands in [reference.md](reference.md). The minimum lifecycle is:
 
 1. Submit the root task with `create --triage`.
-2. Confirm dispatch with `list`, `show`, or `stats`.
-3. Follow progress with `tail`; inspect `runs` and `diagnostics` when needed.
-4. Read the root handoff and `analysis.md` after the synthesizer completes.
-5. Recover only the affected task, then re-check downstream dependencies.
+2. Confirm the task id and notification subscription.
+3. Let Gateway auto-decompose the `triage` task.
+4. Follow progress with `show`, `tail`, or `runs` only when the user asks for
+   status or recovery.
+5. Read the root handoff and `analysis.md` after the synthesizer completes.
+6. Recover only the affected task, then re-check downstream dependencies.
 
 The main worker should not claim specialist work or perform the code/runtime
 investigation itself. It should return the root task id and a concise status

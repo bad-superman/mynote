@@ -3637,6 +3637,15 @@ EOF
 <p>在支持 Hermes slash command 的飞书会话中，也可以提交：</p>
 <pre><code class="language-text">/kanban --board issue-analysis create &quot;[qa][service] 简短现象&quot; --assignee issue-coordinator --triage --body &quot;...&quot;
 </code></pre>
+<p>如果目标是“飞书发起，自动分析完成后回飞书”，创建任务后必须确认通知订阅。推荐使用 <code>notify+wake</code>，这样终态事件会唤醒 Gateway agent 读取报告并在原会话回复：</p>
+<pre><code class="language-bash">hermes kanban --board issue-analysis notify-list t_xxxxxxxx
+hermes kanban --board issue-analysis notify-subscribe t_xxxxxxxx \
+  --platform feishu \
+  --chat-id oc_xxxxxxxx \
+  --chat-type dm \
+  --delivery-mode notify+wake
+</code></pre>
+<p>如果创建结果显示 <code>subscribed=false</code>，或者任务的 <code>session_id</code> 为空且没有订阅记录，就不能承诺自动回传报告。</p>
 <h3 id="4">4. 处理阻塞</h3>
 <p>阻塞原因应使用类型，不要只写“卡住了”：</p>
 <pre><code class="language-bash">hermes kanban --board issue-analysis block \
@@ -3663,7 +3672,7 @@ EOF
   auto_decompose_per_tick: 1
   dispatch_stale_timeout_seconds: 14400
   max_in_progress_per_profile: 1
-  auto_subscribe_on_create: false
+  auto_subscribe_on_create: true
   review_dispatch: false
 </code></pre>
 <p>配置含义：</p>
@@ -3674,6 +3683,7 @@ EOF
 <li><code>auto_decompose_per_tick</code>：每次 dispatcher tick 最多拆分几个任务，当前为 1，用于限制辅助模型调用和突发 fan-out；</li>
 <li><code>dispatch_stale_timeout_seconds</code>：4 小时没有有效进展时进入 stale 检查；</li>
 <li><code>max_in_progress_per_profile</code>：同一 profile 同时最多运行 1 个 Worker；</li>
+<li><code>auto_subscribe_on_create</code>：从持久会话创建任务时自动订阅终态事件；如果关闭，需要显式 <code>notify-subscribe</code>；</li>
 <li><code>review_dispatch: false</code>：当前不自动派发独立 review Worker，证据复核通过显式阶段完成。</li>
 </ul>
 <p>这里没有显式设置全局 <code>max_in_progress</code>，Hermes 会根据机器内存推导一个默认上限。如果宿主机资源较紧张，可以增加：</p>
@@ -3687,6 +3697,7 @@ EOF
     -&gt; 根任务 assignee 为 issue-coordinator
     -&gt; 子任务按 profile description 路由
 </code></pre>
+<p><code>triage</code> 是等待自动拆分的状态，不应直接 <code>promote</code>。如果 <code>triage</code> 长时间不动，优先检查 <code>auxiliary.kanban_decomposer</code> 的 endpoint、凭证、Gateway 是否读取到最新配置，以及 Gateway 日志中的 <code>decompose: API call failed</code>。</p>
 <p>如果需要完全固定任务图，可以关闭 <code>auto_decompose</code>，创建一个普通的 <code>ready</code> 任务给 <code>issue-coordinator</code>，由它通过 <code>kanban_create</code> 显式创建 intake、代码、运行时、复核和汇总子任务。</p>
 <p>因此，<code>profile.yaml</code> 中的 description 很重要。自动拆分器会根据 profile 描述选择 assignee，而不是只根据 profile 名称猜测。</p>
 <h2 id="_5">四、各阶段职责</h2>
@@ -3871,9 +3882,13 @@ hermes kanban --board issue-analysis diagnostics --json
 <li>网关没有运行；</li>
 <li><code>auto_decompose</code> 被关闭；</li>
 <li>辅助模型不可用；</li>
+<li>辅助模型配置更新后 Gateway 没有重启，仍在使用旧 endpoint 或旧凭证；</li>
 <li>profile description 缺失或 assignee 不存在；</li>
 <li>Issue 仍然缺少必要输入。</li>
 </ul>
+<p>不要先尝试 <code>promote triage -&gt; ready</code>。<code>triage</code> 应由 <code>decompose</code> 或 <code>specify</code> 处理；自动模式下由 Gateway dispatcher 调用，手动恢复时才执行：</p>
+<pre><code class="language-bash">hermes kanban --board issue-analysis decompose t_xxxxxxxx --json
+</code></pre>
 <h3 id="2-worker">2. Worker 启动失败</h3>
 <p>查看任务详情和运行记录：</p>
 <pre><code class="language-bash">hermes kanban --board issue-analysis show t_xxxxxxxx --json
@@ -3925,6 +3940,7 @@ deployed_commit: 线上实际部署 commit
 <ul>
 <li>[ ] 任务以 <code>triage</code> 进入 <code>issue-analysis</code> Board；</li>
 <li>[ ] dispatcher 自动拆分，且每轮不超过 <code>auto_decompose_per_tick</code>；</li>
+<li>[ ] 创建自飞书的任务具备通知订阅，终态事件能回到原会话；</li>
 <li>[ ] intake 完成后，代码和运行时任务并行；</li>
 <li>[ ] 子任务 handoff 保持短小；</li>
 <li>[ ] CodeGraph 和 Nex 原始输出没有进入汇总上下文；</li>

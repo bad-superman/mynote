@@ -160,6 +160,19 @@ EOF
 /kanban --board issue-analysis create "[qa][service] 简短现象" --assignee issue-coordinator --triage --body "..."
 ```
 
+如果目标是“飞书发起，自动分析完成后回飞书”，创建任务后必须确认通知订阅。推荐使用 `notify+wake`，这样终态事件会唤醒 Gateway agent 读取报告并在原会话回复：
+
+```bash
+hermes kanban --board issue-analysis notify-list t_xxxxxxxx
+hermes kanban --board issue-analysis notify-subscribe t_xxxxxxxx \
+  --platform feishu \
+  --chat-id oc_xxxxxxxx \
+  --chat-type dm \
+  --delivery-mode notify+wake
+```
+
+如果创建结果显示 `subscribed=false`，或者任务的 `session_id` 为空且没有订阅记录，就不能承诺自动回传报告。
+
 ### 4. 处理阻塞
 
 阻塞原因应使用类型，不要只写“卡住了”：
@@ -193,7 +206,7 @@ kanban:
   auto_decompose_per_tick: 1
   dispatch_stale_timeout_seconds: 14400
   max_in_progress_per_profile: 1
-  auto_subscribe_on_create: false
+  auto_subscribe_on_create: true
   review_dispatch: false
 ```
 
@@ -205,6 +218,7 @@ kanban:
 - `auto_decompose_per_tick`：每次 dispatcher tick 最多拆分几个任务，当前为 1，用于限制辅助模型调用和突发 fan-out；
 - `dispatch_stale_timeout_seconds`：4 小时没有有效进展时进入 stale 检查；
 - `max_in_progress_per_profile`：同一 profile 同时最多运行 1 个 Worker；
+- `auto_subscribe_on_create`：从持久会话创建任务时自动订阅终态事件；如果关闭，需要显式 `notify-subscribe`；
 - `review_dispatch: false`：当前不自动派发独立 review Worker，证据复核通过显式阶段完成。
 
 这里没有显式设置全局 `max_in_progress`，Hermes 会根据机器内存推导一个默认上限。如果宿主机资源较紧张，可以增加：
@@ -224,6 +238,8 @@ kanban:
     -> 根任务 assignee 为 issue-coordinator
     -> 子任务按 profile description 路由
 ```
+
+`triage` 是等待自动拆分的状态，不应直接 `promote`。如果 `triage` 长时间不动，优先检查 `auxiliary.kanban_decomposer` 的 endpoint、凭证、Gateway 是否读取到最新配置，以及 Gateway 日志中的 `decompose: API call failed`。
 
 如果需要完全固定任务图，可以关闭 `auto_decompose`，创建一个普通的 `ready` 任务给 `issue-coordinator`，由它通过 `kanban_create` 显式创建 intake、代码、运行时、复核和汇总子任务。
 
@@ -447,8 +463,15 @@ hermes kanban --board issue-analysis diagnostics --json
 - 网关没有运行；
 - `auto_decompose` 被关闭；
 - 辅助模型不可用；
+- 辅助模型配置更新后 Gateway 没有重启，仍在使用旧 endpoint 或旧凭证；
 - profile description 缺失或 assignee 不存在；
 - Issue 仍然缺少必要输入。
+
+不要先尝试 `promote triage -> ready`。`triage` 应由 `decompose` 或 `specify` 处理；自动模式下由 Gateway dispatcher 调用，手动恢复时才执行：
+
+```bash
+hermes kanban --board issue-analysis decompose t_xxxxxxxx --json
+```
 
 ### 2. Worker 启动失败
 
@@ -518,6 +541,7 @@ deployed_commit: 线上实际部署 commit
 
 - [ ] 任务以 `triage` 进入 `issue-analysis` Board；
 - [ ] dispatcher 自动拆分，且每轮不超过 `auto_decompose_per_tick`；
+- [ ] 创建自飞书的任务具备通知订阅，终态事件能回到原会话；
 - [ ] intake 完成后，代码和运行时任务并行；
 - [ ] 子任务 handoff 保持短小；
 - [ ] CodeGraph 和 Nex 原始输出没有进入汇总上下文；
