@@ -23,6 +23,7 @@ Use this as the entry point for Roy's skill library.
 - If two skills fit, choose the one whose description matches the user's wording best.
 - If the request is a repo-maintenance task, prefer `mynote-wiki-maintenance`.
 - If the request is about Mac external display HiDPI, prefer `one-key-hidpi`.
+- If the request is about Espanso, text expansion, or filling a saved template into an input box, prefer `espanso`.
 
 ## Notes
 

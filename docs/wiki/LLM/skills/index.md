@@ -8,6 +8,7 @@
 - [one-key-hidpi：Mac 外接显示器开启 HiDPI](one-key-hidpi/SKILL.md)
 - [mynote-wiki-maintenance：Wiki 仓库维护](mynote-wiki-maintenance/SKILL.md)
 - [issue-analysis：Hermes Kanban Issue 分析工作流](issue-analysis/SKILL.md)
+- [espanso：Mac 文本展开，把模板填进任意输入框](espanso/SKILL.md)
 
 ## 维护约定
 

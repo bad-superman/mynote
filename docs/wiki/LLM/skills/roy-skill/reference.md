@@ -5,6 +5,7 @@
 - `mynote-wiki-maintenance`: repo setup, note creation, MkDocs install, publish
 - `one-key-hidpi`: Mac external display HiDPI setup
 - `issue-analysis`: Hermes Kanban issue investigation with CodeGraph and Nex. SKILL.md lives at `$ROY_NOTE_PWD/docs/wiki/LLM/skills/issue-analysis/SKILL.md` — not a system skill. Load via `read_file()` from that path.
+- `espanso`: Mac text expansion that fills saved templates into Cursor, Codex, and Claude input boxes. SKILL.md lives at `$ROY_NOTE_PWD/docs/wiki/LLM/skills/espanso/SKILL.md`
 - `roy-skill`: router entry point for the skill library
 
 ## Future extension
