@@ -1439,8 +1439,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#feishu-handoff-contract" class="md-nav__link">
-    Feishu handoff contract
+  <a href="#feishu-front-desk" class="md-nav__link">
+    Feishu front desk
   </a>
   
 </li>
@@ -1537,7 +1537,7 @@
             
   
   <span class="md-ellipsis">
-    Mynote wiki maintenance
+    Jaeger trace
   </span>
   
 
@@ -1546,6 +1546,68 @@
         
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3_8_4">
+            <span class="md-nav__icon md-icon"></span>
+            Jaeger trace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jaeger-trace/SKILL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jaeger trace lookup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8_5" >
+        
+          <label class="md-nav__link" for="__nav_2_3_8_5" id="__nav_2_3_8_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mynote wiki maintenance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8_5">
             <span class="md-nav__icon md-icon"></span>
             Mynote wiki maintenance
           </label>
@@ -1613,9 +1675,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8_6" >
         
-          <label class="md-nav__link" for="__nav_2_3_8_5" id="__nav_2_3_8_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_3_8_6" id="__nav_2_3_8_6_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1626,8 +1688,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_8_5">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8_6">
             <span class="md-nav__icon md-icon"></span>
             One key hidpi
           </label>
@@ -1695,9 +1757,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8_7" >
         
-          <label class="md-nav__link" for="__nav_2_3_8_6" id="__nav_2_3_8_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_3_8_7" id="__nav_2_3_8_7_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1708,8 +1770,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_8_6">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_8_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8_7">
             <span class="md-nav__icon md-icon"></span>
             Roy skill
           </label>
@@ -3161,8 +3223,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#feishu-handoff-contract" class="md-nav__link">
-    Feishu handoff contract
+  <a href="#feishu-front-desk" class="md-nav__link">
+    Feishu front desk
   </a>
   
 </li>
@@ -3235,13 +3297,26 @@ documents, not in this skill.</p>
 <p>Do not run a full Kanban investigation for a generic code question or a
 standalone log explanation that does not need repository and runtime evidence.</p>
 <h2 id="trigger-and-submit">Trigger and submit</h2>
-<p>Create the root task on the <code>issue-analysis</code> board and route it to
-<code>issue-coordinator</code>. Use <code>triage</code> so the configured decomposer can normalize
-the input and create the staged graph.</p>
-<p><code>triage</code> is a temporary orchestration state. After creating a triage task, the
-main worker should let the Gateway dispatcher run <code>auto_decompose</code>; it should
-not immediately <code>promote</code>, manually <code>decompose</code>, or start specialist work unless
-the user explicitly asks for operational recovery.</p>
+<p>Create the graph with the fixed submit script. Do not use <code>--triage</code> and do
+not call <code>decompose</code>. The decomposer rebuilds the graph with an LLM, drops
+the stage skills, and sometimes starts code and runtime before intake.</p>
+<pre><code class="language-bash">python3 /home/roy/source/mynote/docs/wiki/LLM/skills/issue-analysis/scripts/submit_issue.py \
+  --body-file &lt;issue.md&gt; \
+  --idempotency-key &quot;&lt;stable-issue-key&gt;&quot;
+</code></pre>
+<p>Add <code>--title</code> when the default <code>[environment][service] symptom</code> title is a
+poor summary. Add <code>--deployed-commit &lt;hash&gt;</code> only when the user already
+knows the commit that was running. Add <code>--chat-id &lt;oc_xxx&gt;</code> when the report
+should return to the Feishu chat that asked; the subscription is attached
+to the root, which completes last.</p>
+<p>The script rejects a body that is missing any of the five sections below.
+Do not invent a missing service, environment, time window, or repository.
+Ask for the missing input before submitting.</p>
+<p><code>Service</code> must be the Nex deploy name, which often differs from the name
+in the source catalog or in Jaeger (<code>trade.order-service.job</code>, not
+<code>trade.order.service</code> or <code>OrderService.grpc</code>). Look it up with
+<code>scripts/find_service.py --env &lt;env&gt; --keyword &lt;word&gt;</code> and add
+<code>--verify-service</code> so a wrong name is refused before any card exists.</p>
 <p>Required task fields:</p>
 <ul>
 <li>title: <code>[&lt;environment&gt;][&lt;service&gt;] &lt;short symptom&gt;</code>;</li>
@@ -3259,7 +3334,7 @@ for the missing input, or leave the task blocked with a typed reason.</p>
 &lt;service name&gt;
 
 ## Environment
-&lt;qa | staging | prod | other&gt;
+&lt;qa | test | staging | prod | other&gt;
 
 ## Time Window
 &lt;absolute time range with timezone, or unknown&gt;
@@ -3267,42 +3342,69 @@ for the missing input, or leave the task blocked with a typed reason.</p>
 ## Evidence
 &lt;trace/request id, error code, log keyword, or reproduction steps&gt;
 </code></pre>
-<p>The default graph is:</p>
-<pre><code class="language-text">root -&gt; intake -&gt; (code + runtime) -&gt; verifier -&gt; synthesizer
+<p>The script builds this graph. Code and runtime start only after intake has
+resolved the deployed commit. The root is a child of all five stages, so it
+runs last and a Feishu subscription on it fires after the report exists.</p>
+<pre><code class="language-text">intake -&gt; code ----+
+      -&gt; runtime --+-&gt; verifier -&gt; synthesizer
+                         \__________________/
+                                   |
+                                  root (issue-coordinator)
 </code></pre>
-<p>Code and runtime branches should run in parallel. Downstream stages start only
-after their real parent tasks complete.</p>
-<h2 id="feishu-handoff-contract">Feishu handoff contract</h2>
-<p>When the task is created from Feishu and the user expects an automatic report
-back to Feishu, the creation path must leave a notification subscription:</p>
+<p>Intake may change the graph once, with <code>scripts/adjust_graph.py</code>, before
+code and runtime start:</p>
 <ul>
-<li>prefer a creation path that returns or records a subscription;</li>
-<li>if the create result says <code>subscribed=false</code>, or the task has no subscription
-  row, subscribe the originating Feishu chat with <code>notify-subscribe</code>;</li>
-<li>use <code>notify+wake</code> when the final report should be read by the gateway agent
-  and answered in the chat, not just posted as a passive Kanban event.</li>
+<li><strong>fact route</strong>: the report asks what happened, not why the code behaves
+  that way. The code card is archived and the rest runs as drawn. Any
+  question about business logic keeps the code card.</li>
+<li><strong>extra runtime</strong>: the trace shows another service with its own error
+  span. One more runtime card is added for it (at most two) and the
+  verifier waits for it.</li>
 </ul>
-<p>If no subscription can be created, tell the user the task id and that they must
-check the board manually. Do not imply that a report will be pushed back.</p>
+<p>Do not skip or add cards by hand; see <a href="../reference/#routes">reference.md</a>.</p>
+<p>All five reports go in one directory,
+<code>/home/roy/dev/.hermes-issue-analysis/&lt;root-id&gt;/</code>. Intake also writes
+<code>deployed.json</code>. The synthesizer is the only writer of <code>analysis.md</code>.</p>
+<h2 id="feishu-front-desk">Feishu front desk</h2>
+<p>Reports that arrive through 老铁 on Feishu are not handled by this skill.
+The gateway routes every Feishu chat to the <code>issue-desk</code> profile, whose
+own skill collects the report, finds the deploy service name, submits the
+graph, and relays <code>analysis.md</code> when the root finishes. The desk does not
+investigate, and when it cannot settle on one service it asks the reporter
+to be more specific. A report does not need a trace id or an account: the
+environment, the time window, what happened, and the service are enough.</p>
+<p><code>issue_desk.py submit</code> subscribes the asking chat by itself: the root and
+intake with <code>notify+wake</code>, the other stages with <code>notify</code>. A blocked
+intake wakes the desk, which asks the reporter and passes the answer back
+with <code>issue_desk.py answer</code>.</p>
+<p>When submitting by hand for someone waiting in Feishu, pass <code>--chat-id</code>
+and <code>--delivery-mode notify</code> to <code>submit_issue.py</code>. The chat then gets one
+line when the root finishes, and the person can ask 老铁 for the report by
+root id. Do not use <code>notify+wake</code> by hand: a subscription made from the
+command line is owned by the default profile, so the wake would be
+answered by the default profile and not by the desk. If no subscription
+can be created, tell the user the task id and that they must check the
+board manually. Do not imply that a report will be pushed back.</p>
 <h2 id="preflight">Preflight</h2>
 <p>Before relying on an unattended run, confirm the infrastructure is ready:</p>
 <ul>
 <li>Gateway is running and <code>kanban.dispatch_in_gateway=true</code>;</li>
-<li><code>kanban.auto_decompose=true</code>;</li>
-<li><code>auxiliary.kanban_decomposer</code> can call the intended endpoint;</li>
 <li>staged profiles exist and have useful descriptions;</li>
-<li>the worker environment can run CodeGraph and Nex;</li>
-<li>Feishu notification subscription exists for the root task.</li>
+<li>the worker environment can run CodeGraph, Nex, and the Jaeger summary script;</li>
+<li><code>submit_issue.py</code> is used instead of <code>triage</code> for new issues;</li>
+<li>Feishu notification subscription exists for the root task;</li>
+<li>for the Feishu desk: <code>gateway.profile_routes</code> sends <code>feishu</code> to
+  <code>issue-desk</code>, and <code>issue_desk.py catalog --line 风控</code> prints the catalog.</li>
 </ul>
 <p>If a preflight check fails, create a visible <code>capability</code> or <code>needs_input</code>
-blocker, or return a short setup error instead of silently leaving a task in
-<code>triage</code>.</p>
+blocker, or return a short setup error. Do not submit through <code>triage</code>
+to get around a failed check.</p>
 <h2 id="operate-the-board">Operate the board</h2>
 <p>Use the commands in <a href="../reference/">reference.md</a>. The minimum lifecycle is:</p>
 <ol>
-<li>Submit the root task with <code>create --triage</code>.</li>
-<li>Confirm the task id and notification subscription.</li>
-<li>Let Gateway auto-decompose the <code>triage</code> task.</li>
+<li>Submit the graph with <code>submit_issue.py</code>.</li>
+<li>Confirm the returned root id, <code>root_status</code> <code>todo</code>, and five parents.</li>
+<li>Let the Gateway dispatcher run the stages. Do not promote the root.</li>
 <li>Follow progress with <code>show</code>, <code>tail</code>, or <code>runs</code> only when the user asks for
    status or recovery.</li>
 <li>Read the root handoff and <code>analysis.md</code> after the synthesizer completes.</li>
