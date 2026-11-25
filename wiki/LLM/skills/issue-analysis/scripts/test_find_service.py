@@ -61,6 +61,27 @@ class FindTest(unittest.TestCase):
         self.assertEqual(ctx.exception.code, fs.EXIT_TOOL)
         self.assertIn("REMOTE_ERROR", ctx.exception.payload["detail"])
 
+    def test_a_lookup_nex_did_not_answer_is_tried_once_more(self):
+        good = runner_for(ROWS)
+        attempts = []
+
+        def flaky(cmd, timeout):
+            attempts.append(cmd)
+            if len(attempts) == 1:
+                return subprocess.CompletedProcess(
+                    cmd, 1, b"", b'{"error":{"code":"INTERNAL","message":"request timeout"}}')
+            return good(cmd, timeout)
+
+        result = fs.find("order", "qa", runner=flaky)
+        self.assertEqual(result["services"], ["trade.order-service.job", "trade.reorder.job"])
+        self.assertEqual(len(attempts), 2)
+
+    def test_a_lookup_that_fails_twice_is_reported(self):
+        runner = runner_for(ROWS, returncode=1, stderr=b'{"error":{"code":"INTERNAL"}}')
+        with self.assertRaises(dv.ResolveError):
+            fs.find("order", "qa", runner=runner)
+        self.assertEqual(len(runner.calls), 2)
+
     def test_one_character_keyword_is_rejected(self):
         with self.assertRaises(dv.ResolveError) as ctx:
             fs.find("o", "qa", runner=runner_for(ROWS))

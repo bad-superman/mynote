@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -38,6 +39,14 @@ TAG_ALLOWLIST = frozenset({
     "peer.service",
     "error",
 })
+
+# gRPC status codes by number. A reader shown a bare 13 guesses its name.
+GRPC_CODES = (
+    "OK", "Canceled", "Unknown", "InvalidArgument", "DeadlineExceeded",
+    "NotFound", "AlreadyExists", "PermissionDenied", "ResourceExhausted",
+    "FailedPrecondition", "Aborted", "OutOfRange", "Unimplemented",
+    "Internal", "Unavailable", "DataLoss", "Unauthenticated",
+)
 
 SHANGHAI = ZoneInfo("Asia/Shanghai")
 
@@ -95,6 +104,31 @@ def _tag_map(span: dict) -> dict[str, str]:
     return out
 
 
+def _grpc_errors(span: dict) -> str:
+    """The gRPC code names in the span's status description, outermost first.
+
+    Only the names are taken. The rest of the description is free text
+    that can hold identifiers, and it stays in the raw file.
+    """
+    for tag in span.get("tags") or []:
+        if isinstance(tag, dict) and tag.get("key") == "otel.status_description":
+            found = re.findall(r"code = (\w+)", str(tag.get("value") or ""))
+            return ">".join(name for name in found if name in GRPC_CODES)
+    return ""
+
+
+def _error_tags(span: dict) -> dict[str, str]:
+    """The allowlisted tags of an error span, with the gRPC error spelled out."""
+    tags = _tag_map(span)
+    code = tags.get("rpc.grpc.status_code", "")
+    if code.isdigit() and int(code) < len(GRPC_CODES):
+        tags["rpc.grpc.status_code"] = f"{code}({GRPC_CODES[int(code)]})"
+    named = _grpc_errors(span)
+    if named:
+        tags["grpc_error"] = named
+    return tags
+
+
 def _is_error(tags: dict[str, str]) -> bool:
     if tags.get("error", "").lower() == "true":
         return True
@@ -117,7 +151,8 @@ def _service(span: dict, processes: dict) -> str:
     return "?"
 
 
-def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
+def analyze(trace: dict) -> dict:
+    """The facts behind the summary: the call tree, bounds, and failure points."""
     spans = [s for s in (trace.get("spans") or []) if isinstance(s, dict)]
     processes = trace.get("processes") or {}
     if not isinstance(processes, dict):
@@ -141,6 +176,16 @@ def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
         kids.sort(key=lambda s: int(s.get("startTime") or 0))
     roots.sort(key=lambda s: int(s.get("startTime") or 0))
 
+    depth: dict[str, int] = {}
+    stack = [(root, 0) for root in roots]
+    while stack:
+        span, level = stack.pop()
+        sid = str(span.get("spanID"))
+        if sid in depth:
+            continue
+        depth[sid] = level
+        stack.extend((child, level + 1) for child in children.get(sid, []))
+
     starts = [int(s["startTime"]) for s in spans if s.get("startTime") is not None]
     ends = [
         int(s["startTime"]) + int(s.get("duration") or 0)
@@ -148,32 +193,68 @@ def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
         if s.get("startTime") is not None
     ]
 
+    services: list[str] = []
+    for span in sorted(spans, key=lambda s: int(s.get("startTime") or 0)):
+        name = _service(span, processes)
+        if name not in services:
+            services.append(name)
+
+    errors = [span for span in spans if _is_error(_tag_map(span))]
+    # The failure usually starts at the error span furthest from the entry
+    # point; among equals, the one that started last.
+    deepest = max(
+        errors,
+        key=lambda s: (depth.get(str(s.get("spanID")), 0), int(s.get("startTime") or 0)),
+        default=None,
+    )
+    # A failed outgoing call with no span under it: the callee did not
+    # answer, or is not traced. Either way the trace ends at the caller.
+    unanswered = [
+        span for span in errors
+        if _tag_map(span).get("span.kind", "").lower() == "client"
+        and not children.get(str(span.get("spanID")))
+    ]
+    return {
+        "trace_id": trace_id,
+        "spans": spans,
+        "processes": processes,
+        "children": children,
+        "roots": roots,
+        "start_us": min(starts) if starts else None,
+        "end_us": max(ends) if ends else None,
+        "services": services,
+        "errors": errors,
+        "deepest_error": deepest,
+        "unanswered": unanswered,
+    }
+
+
+def service_of(span: dict | None, facts: dict) -> str | None:
+    """The Jaeger service name of a span returned by analyze()."""
+    return _service(span, facts["processes"]) if span else None
+
+
+def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
+    facts = analyze(trace)
+    spans, processes, children = facts["spans"], facts["processes"], facts["children"]
+
     lines = [
-        f"trace_id: {trace_id}",
+        f"trace_id: {facts['trace_id']}",
         f"env: {env}",
         "found: yes",
         f"span_count: {len(spans)}",
     ]
-    if starts and ends:
-        lines.append(f"start: {_fmt_time(min(starts))}")
-        lines.append(f"end: {_fmt_time(max(ends))}")
-        lines.append(f"duration_ms: {(max(ends) - min(starts)) / 1000:.1f}")
+    if facts["start_us"] is not None and facts["end_us"] is not None:
+        lines.append(f"start: {_fmt_time(facts['start_us'])}")
+        lines.append(f"end: {_fmt_time(facts['end_us'])}")
+        lines.append(f"duration_ms: {(facts['end_us'] - facts['start_us']) / 1000:.1f}")
 
-    seen: list[str] = []
-    for span in sorted(spans, key=lambda s: int(s.get("startTime") or 0)):
-        name = _service(span, processes)
-        if name not in seen:
-            seen.append(name)
-    lines.append("services: " + (", ".join(seen) if seen else "(none)"))
+    lines.append("services: " + (", ".join(facts["services"]) if facts["services"] else "(none)"))
 
-    errors = []
-    for span in spans:
-        tags = _tag_map(span)
-        if _is_error(tags):
-            errors.append(span)
+    errors = facts["errors"]
     lines.append(f"error_spans: {len(errors)}")
     for span in errors[:20]:
-        tags = _tag_map(span)
+        tags = _error_tags(span)
         dur = int(span.get("duration") or 0) / 1000
         tag_text = " ".join(f"{k}={v}" for k, v in sorted(tags.items()))
         lines.append(
@@ -182,6 +263,20 @@ def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
         )
     if len(errors) > 20:
         lines.append(f"- … {len(errors) - 20} more error spans omitted")
+
+    deepest = facts["deepest_error"]
+    lines.append(
+        "deepest_error: "
+        + (f"{_service(deepest, processes)} {deepest.get('operationName') or '?'}"
+           if deepest else "none")
+    )
+    unanswered = facts["unanswered"]
+    lines.append(f"unanswered_calls: {len(unanswered)}")
+    for span in unanswered[:10]:
+        dur = int(span.get("duration") or 0) / 1000
+        lines.append(
+            f"- {_service(span, processes)} -> {span.get('operationName') or '?'} {dur:.1f}ms"
+        )
 
     lines.append("tree:")
     emitted = 0
@@ -200,7 +295,7 @@ def summarize(trace: dict, *, env: str, max_tree_lines: int = 60) -> str:
         for child in children.get(str(span.get("spanID")), []):
             walk(child, depth + 1)
 
-    for root in roots:
+    for root in facts["roots"]:
         walk(root, 0)
         if emitted >= max_tree_lines:
             break
@@ -226,6 +321,32 @@ def fetch_trace(base: str, trace_id: str, *, timeout: float = 20.0) -> tuple[int
     if not isinstance(doc, dict):
         doc = None
     return status, doc
+
+
+def find_env(trace_id: str, *, envs: tuple[str, ...] = ("qa", "test", "prod"),
+             timeout: float = 20.0) -> dict:
+    """Ask each Jaeger server for the trace and stop at the first that has it.
+
+    A trace id lives on one server only, so the server that answers is the
+    environment the request ran in.
+    """
+    unreachable: list[str] = []
+    for env in envs:
+        try:
+            status, doc = fetch_trace(ENV_BASES[env], trace_id, timeout=timeout)
+        except OSError:
+            # URLError for a refused or failed connection, TimeoutError for
+            # a server that stops answering while the body is being read.
+            unreachable.append(env)
+            continue
+        if is_not_found(status, doc) or doc is None or status >= 400:
+            if not is_not_found(status, doc):
+                unreachable.append(env)
+            continue
+        trace = unwrap_trace(doc)
+        if trace is not None:
+            return {"env": env, "trace": trace, "unreachable": unreachable}
+    return {"env": None, "trace": None, "unreachable": unreachable}
 
 
 def build_parser() -> argparse.ArgumentParser:

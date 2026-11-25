@@ -218,6 +218,7 @@ def resolve(
     evidence_dir: str | None = None,
     fetch: bool = True,
     runner=None,
+    expect_path: str | None = None,
 ) -> dict:
     runner = runner or _default_runner
     environment = normalize_env(env)
@@ -270,6 +271,12 @@ def resolve(
     }
     if commit_override and not full.startswith(commit_override):
         result["override_matches_deployed"] = selected["incident"]["commit"].startswith(commit_override)
+    wanted = (expect_path or "").strip().strip("/")
+    if wanted:
+        # A service located in the source catalog is confirmed by content:
+        # the directory it was found by must exist in what this job deployed.
+        probe = runner(["git", "-C", str(checkout), "cat-file", "-e", f"{full}:{wanted}"], timeout=30)
+        result["expect_path"] = {"path": wanted, "in_deployed_commit": probe.returncode == 0}
     if evidence_dir:
         path = Path(evidence_dir)
         path.mkdir(parents=True, exist_ok=True)
@@ -339,6 +346,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--checkout-root", default="/home/roy/dev")
     parser.add_argument("--evidence-dir")
     parser.add_argument("--no-fetch", action="store_true")
+    parser.add_argument("--expect-path", metavar="PATH",
+                        help="Also report whether this repository path exists in the deployed commit.")
     args = parser.parse_args(argv)
     if args.commit and not re.fullmatch(r"[0-9a-fA-F]{7,40}", args.commit):
         print(json.dumps({"ok": False, "error": "bad_commit_override"}))
@@ -353,6 +362,7 @@ def main(argv: list[str] | None = None) -> int:
             checkout_root=args.checkout_root,
             evidence_dir=args.evidence_dir,
             fetch=not args.no_fetch,
+            expect_path=args.expect_path,
         )
     except ResolveError as exc:
         print(json.dumps(exc.payload, ensure_ascii=False))
