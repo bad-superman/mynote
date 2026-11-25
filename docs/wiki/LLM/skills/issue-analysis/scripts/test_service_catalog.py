@@ -82,6 +82,141 @@ class CatalogTest(unittest.TestCase):
             self.assertEqual(sc.main(["--service", "risk.risk.service"], call=fake_call), 2)
 
 
+REPO = {
+    "": ["api/", "cmd/", "internal/", "third_party/", "go.mod", "README.md"],
+    "api": ["order/"],
+    "api/order": ["v1/"],
+    "cmd": ["server/"],
+    "internal": ["biz/", "crontab/", "data/"],
+    "internal/biz": ["option_expiration/", "order/", "biz.go"],
+    "internal/biz/option_expiration": ["usecase.go"],
+    "internal/crontab": ["option_expiration_reminder.go", "order_sync.go"],
+    "internal/data": ["order/"],
+    "third_party": ["google/"],
+    "third_party/google": ["api/"],
+}
+
+
+def tree_server(cap, calls=None):
+    """A list_tree that walks REPO breadth-first and stops after `cap` entries."""
+    def call(name, arguments):
+        assert name == "list_tree", name
+        if calls is not None:
+            calls.append((arguments["path"], arguments["depth"]))
+        start = "" if arguments["path"] == "." else arguments["path"]
+        entries, level = [], [start]
+        for _ in range(arguments["depth"]):
+            following = []
+            for directory in level:
+                for child in REPO.get(directory, []):
+                    path = f"{directory}/{child}".strip("/")
+                    kind = "dir" if child.endswith("/") else "file"
+                    entries.append({"path": path, "type": kind})
+                    if kind == "dir":
+                        following.append(path)
+            level = following
+        return {"path": arguments["path"], "entries": entries[:cap],
+                "count": min(len(entries), cap), "truncated": len(entries) > cap}
+    return call
+
+
+class TreeTest(unittest.TestCase):
+    def test_overview_lists_directories_three_levels_deep_and_no_files(self):
+        result = sc.tree(service="trade.order.service", path=None, call=tree_server(cap=200))
+        self.assertIn("internal/biz/option_expiration", result["directories"])
+        self.assertIn("api/order/v1", result["directories"])
+        self.assertNotIn("go.mod", result["directories"])
+        self.assertNotIn("files", result)
+        self.assertEqual(result["more"], [])
+
+    def test_a_listing_the_server_cut_short_is_fetched_per_top_level_directory(self):
+        calls = []
+        # 20 entries in three levels, but no top-level directory holds more than 9.
+        result = sc.tree(service="trade.order.service", path=None,
+                         call=tree_server(cap=9, calls=calls))
+        self.assertIn("internal/biz/option_expiration", result["directories"])
+        self.assertIn("internal/data/order", result["directories"])
+        self.assertEqual(result["more"], [])
+        # Dependencies are listed but not walked.
+        self.assertIn("third_party", result["directories"])
+        self.assertNotIn("third_party/google", result["directories"])
+        self.assertNotIn(("third_party", 2), calls)
+
+    def test_a_directory_too_large_to_list_is_named(self):
+        result = sc.tree(service="trade.order.service", path=None, call=tree_server(cap=3))
+        self.assertIn("internal", result["more"])
+
+    def test_a_path_lists_one_level_with_file_names(self):
+        result = sc.tree(service="trade.order.service", path="internal/crontab/",
+                         call=tree_server(cap=200))
+        self.assertEqual(result["path"], "internal/crontab")
+        self.assertEqual(result["directories"], [])
+        self.assertEqual(result["files"], ["internal/crontab/option_expiration_reminder.go",
+                                           "internal/crontab/order_sync.go"])
+
+    def test_main_takes_one_service_for_a_tree(self):
+        out, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            self.assertEqual(sc.main(["--tree", "--service", "trade.order.service"],
+                                     call=tree_server(cap=200)), 0)
+            self.assertEqual(sc.main(["--tree", "--service", "a", "--service", "b"],
+                                     call=tree_server(cap=200)), 2)
+            self.assertEqual(sc.main(["--path", "internal"], call=tree_server(cap=200)), 2)
+        self.assertIn("internal/biz", json.loads(out.getvalue())["directories"])
+
+
+class BudgetTest(unittest.TestCase):
+    """Each card may look things up a fixed number of times."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.calls = []
+
+    def lookup(self, *argv, task="t_intake"):
+        def call(name, arguments):
+            self.calls.append(name)
+            return fake_call(name, arguments)
+        out, err = io.StringIO(), io.StringIO()
+        environ = {"HERMES_KANBAN_TASK": task} if task else {}
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            code = sc.main(list(argv), call=call, environ=environ, budget_dir=Path(self.tmp.name))
+        return code, out.getvalue(), err.getvalue()
+
+    def test_a_lookup_by_a_card_is_counted(self):
+        code, out, _ = self.lookup("--line", "风控")
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(out)["lookups_left"], sc.MAX_LOOKUPS_PER_CARD - 1)
+        _, out, _ = self.lookup("--line", "风控")
+        self.assertEqual(json.loads(out)["lookups_left"], sc.MAX_LOOKUPS_PER_CARD - 2)
+
+    def test_past_the_limit_nothing_is_asked(self):
+        for _ in range(sc.MAX_LOOKUPS_PER_CARD):
+            self.assertEqual(self.lookup("--line", "风控")[0], 0)
+        asked = len(self.calls)
+        code, out, err = self.lookup("--line", "风控")
+        self.assertEqual(code, sc.EXIT_BUDGET)
+        self.assertEqual(out, "")
+        self.assertIn(f"{sc.MAX_LOOKUPS_PER_CARD} lookups", err)
+        self.assertEqual(len(self.calls), asked)
+
+    def test_each_card_has_its_own_count(self):
+        for _ in range(sc.MAX_LOOKUPS_PER_CARD):
+            self.lookup("--line", "风控")
+        self.assertEqual(self.lookup("--line", "风控", task="t_other")[0], 0)
+
+    def test_a_usage_error_costs_nothing(self):
+        self.assertEqual(self.lookup("--service", "risk.risk.service")[0], 2)
+        _, out, _ = self.lookup("--line", "风控")
+        self.assertEqual(json.loads(out)["lookups_left"], sc.MAX_LOOKUPS_PER_CARD - 1)
+
+    def test_outside_a_card_there_is_no_count(self):
+        code, out, _ = self.lookup("--line", "风控", task=None)
+        self.assertEqual(code, 0)
+        self.assertNotIn("lookups_left", json.loads(out))
+        self.assertEqual(list(Path(self.tmp.name).iterdir()), [])
+
+
 class TransportTest(unittest.TestCase):
     def test_parses_plain_json_and_server_sent_events(self):
         message = {"jsonrpc": "2.0", "id": 1, "result": {}}

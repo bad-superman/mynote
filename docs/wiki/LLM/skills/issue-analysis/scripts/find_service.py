@@ -40,12 +40,18 @@ def find(keyword: str, env: str, *, runner=None) -> dict:
     word = keyword.strip()
     if len(word) < 2 or any(ch.isspace() for ch in word):
         raise dv.ResolveError(EXIT_USAGE, "keyword_must_be_one_token_of_2_or_more_chars")
-    completed = runner([
+    command = [
         dv.NEX, "deploy", "services",
         "--pdl", dv.PDL, "--class", "k8s",
         "--service-name", word, "--page-size", "50", "-o", "json",
-    ], timeout=60)
-    if completed.returncode != 0 or not completed.stdout.strip():
+    ]
+    # Nex now and then answers "request timeout" to a query it serves a
+    # moment later. One more try costs less than a card blocked on tooling.
+    for _ in range(2):
+        completed = runner(command, timeout=60)
+        if completed.returncode == 0 and completed.stdout.strip():
+            break
+    else:
         detail = (completed.stderr or b"").decode("utf-8", errors="replace").strip()[:300]
         raise dv.ResolveError(EXIT_TOOL, "nex_services_failed", detail=detail)
     doc = dv._load_json(completed.stdout)

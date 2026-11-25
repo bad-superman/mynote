@@ -65,6 +65,47 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(branches, ["origin/qa", "origin/release/test"])
 
 
+class ExpectPathTest(unittest.TestCase):
+    """Intake locates a service in production code, then checks that the
+    deploy name it picked really serves that code in the environment."""
+
+    def resolve(self, present):
+        def runner(cmd, timeout):
+            if cmd[1:3] == ["deploy", "services"]:
+                body = {"services": [{"service_name": "trade.order-service.job",
+                                      "cluster": "tx-youfi-qa-sg", "job_name": "job-qa"}]}
+            elif cmd[1:3] == ["deploy", "info"]:
+                body = {"git_addr": "git@code.youfi.com:link1/OrderService.git"}
+            elif cmd[1:3] == ["deploy", "history"]:
+                body = {"history": [item("abcdef1", "20261021163600", current="True")]}
+            else:
+                body = None
+            if body is not None:
+                return subprocess.CompletedProcess(cmd, 0, json.dumps(body).encode(), b"")
+            if "rev-parse" in cmd:
+                return subprocess.CompletedProcess(cmd, 0, b"abcdef1234567890\n", b"")
+            if "branch" in cmd:
+                return subprocess.CompletedProcess(cmd, 0, b"  origin/qa\n", b"")
+            if "cat-file" in cmd:
+                self.assertEqual(cmd[-1], "abcdef1234567890:internal/biz/option_expiration")
+                return subprocess.CompletedProcess(cmd, 0 if present else 128, b"", b"")
+            return subprocess.CompletedProcess(cmd, 0, b"", b"")
+
+        original = dv._ensure_checkout
+        dv._ensure_checkout = lambda checkout, git_addr, runner: None
+        self.addCleanup(setattr, dv, "_ensure_checkout", original)
+        return dv.resolve(service="trade.order-service.job", env="qa",
+                          window_start="2026-10-22 03:31:08", runner=runner,
+                          expect_path="/internal/biz/option_expiration/")
+
+    def test_reports_a_path_the_deployed_commit_contains(self):
+        self.assertEqual(self.resolve(present=True)["expect_path"], {
+            "path": "internal/biz/option_expiration", "in_deployed_commit": True})
+
+    def test_reports_a_path_the_deployed_commit_lacks(self):
+        self.assertFalse(self.resolve(present=False)["expect_path"]["in_deployed_commit"])
+
+
 class ResolveTest(unittest.TestCase):
     def test_resolve_uses_nex_then_git_without_checkout(self):
         calls = []

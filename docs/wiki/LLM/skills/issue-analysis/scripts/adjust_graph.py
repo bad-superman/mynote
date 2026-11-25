@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""Let intake trim or extend the fixed issue-analysis graph.
+"""Let a stage record where the issue lives, and trim or extend the graph.
 
-The submit script always builds the full graph, so an intake that never
-calls this still gets the complete investigation. Intake calls it for two
-cases only:
+The submit script always builds the full graph, so a stage that never
+calls this still gets the complete investigation. It is called for:
 
-- the reporter asked what happened, not why: archive the code card;
-- more than one service failed: add a runtime card per extra service.
+- intake located the service of an issue submitted without one: record
+  the deploy name (`--service`);
+- the reporter asked what happened, not why: archive the code card
+  (`--route fact`);
+- another service has to be looked at: add a runtime card for it
+  (`--add-runtime`). Intake does this for a second service with its own
+  error span, the code stage for the next hop its conclusion depends on.
 
 State is kept in <evidence-dir>/route.json so a retry does not add cards
 twice and later stages can read which route was taken.
@@ -24,6 +28,7 @@ from pathlib import Path
 import submit_issue as si
 
 ROUTES = ("why", "fact")
+LOCATED_BY = ("trace", "description", "reporter")
 MAX_EXTRA_RUNTIME = 2
 OPEN_BEFORE_START = {"todo", "ready", "blocked", "triage"}
 CLOSED = {"done", "archived"}
@@ -75,10 +80,14 @@ def service_slug(service: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]", "_", service)
 
 
-def extra_runtime_body(service: str, root_id: str, evidence: Path, original: str) -> str:
+def extra_runtime_body(service: str, root_id: str, evidence: Path, original: str,
+                       reason: str | None = None) -> str:
+    why = (reason or "").strip() or (
+        "This service has its own error span in the trace, or the code stage named it as the next hop.")
     return (
         "## Stage\nruntime\n\n"
         f"## Target Service\n{service}\n\n"
+        f"## Why\n{why}\n\n"
         f"## Root Task\n{root_id}\n\n"
         f"## Evidence Directory\n{evidence}\n\n"
         f"## Report\nruntime-{service_slug(service)}.md\n\n"
@@ -87,9 +96,18 @@ def extra_runtime_body(service: str, root_id: str, evidence: Path, original: str
         "Do not quote it as this service's version.\n\n"
         "## Rules\n"
         "Investigate only the Target Service, inside the issue's time window. "
-        "Report what its logs, metrics, and trace spans show; say so plainly when it is healthy. "
+        "Check the 待验证 items in code.md that name this service, and what its 下一跳 section "
+        "asks about it. Say so plainly when the service is healthy. "
         "Write the Report file named above, not runtime.md.\n\n"
         f"## Original Issue\n{original.rstrip()}\n"
+    )
+
+
+def service_note(service: str, located_by: str) -> str:
+    return (
+        f"## Service\n{service}\n\n"
+        f"Intake located this service (by {located_by}). The card body says `unresolved` "
+        "because the card was created before intake ran. Use this deploy name everywhere.\n"
     )
 
 
@@ -103,12 +121,18 @@ def _comment_once(task_id: str, text: str, shown: dict, *, board: str, env: dict
         raise AdjustError(detail or f"comment on {task_id} failed", code=1)
 
 
-def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
+def adjust(root_id: str, *, route: str | None = None, add_runtime: list[str] | tuple = (),
+           service: str | None = None, located_by: str | None = None,
+           reason: str | None = None,
            board: str = si.BOARD, workspace: str = si.WORKSPACE,
            env: dict | None = None, hermes: str = "hermes",
            verify_service: bool = True, service_lookup=None) -> dict:
     if route is not None and route not in ROUTES:
         raise AdjustError(f"route must be one of {', '.join(ROUTES)}", code=EXIT_USAGE)
+    located = (service or "").strip() or None
+    if located and located_by not in LOCATED_BY:
+        raise AdjustError(
+            f"--service needs --located-by, one of {', '.join(LOCATED_BY)}", code=EXIT_USAGE)
     env = dict(os.environ if env is None else env)
     kw = {"board": board, "env": env, "hermes": hermes}
 
@@ -126,16 +150,37 @@ def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
     synthesizer = si.show_task(graph["synthesizer"], **kw)
 
     state_path = evidence / "route.json"
-    state = {"route": "why", "archived": [], "extra_runtime": {}}
+    state = {"route": "why", "archived": [], "extra_runtime": {}, "service": None, "located_by": None}
     if state_path.exists():
         loaded = json.loads(state_path.read_text(encoding="utf-8"))
         if isinstance(loaded, dict):
             state.update({k: loaded[k] for k in state if k in loaded})
 
+    record_service = False
+    if located:
+        if info["service"] != si.UNRESOLVED:
+            raise AdjustError(
+                f"the issue already names its service ({info['service']}); "
+                "--service is only for an issue submitted as unresolved")
+        if state["service"] != located:
+            code = si.show_task(graph["code"], **kw)
+            if code["task"]["status"] not in OPEN_BEFORE_START | {"archived"}:
+                raise AdjustError(
+                    f"code card {graph['code']} is {code['task']['status']}; "
+                    "the service can only be recorded before the code stage starts")
+            if verify_service:
+                try:
+                    si.check_service(located, info["environment"], lookup=service_lookup)
+                except si.SubmitError as exc:
+                    raise AdjustError(str(exc), code=exc.code) from exc
+            record_service = True
+    # The issue's main service: named at submit, or located by intake.
+    main_service = located or state["service"] or info["service"]
+
     wanted: list[str] = []
-    for service in add_runtime:
-        name = service.strip()
-        if not name or name == info["service"] or name in wanted:
+    for item in add_runtime:
+        name = item.strip()
+        if not name or name == main_service or name in wanted:
             continue
         wanted.append(name)
     new_services = [name for name in wanted if name not in state["extra_runtime"]]
@@ -155,6 +200,14 @@ def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
                 si.check_service(name, info["environment"], lookup=service_lookup)
             except si.SubmitError as exc:
                 raise AdjustError(str(exc), code=exc.code) from exc
+
+    if record_service:
+        note = service_note(located, located_by)
+        for stage in ("code", "runtime", "verifier", "synthesizer"):
+            _comment_once(graph[stage], note, si.show_task(graph[stage], **kw), **kw)
+        _comment_once(root_id, note, root, **kw)
+        state["service"] = located
+        state["located_by"] = located_by
 
     if route == "fact" and state["route"] != "fact":
         code = si.show_task(graph["code"], **kw)
@@ -192,9 +245,10 @@ def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
             "assignee": si.ASSIGNEE["runtime"],
             "workspace": workspace,
             "idempotency_key": f"issue:{root_id}:runtime:{name}",
-            "body": extra_runtime_body(name, root_id, evidence, info["original"]),
+            "body": extra_runtime_body(name, root_id, evidence, info["original"], reason),
             "skills": si.SKILLS["runtime"],
-            "parents": [graph["intake"]],
+            # Like the main runtime card, it checks what code concluded.
+            "parents": [graph["intake"], graph["code"]],
         }, **kw)
         card = created["id"]
         for child in (graph["verifier"], graph["synthesizer"], root_id):
@@ -219,6 +273,8 @@ def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
     return {
         "root": root_id,
         "root_status": final["task"]["status"],
+        "service": state["service"] or (None if info["service"] == si.UNRESOLVED else info["service"]),
+        "located_by": state["located_by"],
         "route": state["route"],
         "archived": state["archived"],
         "extra_runtime": state["extra_runtime"],
@@ -228,24 +284,35 @@ def adjust(root_id: str, *, route: str | None, add_runtime: list[str],
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Trim or extend an issue-analysis graph.")
+    parser = argparse.ArgumentParser(
+        description="Record the located service, or trim or extend an issue-analysis graph.")
     parser.add_argument("--root", required=True, help="Root task id from the card's '## Root Task'.")
+    parser.add_argument("--service", metavar="SERVICE",
+                        help="Exact deploy name intake located for an issue submitted as unresolved.")
+    parser.add_argument("--located-by", choices=LOCATED_BY,
+                        help="How --service was found.")
     parser.add_argument("--route", choices=ROUTES,
                         help="fact archives the code card; why keeps the full graph.")
     parser.add_argument("--add-runtime", action="append", default=[], metavar="SERVICE",
                         help="Exact deploy service name; repeat for a second service.")
+    parser.add_argument("--reason", help="With --add-runtime: what to check on that service.")
     parser.add_argument("--board", default=si.BOARD)
     parser.add_argument("--workspace", default=si.WORKSPACE)
     parser.add_argument("--hermes", default="hermes")
     parser.add_argument("--no-verify-service", action="store_true")
     args = parser.parse_args(argv)
-    if args.route is None and not args.add_runtime:
-        parser.error("give --route, --add-runtime, or both")
+    if args.route is None and not args.add_runtime and not args.service:
+        parser.error("give --service, --route, or --add-runtime")
+    if args.service and not args.located_by:
+        parser.error("--service needs --located-by")
     try:
         result = adjust(
             args.root,
             route=args.route,
             add_runtime=args.add_runtime,
+            service=args.service,
+            located_by=args.located_by,
+            reason=args.reason,
             board=args.board,
             workspace=args.workspace,
             hermes=args.hermes,

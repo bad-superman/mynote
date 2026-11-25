@@ -44,14 +44,18 @@ should return to the Feishu chat that asked; the subscription is attached
 to the root, which completes last.
 
 The script rejects a body that is missing any of the five sections below.
-Do not invent a missing service, environment, time window, or repository.
-Ask for the missing input before submitting.
+Do not invent a missing environment, time window, or repository. Ask for
+the missing input before submitting.
 
-`Service` must be the Nex deploy name, which often differs from the name
-in the source catalog or in Jaeger (`trade.order-service.job`, not
-`trade.order.service` or `OrderService.grpc`). Look it up with
+`Service` is either the Nex deploy name or the word `unresolved`. The
+deploy name often differs from the name in the source catalog or in
+Jaeger (`trade.order-service.job`, not `trade.order.service` or
+`OrderService.grpc`). Look it up with
 `scripts/find_service.py --env <env> --keyword <word>` and add
 `--verify-service` so a wrong name is refused before any card exists.
+When the service is not known, write `unresolved`: intake locates it from
+the trace or from the source catalog and records it on the later cards.
+Do not guess a name.
 
 Required task fields:
 
@@ -60,9 +64,6 @@ Required task fields:
 - workspace: `dir:/home/roy/dev` when stages share checkout and reports;
 - idempotency key: a stable issue key when the source can be retried safely.
 
-Do not invent a missing service, environment, time window, or repository. Ask
-for the missing input, or leave the task blocked with a typed reason.
-
 Canonical body:
 
 ```markdown
@@ -70,39 +71,60 @@ Canonical body:
 <detailed description or Feishu Project issue URL>
 
 ## Service
-<service name>
+<deploy name | unresolved>
 
 ## Environment
-<qa | test | staging | prod | other>
+<qa | test | prod>
 
 ## Time Window
-<absolute time range with timezone, or unknown>
+<absolute time range with timezone>
 
 ## Evidence
 <trace/request id, error code, log keyword, or reproduction steps>
 ```
 
-The script builds this graph. Code and runtime start only after intake has
-resolved the deployed commit. The root is a child of all five stages, so it
-runs last and a Feishu subscription on it fires after the report exists.
+The script builds this graph. The stages run one after another, and the
+root is a child of all five, so it runs last and a Feishu subscription on
+it fires after the report exists.
 
 ```text
-intake -> code ----+
-      -> runtime --+-> verifier -> synthesizer
-                         \__________________/
-                                   |
-                                  root (issue-coordinator)
+intake -> code -> runtime -> verifier -> synthesizer -> root (issue-coordinator)
 ```
 
-Intake may change the graph once, with `scripts/adjust_graph.py`, before
-code and runtime start:
+Each stage hands the next what it needs:
 
-- **fact route**: the report asks what happened, not why the code behaves
-  that way. The code card is archived and the rest runs as drawn. Any
-  question about business logic keeps the code card.
-- **extra runtime**: the trace shows another service with its own error
-  span. One more runtime card is added for it (at most two) and the
-  verifier waits for it.
+- **intake** locates the service (the deepest error span of the trace, or
+  the source catalog when there is only a description) and resolves the
+  commit that was deployed at the incident;
+- **code** reads that commit and ends `code.md` with 结论, 待验证, and
+  下一跳: what it concluded, what has to be checked to confirm it, and
+  which service the failing path goes to next;
+- **runtime** checks the 待验证 list against logs, metrics, and data, and
+  gives each item a verdict: 成立, 不成立, or 查不到;
+- **verifier** rates two things separately, where the failure is (故障点)
+  and why it happened (原因);
+- **synthesizer** writes `analysis.md` with both ratings.
+
+A trace, an account, or an order id is not required. They help to collect
+evidence; the investigation runs from the description, the deployed code,
+and the logs in the time window.
+
+Two stages may change the graph, only through `scripts/adjust_graph.py`:
+
+- **located service** (intake): an issue submitted as `unresolved` gets its
+  deploy name recorded on every later card.
+- **fact route** (intake): the report asks what happened, not why the code
+  behaves that way. The code card is archived and runtime starts right
+  after intake. Any question about business logic keeps the code card.
+- **extra runtime** (intake or code): one more runtime card for another
+  service, at most two per issue. Intake adds one for a service with its
+  own error span in the trace. Code adds one for the next hop when its
+  conclusion depends on what happened there.
+
+When the next hop is a system the board cannot look inside, an external
+system or a service not deployed through Nex, the report says so: 故障点
+can be rated high while 原因 stays low, and the report names who has to
+continue and with which evidence.
 
 Do not skip or add cards by hand; see [reference.md](reference.md#routes).
 
@@ -114,16 +136,24 @@ All five reports go in one directory,
 
 Reports that arrive through 老铁 on Feishu are not handled by this skill.
 The gateway routes every Feishu chat to the `issue-desk` profile, whose
-own skill collects the report, finds the deploy service name, submits the
-graph, and relays `analysis.md` when the root finishes. The desk does not
-investigate, and when it cannot settle on one service it asks the reporter
-to be more specific. A report does not need a trace id or an account: the
-environment, the time window, what happened, and the service are enough.
+own skill collects the report, submits the graph, passes the board's
+questions to the reporter, and relays `analysis.md` when the root
+finishes. The desk does not investigate and does not look for the
+service.
 
-`issue_desk.py submit` subscribes the asking chat by itself: the root and
-intake with `notify+wake`, the other stages with `notify`. A blocked
-intake wakes the desk, which asks the reporter and passes the answer back
-with `issue_desk.py answer`.
+What the desk asks for depends on the trace. With a trace id it asks
+nothing: `issue_desk.py submit` finds the Jaeger server that holds the
+trace, which gives the environment, and takes the time window from the
+trace. Without one it asks for the environment and the time. A service
+name the reporter mentions is used when it is an exact deploy name and
+passed to intake as a hint otherwise.
+
+`issue_desk.py submit` subscribes the asking chat by itself: the root,
+intake, and runtime with `notify+wake`, the other stages with `notify`.
+Intake blocks with `needs_input` when it cannot settle on one service,
+and runtime may do so once when a check needs an identifier the issue
+lacks. Either wakes the desk, which asks the reporter and passes the
+answer back with `issue_desk.py answer`.
 
 When submitting by hand for someone waiting in Feishu, pass `--chat-id`
 and `--delivery-mode notify` to `submit_issue.py`. The chat then gets one
@@ -144,7 +174,9 @@ Before relying on an unattended run, confirm the infrastructure is ready:
 - `submit_issue.py` is used instead of `triage` for new issues;
 - Feishu notification subscription exists for the root task;
 - for the Feishu desk: `gateway.profile_routes` sends `feishu` to
-  `issue-desk`, and `issue_desk.py catalog --line 风控` prints the catalog.
+  `issue-desk`;
+- for locating a service from a description:
+  `scripts/service_catalog.py --line 风控` prints the catalog.
 
 If a preflight check fails, create a visible `capability` or `needs_input`
 blocker, or return a short setup error. Do not submit through `triage`
@@ -175,7 +207,9 @@ answer should distinguish:
 - facts, inferences, and unverified hypotheses;
 - impact and affected versions;
 - remediation and verification plan;
-- confidence and remaining human checks.
+- the two confidence ratings, 故障点 and 原因, without merging them;
+- remaining human checks, and who has to continue when the cause lies in
+  a system the board could not look inside.
 
 Do not paste full source files, graph dumps, raw logs, or raw database results
 into the main conversation. Use the report path and short handoffs as the

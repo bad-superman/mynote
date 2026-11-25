@@ -1,7 +1,7 @@
 ---
 name: jaeger-trace
 description: "Look up one call trace by trace id, or list one account's traces in a time window, on the YouFi Jaeger servers."
-version: 1.1.0
+version: 1.2.0
 platforms: [linux, macos, windows]
 environments: [kanban]
 ---
@@ -20,6 +20,28 @@ python3 /home/roy/source/mynote/docs/wiki/LLM/skills/jaeger-trace/scripts/jaeger
 
 The script prints a short summary. The raw JSON, which can contain SQL,
 account ids, and request payloads, stays in `--raw-out`.
+
+The summary lists the services, the start and end, the error spans, and
+the call tree with durations. Two lines say where the failure is:
+
+- `deepest_error: <service> <operation>` is the error span furthest down
+  the call chain; among spans at the same depth, the one that started
+  last. `deepest_error: none` means the trace has no error span.
+- `unanswered_calls: N`, followed by one `<service> -> <operation>` line
+  each, lists failed outgoing calls (`span.kind=client`) with no span
+  under them. The callee did not answer or is not traced, so the trace
+  ends at the caller and cannot say what happened inside the callee.
+
+An error span's gRPC error is spelled out, so nobody has to guess what a
+number means: `rpc.grpc.status_code=13(Internal)`, and
+`grpc_error=Internal>DeadlineExceeded` for the code names in the span's
+status description, outermost first. Quote these as printed. The rest of
+the description is free text and stays in the raw file.
+
+A trace id lives on one server only. `jaeger_trace.find_env(trace_id)`
+asks the servers in turn and returns the environment of the one that
+holds the trace; `issue_desk.py submit` uses it so that a report with a
+trace id needs no environment.
 
 Exit codes:
 

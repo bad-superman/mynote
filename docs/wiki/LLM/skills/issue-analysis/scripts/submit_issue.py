@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Create the fixed issue-analysis graph.
 
-The decomposer is not used. One root card waits until intake, code,
-runtime, verification, and synthesis have all finished, which is also when
-a Feishu subscription on the root fires.
+The decomposer is not used. The stages run one after another: intake
+locates the service and pins the deployed commit, code reads that commit
+and lists what has to be checked, runtime checks that list against logs,
+metrics, and data, then verification and synthesis. One root card waits
+for all five, which is also when a Feishu subscription on the root fires.
 """
 
 from __future__ import annotations
@@ -20,6 +22,9 @@ BOARD = "issue-analysis"
 WORKSPACE = "dir:/home/roy/dev"
 EVIDENCE_ROOT = Path("/home/roy/dev/.hermes-issue-analysis")
 SECTIONS = ("Issue", "Service", "Environment", "Time Window", "Evidence")
+# What the Service section holds when nobody could name the service. Intake
+# locates it and records the name with `adjust_graph.py --service`.
+UNRESOLVED = "unresolved"
 
 ASSIGNEE = {
     "root": "issue-coordinator",
@@ -46,10 +51,10 @@ REPORT = {
     "synthesizer": "analysis.md",
 }
 TITLES = {
-    "intake": "规范化 issue 并确认事发时的部署提交",
-    "code": "在部署提交上分析代码路径",
-    "runtime": "收集该部署版本的运行时证据",
-    "verifier": "复核代码与运行时证据",
+    "intake": "定位服务并确认事发时的部署提交",
+    "code": "在部署提交上梳理代码逻辑并列出待验证项",
+    "runtime": "按待验证项收集运行时证据",
+    "verifier": "复核代码结论与运行时证据",
     "synthesizer": "汇总根因报告",
 }
 ORDER = ("intake", "code", "runtime", "verifier", "synthesizer")
@@ -111,24 +116,42 @@ def check_service(service: str, environment: str, *, lookup=None) -> None:
         near = ", ".join(result.get("services") or []) or "none"
         raise SubmitError(
             f"service {service!r} is not a deploy service name in {environment}; "
-            f"names containing it: {near}. Look the name up by keyword "
-            "(find_service.py, or 'issue_desk.py service') and use a name it prints.",
+            f"names containing it: {near}. Look the name up by keyword with "
+            "find_service.py and use a name it prints.",
             code=3)
 
 
-def stage_body(stage: str, root_id: str, evidence: Path, original: str, deployed_commit: str | None) -> str:
+def stage_body(stage: str, root_id: str, evidence: Path, original: str, deployed_commit: str | None,
+               unresolved: bool = False) -> str:
     commit_line = deployed_commit or (
         "intake must resolve the commit deployed at the incident time; "
         "do not analyze the latest code"
     )
     rules = {
-        "intake": "Resolve the deployed commit before completing. Code and runtime wait on you.",
-        "code": "Analyze that deployed commit, not the branch tip. Write code.md before you finish.",
-        "runtime": "Use the deployed commit from intake.md. Do not look up a newer deploy and treat it as the incident.",
-        "verifier": "Reject the evidence when the analyzed commit differs from the deployed commit. Do not create cards.",
+        "intake": "Resolve the deployed commit before completing. Code waits on you, and runtime waits on code.",
+        "code": (
+            "Analyze that deployed commit, not the branch tip. End code.md with 结论, 待验证, and 下一跳: "
+            "runtime checks the 待验证 list and nothing else tells it what to look for."
+        ),
+        "runtime": (
+            "Check the 待验证 list in code.md item by item, on the deployed commit from intake.md. "
+            "Do not look up a newer deploy and treat it as the incident."
+        ),
+        "verifier": (
+            "Reject the evidence when the analyzed commit differs from the deployed commit. "
+            "Rate 故障点 and 原因 separately. Do not create cards."
+        ),
         "synthesizer": "You are the only writer of analysis.md. Do not create cards and do not complete the root.",
         "root": "The graph already exists. Do not create another one. Complete only after synthesis, or after one follow-up round.",
     }[stage]
+    if unresolved:
+        rules += (
+            " The Service section below says `unresolved`: locate the service first and record it "
+            "with adjust_graph.py --service."
+            if stage == "intake" else
+            " The Service section below says `unresolved` because this card was created before "
+            "intake ran. The service is in intake.md and in this card's `## Service` comment."
+        )
     return (
         f"## Stage\n{stage}\n\n"
         f"## Root Task\n{root_id}\n\n"
@@ -144,7 +167,8 @@ def default_title(service: str, environment: str, issue: str) -> str:
     symptom = issue.splitlines()[0].strip()
     if len(symptom) > 60:
         symptom = symptom[:59] + "…"
-    return f"[{environment}][{service}] {symptom}"
+    shown = "待定位" if service == UNRESOLVED else service
+    return f"[{environment}][{shown}] {symptom}"
 
 
 def _run(cmd: list[str], env: dict) -> subprocess.CompletedProcess:
@@ -211,7 +235,8 @@ def submit(body: str, *, key: str, title: str | None, deployed_commit: str | Non
     sections = parse_sections(body)
     service = field_value(sections["Service"])
     environment = field_value(sections["Environment"])
-    if verify_service:
+    unresolved = service == UNRESOLVED
+    if verify_service and not unresolved:
         check_service(service, environment, lookup=service_lookup)
     root_title = title or default_title(service, environment, sections["Issue"])
     env = dict(os.environ if env is None else env)
@@ -229,7 +254,8 @@ def submit(body: str, *, key: str, title: str | None, deployed_commit: str | Non
     # The evidence directory is named by the root id, so the root card has to
     # exist before the other bodies can point at it. It stays blocked until
     # the five parents are linked, and then waits in todo.
-    placeholder = stage_body("root", "(pending)", evidence_root / "(pending)", body, deployed_commit)
+    placeholder = stage_body("root", "(pending)", evidence_root / "(pending)", body, deployed_commit,
+                             unresolved)
     root = create_task({
         "title": root_title,
         "assignee": ASSIGNEE["root"],
@@ -250,7 +276,7 @@ def submit(body: str, *, key: str, title: str | None, deployed_commit: str | Non
             "assignee": ASSIGNEE[stage],
             "workspace": workspace,
             "idempotency_key": f"issue:{key}:{stage}",
-            "body": stage_body(stage, root_id, evidence, body, deployed_commit),
+            "body": stage_body(stage, root_id, evidence, body, deployed_commit, unresolved),
             "skills": SKILLS[stage],
             "parents": parents,
         }, board=board, env=env, hermes=hermes)
@@ -259,7 +285,9 @@ def submit(body: str, *, key: str, title: str | None, deployed_commit: str | Non
 
     intake = make("intake", [])
     code = make("code", [intake])
-    runtime = make("runtime", [intake])
+    # Runtime verifies what code concluded, so it starts after code. On the
+    # fact route the code card is archived, which releases runtime as well.
+    runtime = make("runtime", [intake, code])
     verifier = make("verifier", [intake, code, runtime])
     synthesizer = make("synthesizer", [intake, code, runtime, verifier])
 

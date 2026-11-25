@@ -3191,6 +3191,26 @@ handoff. Run:</p>
 </code></pre>
 <p>The script prints a short summary. The raw JSON, which can contain SQL,
 account ids, and request payloads, stays in <code>--raw-out</code>.</p>
+<p>The summary lists the services, the start and end, the error spans, and
+the call tree with durations. Two lines say where the failure is:</p>
+<ul>
+<li><code>deepest_error: &lt;service&gt; &lt;operation&gt;</code> is the error span furthest down
+  the call chain; among spans at the same depth, the one that started
+  last. <code>deepest_error: none</code> means the trace has no error span.</li>
+<li><code>unanswered_calls: N</code>, followed by one <code>&lt;service&gt; -&gt; &lt;operation&gt;</code> line
+  each, lists failed outgoing calls (<code>span.kind=client</code>) with no span
+  under them. The callee did not answer or is not traced, so the trace
+  ends at the caller and cannot say what happened inside the callee.</li>
+</ul>
+<p>An error span's gRPC error is spelled out, so nobody has to guess what a
+number means: <code>rpc.grpc.status_code=13(Internal)</code>, and
+<code>grpc_error=Internal&gt;DeadlineExceeded</code> for the code names in the span's
+status description, outermost first. Quote these as printed. The rest of
+the description is free text and stays in the raw file.</p>
+<p>A trace id lives on one server only. <code>jaeger_trace.find_env(trace_id)</code>
+asks the servers in turn and returns the environment of the one that
+holds the trace; <code>issue_desk.py submit</code> uses it so that a report with a
+trace id needs no environment.</p>
 <p>Exit codes:</p>
 <ul>
 <li><code>0</code>: summary printed. Quote services, times, and error spans from it.</li>
